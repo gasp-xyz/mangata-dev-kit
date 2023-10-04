@@ -1,19 +1,16 @@
 {
   "name": "@mangata-finance/type-definitions",
   "version": "0.0.1",
-  "dependencies": {
-    "@swc/helpers": "0.5.2"
-  },
   "peerDependencies": {
     "@polkadot/types": "^10.9.1"
   },
   "type": "module",
   "module": "./src/index.js",
-  "typings": "./src/index.d.ts",
+  "types": "./src/index.d.ts",
   "exports": {
     ".": {
-      "import": "./src/index.js",
-      "types": "./src/index.d.ts"
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
     }
   },
   "publishConfig": {

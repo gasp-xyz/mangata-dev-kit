@@ -5,13 +5,9 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nx/js:swc",
-      "outputs": ["{options.outputPath}"],
+      "executor": "nx:run-commands",
       "options": {
-        "outputPath": "dist/packages/type-definitions",
-        "main": "packages/type-definitions/src/index.ts",
-        "tsConfig": "packages/type-definitions/tsconfig.lib.json",
-        "assets": ["packages/type-definitions/*.md"]
+        "command": "tsup packages/type-definitions/src/index.ts --dts --format esm --clean --splitting false --outDir dist/packages/type-definitions"
       }
     },
     "lint": {
