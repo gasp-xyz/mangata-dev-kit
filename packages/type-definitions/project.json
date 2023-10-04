@@ -1,0 +1,45 @@
+{
+  "name": "@mangata-finance/type-definitions",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/type-definitions/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/type-definitions",
+        "main": "packages/type-definitions/src/index.ts",
+        "tsConfig": "packages/type-definitions/tsconfig.lib.json",
+        "assets": ["packages/type-definitions/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/type-definitions/**/*.ts",
+          "packages/type-definitions/package.json"
+        ]
+      }
+    },
+    "semantic-release": {
+      "executor": "@goestav/nx-semantic-release:semantic-release",
+      "options": {
+        "branches": [
+          "main",
+          { "name": "rc/*", "channel": "rc", "prerelease": "rc" }
+        ],
+        "buildTarget": "@mangata-finance/type-definitions:build",
+        "repositoryUrl": "https://github.com/mangata-finance/mangata-dev-kit",
+        "outputPath": "dist/packages/type-definitions",
+        "github": true,
+        "changelog": true,
+        "npm": true,
+        "tagFormat": "${PROJECT_NAME}-v${version}"
+      }
+    }
+  },
+  "tags": []
+}

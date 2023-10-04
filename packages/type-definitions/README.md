@@ -1,0 +1,1 @@
+Types-definitions for Mangata network
