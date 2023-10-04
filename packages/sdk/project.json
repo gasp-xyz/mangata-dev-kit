@@ -1,0 +1,49 @@
+{
+  "name": "@mangata-finance/sdk",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/sdk/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsup packages/sdk/src/index.ts --dts --format esm --clean --splitting false --outDir dist/packages/sdk"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/sdk/**/*.ts",
+          "packages/sdk/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/packages/sdk"
+      }
+    },
+    "semantic-release": {
+      "executor": "@goestav/nx-semantic-release:semantic-release",
+      "options": {
+        "branches": [
+          "main",
+          { "name": "rc/*", "channel": "rc", "prerelease": "rc" }
+        ],
+        "buildTarget": "@mangata-finance/sdk:build",
+        "repositoryUrl": "https://github.com/devdanco/mono-dev",
+        "outputPath": "dist/packages/sdk",
+        "github": true,
+        "changelog": true,
+        "npm": true,
+        "tagFormat": "${PROJECT_NAME}-v${version}"
+      }
+    }
+  },
+  "tags": []
+}
