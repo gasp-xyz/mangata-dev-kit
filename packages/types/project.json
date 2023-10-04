@@ -1,0 +1,51 @@
+{
+  "name": "@mangata-finance/types",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/types/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/types/**/*.ts",
+          "packages/types/package.json"
+        ]
+      }
+    },
+    "build-types": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx esno node_modules/.bin/polkadot-types-from-defs --package @mangata-finance/types/interfaces --input packages/types/src/interfaces --endpoint packages/types/metadata.json",
+          "npx esno node_modules/.bin/polkadot-types-from-chain --package @mangata-finance/types/interfaces --endpoint packages/types/metadata.json --output packages/types/src/interfaces"
+        ],
+        "parallel": false
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsup packages/types/src/index.ts --dts --format esm --clean --splitting false --outDir dist/packages/types"
+      }
+    },
+    "semantic-release": {
+      "executor": "@goestav/nx-semantic-release:semantic-release",
+      "options": {
+        "branches": [
+          "main",
+          { "name": "rc/*", "channel": "rc", "prerelease": "rc" }
+        ],
+        "buildTarget": "@mangata-finance/types:build",
+        "repositoryUrl": "https://github.com/devdanco/mono-dev",
+        "outputPath": "dist/packages/types",
+        "github": true,
+        "changelog": true,
+        "npm": true,
+        "tagFormat": "${PROJECT_NAME}-v${version}"
+      }
+    }
+  },
+  "tags": []
+}
