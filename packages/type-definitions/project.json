@@ -5,9 +5,18 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "nx:run-commands",
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
       "options": {
-        "command": "tsup packages/type-definitions/src/index.ts --dts --format esm --clean --splitting false --outDir dist/packages/type-definitions"
+        "outputPath": "dist/packages/type-definitions",
+        "main": "packages/type-definitions/src/index.ts",
+        "tsConfig": "packages/type-definitions/tsconfig.lib.json",
+        "assets": ["packages/type-definitions/*.md"],
+        "transformers": [
+          {
+            "name": "typescript-transform-paths/nx-transformer"
+          }
+        ]
       }
     },
     "lint": {
