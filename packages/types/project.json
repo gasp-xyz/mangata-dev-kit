@@ -4,13 +4,18 @@
   "sourceRoot": "packages/types/src",
   "projectType": "library",
   "targets": {
-    "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
       "options": {
-        "lintFilePatterns": [
-          "packages/types/**/*.ts",
-          "packages/types/package.json"
+        "outputPath": "dist/packages/types",
+        "main": "packages/types/src/index.ts",
+        "tsConfig": "packages/types/tsconfig.lib.json",
+        "assets": ["packages/types/*.md"],
+        "transformers": [
+          {
+            "name": "typescript-transform-paths/nx-transformer"
+          }
         ]
       }
     },
@@ -24,10 +29,13 @@
         "parallel": false
       }
     },
-    "build": {
-      "executor": "nx:run-commands",
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "command": "tsup packages/types/src/index.ts --dts --format esm --clean --splitting false --outDir dist/packages/types"
+        "lintFilePatterns": [
+          "packages/types/**/*.ts"
+        ]
       }
     },
     "semantic-release": {
@@ -38,7 +46,7 @@
           { "name": "rc/*", "channel": "rc", "prerelease": "rc" }
         ],
         "buildTarget": "@mangata-finance/types:build",
-        "repositoryUrl": "https://github.com/devdanco/mono-dev",
+        "repositoryUrl": "https://github.com/mangata-finance/mangata-dev-kit",
         "outputPath": "dist/packages/types",
         "github": true,
         "changelog": true,

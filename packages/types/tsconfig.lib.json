@@ -4,25 +4,15 @@
     "outDir": "../../dist/out-tsc",
     "declaration": true,
     "types": ["node"],
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@mangata-finance/types/interfaces/default": [
-        "src/interfaces/default/index.ts"
-      ],
-      "@mangata-finance/types": [
-        "src/index.ts"
-      ],
-      // here we replace the @polkadot/api augmentation with our own, generated from chain
-      "@polkadot/api/augment": [
-        "src/interfaces/augment-api.ts"
-      ],
-      "@polkadot/types/lookup": [
-        "src/interfaces/types-lookup.ts"
-      ],
-      // replace the augmented types with our own, as generated from definitions
-      "@polkadot/types/augment": [
-        "src/interfaces/augment-types.ts"
-      ]
+      "@mangata-finance/types/*": ["src/*"],
+      "@polkadot/api/augment": ["src/interfaces/augment-api.ts"],
+      "@polkadot/types/lookup": ["src/interfaces/types-lookup.ts"],
+      "@polkadot/types/augment": ["src/interfaces/augment-types.ts"]
     }
   },
   "include": ["src/**/*.ts"]
