@@ -4,17 +4,17 @@
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
-    "module": "esnext",
     "moduleResolution": "node",
-    "esModuleInterop": true,
-    "strict": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "target": "esnext",
+    "module": "esnext",
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@mangata-finance/types": ["packages/types/src/index.ts"],
+      "@mangata-finance/type-definitions": ["packages/type-definitions/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
