@@ -24,6 +24,7 @@ export const signTx = async (
   account: Account,
   txOptions?: Partial<TxOptions>
 ): Promise<MangataGenericEvent[]> => {
+  /* eslint-disable no-async-promise-executor */
   return new Promise<MangataGenericEvent[]>(async (resolve, reject) => {
     const extractedAccount =
       typeof account === "string" ? account : account.address;
@@ -121,7 +122,7 @@ export const signTx = async (
                   .filter((currentBlockEvent) => {
                     return (
                       currentBlockEvent.phase.isApplyExtrinsic &&
-                      currentBlockEvent.phase.asApplyExtrinsic.toNumber() ===
+                      currentBlockEvent.phase.asApplyExtrinsic.toPrimitive() ===
                         index
                     );
                   })
@@ -131,6 +132,7 @@ export const signTx = async (
                     const eventData: MangataEventData[] = event.data.map(
                       (d: any, i: any) => {
                         return {
+                          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                           lookupName: types[i].lookupName!,
                           data: d
                         };

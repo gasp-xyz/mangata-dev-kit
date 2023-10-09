@@ -20,5 +20,5 @@ export const isSellAssetLockFree = async (
     tokenIds,
     amount
   );
-  return result.toPrimitive() as Boolean;
+  return result.toPrimitive() as boolean;
 };

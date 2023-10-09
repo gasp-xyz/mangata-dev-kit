@@ -17,6 +17,7 @@ export const waitForNewBlock = async (
     numberOfBlocks
   });
 
+  /* eslint-disable no-async-promise-executor */
   return new Promise(async (resolve) => {
     const unsubscribe = await api.rpc.chain.subscribeNewHeads(() => {
       if (++count === numberOfBlocks) {

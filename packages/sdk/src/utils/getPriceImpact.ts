@@ -1,5 +1,4 @@
 import Big from "big.js";
-import { BN } from "@polkadot/util";
 import { BIG_HUNDRED } from "./bigConstants";
 import { BN_TEN_THOUSAND } from "./bnConstants";
 import { toBN } from "./bnUtility";

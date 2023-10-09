@@ -6,6 +6,7 @@ export const getAccountBalances = async (api: ApiPromise, address: string) => {
 
   return ownedAssetsResponse.reduce(
     (acc, [key, value]) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const [_, id] = key.args;
 
       acc[id.toString()] = {

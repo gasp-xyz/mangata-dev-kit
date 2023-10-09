@@ -5,9 +5,13 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "nx:run-commands",
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
       "options": {
-        "command": "tsup packages/sdk/src/index.ts --dts --format esm --clean --splitting false --outDir dist/packages/sdk"
+        "outputPath": "dist/packages/sdk",
+        "main": "packages/sdk/src/index.ts",
+        "tsConfig": "packages/sdk/tsconfig.lib.json",
+        "assets": ["packages/sdk/*.md"]
       }
     },
     "lint": {
@@ -15,8 +19,7 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "packages/sdk/**/*.ts",
-          "packages/sdk/package.json"
+          "packages/sdk/**/*.ts"
         ]
       }
     },

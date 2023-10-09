@@ -3,7 +3,6 @@ import { MangataGenericEvent } from "../../types/common";
 import { signTx } from "../../utils/signTx";
 import { CreatePool } from "../../types/xyk";
 import { SubmittableExtrinsic } from "@polkadot/api/types";
-import { ISubmittableResult } from "@polkadot/types/types";
 import { logger } from "../../utils/mangataLogger";
 
 async function createPool(

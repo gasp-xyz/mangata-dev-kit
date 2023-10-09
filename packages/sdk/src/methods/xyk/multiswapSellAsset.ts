@@ -1,6 +1,5 @@
 import { ApiPromise } from "@polkadot/api";
 import { SubmittableExtrinsic } from "@polkadot/api/types";
-import { ISubmittableResult } from "@polkadot/types/types";
 import { MangataGenericEvent } from "../../types/common";
 import { signTx } from "../../utils/signTx";
 import { MultiswapSellAsset } from "../../types/xyk";

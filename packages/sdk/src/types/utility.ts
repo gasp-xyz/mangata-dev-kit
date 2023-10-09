@@ -2,8 +2,7 @@ import { Merge } from "type-fest";
 import { BN } from "@polkadot/util";
 import {
   ExtrinsicCommon,
-  MangataSubmittableExtrinsic,
-  Prettify
+  MangataSubmittableExtrinsic
 } from "./common";
 
 export type Batch = Merge<

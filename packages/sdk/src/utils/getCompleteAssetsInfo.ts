@@ -11,7 +11,7 @@ export const getCompleteAssetsInfo = async (api: ApiPromise) => {
     const { name, decimals, symbol } = value.unwrap();
     const assetInfo = {
       id: tokenId.toString(),
-      decimals: decimals.toNumber(),
+      decimals: Number(decimals.toPrimitive()),
       name: name.toPrimitive() as string,
       symbol: symbol.toPrimitive() as string
     };

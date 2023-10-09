@@ -56,6 +56,7 @@ import { Batch } from "./utility";
 
 export type Prettify<T> = {
   [K in keyof T]: T[K];
+  // eslint-disable-next-line @typescript-eslint/ban-types
 } & {};
 
 export type ExtrinsicCommon = {
@@ -234,8 +235,8 @@ export interface MangataInstance {
   rpc: {
     getLiquidityTokensForTrading: () => Promise<string[]>,
     getTradeableTokens: () => Promise<TradeAbleTokens[]>,
-    isSellAssetLockFree: (tokendIds: TokenId[], amount: BN) => Promise<Boolean>;
-    isBuyAssetLockFree: (tokendIds: TokenId[], amount: BN) => Promise<Boolean>;
+    isSellAssetLockFree: (tokendIds: TokenId[], amount: BN) => Promise<boolean>;
+    isBuyAssetLockFree: (tokendIds: TokenId[], amount: BN) => Promise<boolean>;
     /**
      * Calculates the buy price based on the asset's ID.
      * @param args - The price parameters.
