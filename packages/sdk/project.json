@@ -5,13 +5,19 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nx/js:tsc",
-      "outputs": ["{options.outputPath}"],
+      "executor": "nx:run-commands",
       "options": {
-        "outputPath": "dist/packages/sdk",
-        "main": "packages/sdk/src/index.ts",
-        "tsConfig": "packages/sdk/tsconfig.lib.json",
-        "assets": ["packages/sdk/*.md"]
+        "cwd": "packages/sdk",
+        "commands": [
+          "tsup ./src/index.ts --dts --format esm --clean --splitting false --tsconfig tsconfig.lib.json --outDir dist/packages/sdk",
+          "mkdir -p ../../dist/packages/sdk",
+          "cp dist/packages/sdk/index.js ../../dist/packages/sdk/",
+          "cp dist/packages/sdk/index.d.ts ../../dist/packages/sdk/",
+          "cp package.json ../../dist/packages/sdk/",
+          "cp README.md ../../dist/packages/sdk/",
+          "rm -rf dist/"
+        ],
+        "parallel": false
       }
     },
     "lint": {
@@ -39,7 +45,7 @@
           { "name": "rc/*", "channel": "rc", "prerelease": "rc" }
         ],
         "buildTarget": "@mangata-finance/sdk:build",
-        "repositoryUrl": "https://github.com/devdanco/mono-dev",
+        "repositoryUrl": "https://github.com/mangata-finance/mangata-dev-kit",
         "outputPath": "dist/packages/sdk",
         "github": true,
         "changelog": true,

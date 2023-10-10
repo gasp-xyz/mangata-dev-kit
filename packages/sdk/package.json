@@ -2,8 +2,8 @@
   "name": "@mangata-finance/sdk",
   "version": "0.0.1",
   "type": "module",
-  "module": "./src/index.js",
-  "types": "./src/index.d.ts",
+  "module": "./index.js",
+  "types": "./index.d.ts",
   "peerDependencies": {
     "@polkadot/api": "10.9.1"
   },
@@ -18,8 +18,8 @@
   },
   "exports": {
     ".": {
-      "types": "./src/index.d.ts",
-      "import": "./src/index.js"
+      "types": "./index.d.ts",
+      "import": "./index.js"
     }
   },
   "publishConfig": {

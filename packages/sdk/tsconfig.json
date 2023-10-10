@@ -1,7 +1,18 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "allowJs": true,
+    "declaration": true,
+    "resolveJsonModule": true,
+    "module": "esnext",
+    "target": "esnext",
+    "lib": ["esnext"],
+    "skipLibCheck": true,
+    "strict": true
   },
   "references": [
     {
