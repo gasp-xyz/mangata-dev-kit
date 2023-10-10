@@ -10,11 +10,7 @@
     "module": "esnext",
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@mangata-finance/types": ["packages/types/src/index.ts"],
-      "@mangata-finance/type-definitions": ["packages/type-definitions/src/index.ts"]
-    }
+    "baseUrl": "."
   },
   "exclude": ["node_modules", "tmp"]
 }
