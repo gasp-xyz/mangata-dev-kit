@@ -5,7 +5,7 @@ on:
     branches:
       - 'rc/*'
     paths:
-      - packages/types
+      - packages/types/**
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
