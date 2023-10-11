@@ -1,9 +1,11 @@
-name: Pre-release
+name: Pre-release sdk
 
 on:
   push:
     branches:
       - 'rc/*'
+    paths:
+      - packages/sdk
 
 env:
   API_URL: "ws://127.0.0.1:9947"
@@ -65,7 +67,7 @@ jobs:
 
       - run: npm ci
 
-      - run: npx nx affected -t lint
+      - run: npx nx run @mangata-finance/sdk:lint
 
       - run: npx nx run @mangata-finance/sdk:test
 
