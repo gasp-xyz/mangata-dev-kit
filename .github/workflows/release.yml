@@ -16,15 +16,6 @@ jobs:
 
       - run: npm ci
 
-      - name: Identify affected projects
-        run: |
-          echo "AFFECTED=$(npx nx show projects --affected --json | jq -r '. | join(" ")')" >> $GITHUB_ENV
-
-      - name: Affected projects
-        run: echo ${{ env.AFFECTED }}
-
-      - run: npx nx affected -t lint
-
 #      - run: npx nx affected --target=semantic-release --parallel=false
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

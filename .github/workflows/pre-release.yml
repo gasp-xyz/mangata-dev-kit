@@ -1,0 +1,78 @@
+name: Pre-release
+
+on:
+  push:
+    branches:
+      - 'rc/*'
+
+env:
+  API_URL: "ws://127.0.0.1:9947"
+  TX_VERBOSE: true
+
+permissions:
+  contents: write
+  id-token: write
+  deployments: write
+  checks: write
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: nrwl/nx-set-shas@v3
+
+      - name: Clone mangata node repository
+        uses: actions/checkout@v3
+        with:
+          repository: mangata-finance/mangata-node
+          path: mangata-repo
+          ref: develop
+
+      - name: Setup Node version and cache dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install WASM toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          target: wasm32-unknown-unknown
+
+      - name: Replace parachain docker image reference in config
+        working-directory: mangata-repo/devops/parachain-launch
+        run: sed -i 's+mangatasolutions/mangata-node:.*+mangatasolutions/mangata-node:develop-fast+g' config.yml
+
+      - name: Generate the config
+        working-directory: mangata-repo/devops/parachain-launch
+        run: npx @open-web3/parachain-launch generate config.yml
+
+      - name: Run the Node
+        working-directory: mangata-repo/devops/parachain-launch/output
+        run: |
+          docker-compose up -d --build
+          docker ps
+
+      - name: Sleep for 3 minutes
+        run: sleep 180s
+
+      - run: npm ci
+
+      - run: npx nx affected -t lint
+
+      - run: npx nx run @mangata-finance/sdk:test
+
+#      - run: npx nx affected --target=semantic-release --parallel=false
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+
+
