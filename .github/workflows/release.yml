@@ -1,0 +1,34 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: nrwl/nx-set-shas@v3
+
+      - run: npm ci
+
+      - name: Identify affected projects
+        run: |
+          echo "AFFECTED=$(npx nx show projects --affected --json | jq -r '. | join(" ")')" >> $GITHUB_ENV
+
+      - name: Affected projects
+        run: echo ${{ env.AFFECTED }}
+
+      - run: npx nx affected -t lint
+
+#      - run: npx nx affected --target=semantic-release --parallel=false
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+
+
