@@ -1,6 +1,6 @@
 # Mangata SDK 
 
-## Installation
+## Installation SDK
 
 ```sh
 // with npm
