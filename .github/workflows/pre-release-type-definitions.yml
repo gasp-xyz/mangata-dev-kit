@@ -1,0 +1,38 @@
+name: Pre-release type definitions
+
+on:
+  push:
+    branches:
+      - 'rc/*'
+    paths:
+      - packages/type-definitions
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: nrwl/nx-set-shas@v3
+
+      - name: Setup Node version and cache dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - run: npm ci
+
+      - run: npx nx run @mangata-finance/type-definitions:lint
+
+#      - run: npx nx affected --target=semantic-release --parallel=false
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+
+
