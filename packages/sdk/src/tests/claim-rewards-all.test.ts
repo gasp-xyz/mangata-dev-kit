@@ -29,6 +29,7 @@ beforeEach(async () => {
   let nonce = await instance.query.getNonce(sudoUser.address);
 
   /// create tokens for liquidity minting
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const calls = await Promise.all([...Array(21).keys()].map((_) => createToken(
         instance,
         testUser1.address,
@@ -97,6 +98,8 @@ it.skip("should claim rewards from multiple pools", async () => {
       return instance.xyk.activateLiquidity(argsLiq, "AvailableBalance");
   }))
 
+  /* eslint-disable no-async-promise-executor */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const wait_for_rewards = new Promise<void>(async (resolve, _) => {
     const unsub_new_heads = await api.derive.chain.subscribeNewHeads(async (header) => {
       const rewards = await Promise.all(activatedTokens.map((token)=> instance.rpc.calculateRewardsAmount(
@@ -145,7 +148,7 @@ it.skip("should throw error when claiming rewards for too many tokens", async ()
       };
       return instance.xyk.activateLiquidity(argsLiq, "AvailableBalance");
   }))
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const wait_for_rewards = new Promise<void>(async (resolve, _) => {
     const unsub_new_heads = await api.derive.chain.subscribeNewHeads(async (header) => {
       const rewards = await Promise.all(tokens!.map((token)=> instance.rpc.calculateRewardsAmount(

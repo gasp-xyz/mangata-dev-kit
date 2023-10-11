@@ -24,8 +24,7 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "packages/type-definitions/**/*.ts",
-          "packages/type-definitions/package.json"
+          "packages/type-definitions/**/*.ts"
         ]
       }
     },
