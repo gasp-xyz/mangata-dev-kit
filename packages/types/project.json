@@ -38,12 +38,21 @@
         ]
       }
     },
+    "generate-metadata": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/types",
+        "command": "echo '{\"id\":1,\"jsonrpc\":\"2.0\",\"method\":\"state_getMetadata\",\"params\":[]}' | websocat -n1 -B 99999999 ws://127.0.0.1:9946 > metadata.json"
+      }
+    },
     "semantic-release": {
       "executor": "@goestav/nx-semantic-release:semantic-release",
       "options": {
         "branches": [
           "main",
-          { "name": "rc/*", "channel": "rc", "prerelease": "rc" }
+          { "name": "rc/*", "channel": "rc", "prerelease": "rc" },
+          { "name": "feature/*", "channel": "feature", "prerelease": "feature" },
+          { "name": "hotfix/*", "channel": "hotfix", "prerelease": "hotfix" }
         ],
         "buildTarget": "@mangata-finance/types:build",
         "repositoryUrl": "https://github.com/mangata-finance/mangata-dev-kit",
@@ -57,3 +66,4 @@
   },
   "tags": []
 }
+
