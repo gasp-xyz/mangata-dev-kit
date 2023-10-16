@@ -17,6 +17,7 @@ on:
         description: "Branch where to make pre release"
         type: string
         required: false
+        default: ""
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -88,15 +89,12 @@ jobs:
 
       - run: npx nx run @mangata-finance/types:lint
 
-      - name: Add branch to project.json
+      - name: Add branch to project.json in order to perform pre-release
+        if: ${{ github.event.inputs.branch != '' }}
         working-directory: packages/types
         run: | 
           sed -i "/\"branches\": \[/a { \"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\" }," project.json
 
-      - name: Display project.json
-        working-directory: packages/types
-        run: |
-          cat project.json
 #      - run: npx nx affected --target=semantic-release --parallel=false
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
