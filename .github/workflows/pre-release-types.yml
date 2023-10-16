@@ -13,6 +13,10 @@ on:
         type: string
         required: false
         default: "mangatasolutions/mangata-node:develop-fast"
+      branch:
+        description: "Branch where to make pre release"
+        type: string
+        required: false
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -84,6 +88,15 @@ jobs:
 
       - run: npx nx run @mangata-finance/types:lint
 
+      - name: Add branch to project.json
+        working-directory: packages/types
+        run: | 
+          sed -i '"/branches": \[/a { "name": \"${{ github.event.inputs.branch }}\", "channel": \"${{ github.event.inputs.branch }}\", "prerelease": \"${{ github.event.inputs.branch }}\" },' project.json
+
+      - name: Display project.json
+        working-directory: packages/types
+        run: |
+          cat project.json
 #      - run: npx nx affected --target=semantic-release --parallel=false
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

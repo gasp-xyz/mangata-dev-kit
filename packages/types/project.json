@@ -51,8 +51,8 @@
         "branches": [
           "main",
           { "name": "rc/*", "channel": "rc", "prerelease": "rc" },
-          { "name": "feature/*", "channel": "feature", "prerelease": "feature" },
-          { "name": "hotfix/*", "channel": "hotfix", "prerelease": "hotfix" }
+          { "name": "feature/gonzalo", "channel": "featuregonzalo", "prerelease": "featuregonzalo" },
+          { "name": "feature/mat", "channel": "hotfix", "prerelease": "hotfix" }
         ],
         "buildTarget": "@mangata-finance/types:build",
         "repositoryUrl": "https://github.com/mangata-finance/mangata-dev-kit",
@@ -66,4 +66,3 @@
   },
   "tags": []
 }
-
