@@ -91,7 +91,7 @@ jobs:
       - name: Add branch to project.json
         working-directory: packages/types
         run: | 
-          sed -i '"/branches": \[/a { "name": \"${{ github.event.inputs.branch }}\", "channel": \"${{ github.event.inputs.branch }}\", "prerelease": \"${{ github.event.inputs.branch }}\" },' project.json
+          sed -i "/\"branches\": \[/a { \"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\" }," project.json
 
       - name: Display project.json
         working-directory: packages/types
