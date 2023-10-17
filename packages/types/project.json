@@ -57,6 +57,7 @@
         "branches": [
 { "name": "feature-generate-types-workflow", "channel": "feature-generate-types-workflow", "prerelease": "feature-generate-types-workflow" },
 { "name": "feature-generate-types-workflow", "channel": "feature-generate-types-workflow", "prerelease": "feature-generate-types-workflow" },
+{ "name": "feature-generate-types-workflow", "channel": "feature-generate-types-workflow", "prerelease": "feature-generate-types-workflow" },
           "main",
           {
             "name": "rc/*",
@@ -76,6 +77,7 @@
   },
   "tags": [],
   "branches": [
+{ "name": "feature-generate-types-workflow", "channel": "feature-generate-types-workflow", "prerelease": "feature-generate-types-workflow" },
 { "name": "feature-generate-types-workflow", "channel": "feature-generate-types-workflow", "prerelease": "feature-generate-types-workflow" },
 { "name": "feature-generate-types-workflow", "channel": "feature-generate-types-workflow", "prerelease": "feature-generate-types-workflow" },
     {
