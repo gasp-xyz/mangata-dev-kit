@@ -49,6 +49,7 @@
       "executor": "@goestav/nx-semantic-release:semantic-release",
       "options": {
         "branches": [
+{ "name": "feature-types-node", "channel": "feature-types-node", "prerelease": "feature-types-node" },
           "main",
           { "name": "rc/*", "channel": "rc", "prerelease": "rc" }
         ],
