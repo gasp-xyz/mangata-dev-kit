@@ -49,6 +49,7 @@
       "executor": "@goestav/nx-semantic-release:semantic-release",
       "options": {
         "branches": [
+{ "name": "feature-generate-types-workflow", "channel": "feature-generate-types-workflow", "prerelease": "feature-generate-types-workflow" },
           "main",
           { "name": "rc/*", "channel": "rc", "prerelease": "rc" }
         ],
