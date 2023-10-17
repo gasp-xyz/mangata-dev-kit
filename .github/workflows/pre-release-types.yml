@@ -95,6 +95,15 @@ jobs:
         run: | 
           sed -i "/\"branches\": \[/a { \"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\" }," project.json
 
+      - name: git status
+        run: git status
+
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          commit_message: "feat: type generation mangata node"
+
 #      - run: npx nx affected --target=semantic-release --parallel=false
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
