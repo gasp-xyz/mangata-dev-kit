@@ -94,10 +94,11 @@ jobs:
         working-directory: packages/types
         run: |
           # Check if the branch already exists in project.json
-          if ! jq -e ".branches[] | select(.name == \"${{ github.event.inputs.branch }}\")" project.json; then
+          if [[ $(jq -r '.branches | length' project.json) -eq 0 ]] || [[ $(jq -e ".branches[] | select(.name == \"${{ github.event.inputs.branch }}\")" project.json) == "null" ]]; then
             echo "Branch not found in project.json, adding it..."
-            # Add the branch to the branches array in project.json
-            jq ".branches += [{ \"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\" }]" project.json > project.json.tmp
+            # Handle an empty or null 'branches' array
+            jq --arg branch "${{ github.event.inputs.branch }}" \
+               '.branches = if .branches == null then [{ "name": $branch, "channel": $branch, "prerelease": $branch }] else .branches + [{ "name": $branch, "channel": $branch, "prerelease": $branch }] end' project.json > project.json.tmp
             mv project.json.tmp project.json
           else
             echo "Branch already exists in project.json, no action needed."
