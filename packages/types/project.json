@@ -50,6 +50,7 @@
       "options": {
         "branches": [
 { "name": "testing", "channel": "testing", "prerelease": "testing" },
+{ "name": "testing", "channel": "testing", "prerelease": "testing" },
           "main",
           { "name": "rc/*", "channel": "rc", "prerelease": "rc" }
         ],
