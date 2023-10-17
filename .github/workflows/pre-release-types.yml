@@ -61,7 +61,7 @@ jobs:
 
       - name: Install websocat
         run: |
-            cargo install websocat
+          cargo install websocat
         shell: bash
 
       - name: Replace parachain docker image reference in config
@@ -79,7 +79,7 @@ jobs:
           docker ps
 
       - name: Sleep for 3 minutes
-        run: sleep 180s
+        run: sleep 120s
 
       - run: npm ci
 
@@ -89,29 +89,11 @@ jobs:
 
       - run: npx nx run @mangata-finance/types:lint
 
-      - name: Check if branch exists in project.json
+      - name: Add branch to project.json in order to perform pre-release
         if: ${{ github.event.inputs.branch != '' }}
         working-directory: packages/types
         run: |
-          # Check if the branch already exists in project.json
-          if ! jq -e ".branches[] | select(.name == \"${{ github.event.inputs.branch }}\")" project.json; then
-            echo "Branch not found in project.json, adding it..."
-            # Add the branch to the branches array in project.json
-            jq ".branches += [{ \"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\" }]" project.json > project.json.tmp
-            mv project.json.tmp project.json
-          else
-            echo "Branch already exists in project.json, no action needed."
-          fi
-      
-
-      #      - name: Add branch to project.json in order to perform pre-release
-#        if: ${{ github.event.inputs.branch != '' }}
-#        working-directory: packages/types
-#        run: |
-#          sed -i "/\"branches\": \[/a { \"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\" }," project.json
-
-      - name: git status
-        run: git status
+          sed -i "/\"branches\": \[/a { \"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\" }," project.json
 
       - name: Commit and push changes
         if: ${{ github.event.inputs.branch != '' }}
@@ -120,11 +102,14 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           commit_message: "feat: type generation mangata node [only @mangata-finance/types]"
 
-#      - run: npx nx affected --target=semantic-release --parallel=false
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Remove .git/COMMIT_EDITMSG
+        run: |
+          rm .git/COMMIT_EDITMSG
 
+      - run: npx nx run @mangata-finance/types:semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 
 
