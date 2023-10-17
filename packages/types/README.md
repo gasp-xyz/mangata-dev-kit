@@ -1,4 +1,4 @@
 # @mangata-finance/types
 
 Support: ESM only
-Polkadot.js type definitions for Mangata Network
+Polkadot.js types for Mangata Network
