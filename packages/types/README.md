@@ -1,7 +1,4 @@
-# types
+# @mangata-finance/types
 
-This library was generated with [Nx](https://nx.dev).
-
-## Building types package
-
-Run `nx build types` to build the library.
+Support: ESM only
+Polkadot.js type definitions for Mangata Network

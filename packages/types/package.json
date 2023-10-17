@@ -1,11 +1,18 @@
 {
   "name": "@mangata-finance/types",
-  "version": "1.1.0",
-  "dependencies": {
-    "tslib": "^2.3.0"
+  "version": "2.0.0",
+  "description": "Polkadot.js type definitions for Mangata Network",
+  "author": "Mangata Finance <solutions@mangata.finance>",
+  "engines": {
+    "node": ">=18.0.0"
   },
+  "keywords": [
+    "mangata",
+    "types"
+  ],
+  "license": "GPL-3.0",
   "devDependencies": {
-    "@mangata-finance/type-definitions": "2.0.0-rc.8"
+    "@mangata-finance/type-definitions": "2.0.0"
   },
   "peerDependencies": {
     "@polkadot/api": "^10.9.1"
