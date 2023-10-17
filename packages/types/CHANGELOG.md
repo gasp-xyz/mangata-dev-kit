@@ -1,3 +1,15 @@
+# [2.1.0-feature-generate-types-workflow.1](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/types-v2.0.0...@mangata-finance/types-v2.1.0-feature-generate-types-workflow.1) (2023-10-17)
+
+
+### Features
+
+* type generation mangata node ([5d6609e](https://github.com/mangata-finance/mangata-dev-kit/commit/5d6609ed328440a81b55725001bc13a307af1d2c))
+* type generation mangata node ([0562501](https://github.com/mangata-finance/mangata-dev-kit/commit/056250131cd546f36689188aed86d6278af9793a))
+* type generation mangata node [only @mangata-finance/types] ([33928ce](https://github.com/mangata-finance/mangata-dev-kit/commit/33928ce6d9df47ff28d97ba61e9346f595d0d875))
+* type generation mangata node [only @mangata-finance/types] ([ec0a280](https://github.com/mangata-finance/mangata-dev-kit/commit/ec0a2808ce4f48817c9a5432f99c06c33b3bfd9d))
+* type generation mangata node [only @mangata-finance/types] ([f37f79a](https://github.com/mangata-finance/mangata-dev-kit/commit/f37f79a33afdf68e0eabd66a796d279640ee909f))
+* type generation mangata node [only @mangata-finance/types] ([be4a170](https://github.com/mangata-finance/mangata-dev-kit/commit/be4a1706106ec7f4869314777e4c8d638e80b3e7))
+
 # [2.0.0](https://github.com/mangata-finance/types/compare/v1.0.0...v2.0.0) (2023-10-12)
 
 
