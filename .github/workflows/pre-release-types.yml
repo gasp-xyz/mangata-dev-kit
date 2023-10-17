@@ -89,30 +89,11 @@ jobs:
 
       - run: npx nx run @mangata-finance/types:lint
 
-      - name: Check if branch exists in project.json
+      - name: Add branch to project.json in order to perform pre-release
         if: ${{ github.event.inputs.branch != '' }}
         working-directory: packages/types
         run: |
-          # Check if the branch already exists in project.json
-          if [[ $(jq -r '.branches | length' project.json) -eq 0 ]] || [[ $(jq -e ".branches[] | select(.name == \"${{ github.event.inputs.branch }}\")" project.json) == "null" ]]; then
-            echo "Branch not found in project.json, adding it..."
-            # Handle an empty or null 'branches' array
-            jq --arg branch "${{ github.event.inputs.branch }}" \
-               '.branches = if .branches == null then [{ "name": $branch, "channel": $branch, "prerelease": $branch }] else .branches + [{ "name": $branch, "channel": $branch, "prerelease": $branch }] end' project.json > project.json.tmp
-            mv project.json.tmp project.json
-          else
-            echo "Branch already exists in project.json, no action needed."
-          fi
-      
-
-      #      - name: Add branch to project.json in order to perform pre-release
-#        if: ${{ github.event.inputs.branch != '' }}
-#        working-directory: packages/types
-#        run: |
-#          sed -i "/\"branches\": \[/a { \"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\" }," project.json
-
-      - name: git status
-        run: git status
+          sed -i "/\"branches\": \[/a { \"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\" }," project.json
 
       - name: Commit and push changes
         if: ${{ github.event.inputs.branch != '' }}
@@ -125,6 +106,14 @@ jobs:
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 #          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Remove branch from project.json
+        if: ${{ github.event.inputs.branch != '' }}
+        working-directory: packages/types
+        run: |
+          sed -i "/\"branches\": \[/,/\]/ {
+            /\"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\"/d
+          }" project.json
 
 
 
