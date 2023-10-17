@@ -102,18 +102,10 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           commit_message: "feat: type generation mangata node [only @mangata-finance/types]"
 
-#      - run: npx nx affected --target=semantic-release --parallel=false
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Remove branch from project.json
-        if: ${{ github.event.inputs.branch != '' }}
-        working-directory: packages/types
-        run: |
-          sed -i "/\"branches\": \[/,/\]/ {
-            /\"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\"/d
-          }" project.json
+      - run: npx nx semantic-release @mangata-finance/types
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 
 
