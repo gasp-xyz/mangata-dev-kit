@@ -89,20 +89,36 @@ jobs:
 
       - run: npx nx run @mangata-finance/types:lint
 
-      - name: Add branch to project.json in order to perform pre-release
+      - name: Check if branch exists in project.json
         if: ${{ github.event.inputs.branch != '' }}
         working-directory: packages/types
-        run: | 
-          sed -i "/\"branches\": \[/a { \"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\" }," project.json
+        run: |
+          # Check if the branch already exists in project.json
+          if ! jq -e ".branches[] | select(.name == \"${{ github.event.inputs.branch }}\")" project.json; then
+            echo "Branch not found in project.json, adding it..."
+            # Add the branch to the branches array in project.json
+            jq ".branches += [{ \"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\" }]" project.json > project.json.tmp
+            mv project.json.tmp project.json
+          else
+            echo "Branch already exists in project.json, no action needed."
+          fi
+      
+
+      #      - name: Add branch to project.json in order to perform pre-release
+#        if: ${{ github.event.inputs.branch != '' }}
+#        working-directory: packages/types
+#        run: |
+#          sed -i "/\"branches\": \[/a { \"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\" }," project.json
 
       - name: git status
         run: git status
 
       - name: Commit and push changes
+        if: ${{ github.event.inputs.branch != '' }}
         uses: devops-infra/action-commit-push@master
         with:
           github_token: ${{ secrets.GH_TOKEN }}
-          commit_message: "feat: type generation mangata node"
+          commit_message: "feat: type generation mangata node [only @mangata-finance/types]"
 
 #      - run: npx nx affected --target=semantic-release --parallel=false
 #        env:
