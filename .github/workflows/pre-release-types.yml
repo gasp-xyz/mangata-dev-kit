@@ -102,7 +102,11 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           commit_message: "feat: type generation mangata node [only @mangata-finance/types]"
 
-      - run: npx nx semantic-release @mangata-finance/types
+      - name: Remove .git/COMMIT_EDITMSG
+        run: |
+          rm .git/COMMIT_EDITMSG
+
+      - run: npx nx run @mangata-finance/types:semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
