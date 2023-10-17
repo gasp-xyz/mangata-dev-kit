@@ -12,7 +12,7 @@ on:
         description: "Name of the parachain docker reference"
         type: string
         required: false
-        default: "mangatasolutions/mangata-node:develop-fast"
+        default: "mangatasolutions/mangata-node:develop"
       branch:
         description: "Branch where to make pre release"
         type: string
