@@ -1,3 +1,10 @@
+# [2.1.0-feature-types-node.3](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/types-v2.1.0-feature-types-node.2...@mangata-finance/types-v2.1.0-feature-types-node.3) (2023-10-18)
+
+
+### Features
+
+* type generation mangata node [only @mangata-finance/types] ([db3109d](https://github.com/mangata-finance/mangata-dev-kit/commit/db3109db6eca5d9e10a3202a6f1007d51709418c))
+
 # [2.1.0-feature-types-node.2](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/types-v2.1.0-feature-types-node.1...@mangata-finance/types-v2.1.0-feature-types-node.2) (2023-10-17)
 
 
