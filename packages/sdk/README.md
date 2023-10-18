@@ -164,7 +164,7 @@ main()
   .finally(() => process.exit());
 ```
 
-For available methods please visit [docs](https://docs.mangata.finance/sdk/)
+For available methods please visit [docs](https://mangata-finance.github.io/mangata-sdk/)
 
 # Documentation
 
