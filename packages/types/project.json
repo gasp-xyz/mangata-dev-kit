@@ -55,10 +55,10 @@
         "buildTarget": "@mangata-finance/types:build",
         "repositoryUrl": "https://github.com/mangata-finance/mangata-dev-kit",
         "outputPath": "dist/packages/types",
-        "github": true,
-        "changelog": true,
-        "npm": true,
-        "tagFormat": "${PROJECT_NAME}-v${version}"
+        "github": false,
+        "git": false,
+        "changelog": false,
+        "npm": true
       }
     }
   },
