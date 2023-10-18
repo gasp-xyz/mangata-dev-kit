@@ -51,6 +51,7 @@
         "branches": [
 { "name": "feature-types-node", "channel": "feature-types-node", "prerelease": "feature-types-node" },
 { "name": "feature-types-node", "channel": "feature-types-node", "prerelease": "feature-types-node" },
+{ "name": "feature-types-node", "channel": "feature-types-node", "prerelease": "feature-types-node" },
           "main",
           { "name": "rc/*", "channel": "rc", "prerelease": "rc" }
         ],
