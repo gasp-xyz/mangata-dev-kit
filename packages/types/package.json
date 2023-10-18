@@ -1,6 +1,6 @@
 {
   "name": "@mangata-finance/types",
-  "version": "2.1.0-feature-types-node.4",
+  "version": "2.1.0-feature-types-node.5",
   "description": "Polkadot.js type definitions for Mangata Network",
   "author": "Mangata Finance <solutions@mangata.finance>",
   "repository": {
