@@ -49,6 +49,7 @@
       "executor": "@goestav/nx-semantic-release:semantic-release",
       "options": {
         "branches": [
+{ "name": "feature-testing-ci", "channel": "feature-testing-ci", "prerelease": "feature-testing-ci" },
           "main",
           { "name": "rc/*", "channel": "rc", "prerelease": "rc" }
         ],
