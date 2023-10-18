@@ -65,16 +65,44 @@ jobs:
       - name: Sleep for 3 minutes
         run: sleep 180s
 
+      - name: Extract peerDependencies
+        id: extract
+        working-directory: packages/sdk
+        run: |
+          peerDependencies=$(cat package.json | jq -r '.peerDependencies | to_entries | map(.key + "@" + .value) | join(",")')
+          echo "PEER_DEPENDENCIES=$peerDependencies" >> $GITHUB_ENV
+
       - run: npm ci
 
       - run: npx nx run @mangata-finance/sdk:lint
 
       - run: npx nx run @mangata-finance/sdk:test
 
-#      - run: npx nx affected --target=semantic-release --parallel=false
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Remove .git/COMMIT_EDITMSG
+        run: |
+          rm .git/COMMIT_EDITMSG
+
+      - run: npx nx run @mangata-finance/sdk:semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Sleep for 1 minutes
+        run: sleep 60s
+
+      - name: Latest released rc version
+        run: |
+          rcVersion=$(npm show @mangata-finance/sdk dist-tags.rc)
+          echo "RC_SDK_VERSION=rcVersion" >> $GITHUB_ENV
+
+      - name: Invoke workflow in microapps repo with inputs
+        uses: jonas-schievink/workflow-proxy@v1
+        with:
+          ref: refs/heads/main
+          workflow: pr-ui-tests.yml
+          repo: mangata-finance/microapps
+          token: ${{ secrets.GH_TOKEN }}
+          inputs: '{"sdkVersion": "${{ env.RC_SDK_VERSION }}", "peerDependencies": "${{ env.PEER_DEPENDENCIES }}"}'
 
 
 
