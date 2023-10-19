@@ -78,8 +78,8 @@ jobs:
           docker-compose up -d --build
           docker ps
 
-      - name: Sleep for 3 minutes
-        run: sleep 120s
+      - name: Sleep for 1 minutes
+        run: sleep 60s
 
       - run: npm ci
 
@@ -89,26 +89,28 @@ jobs:
 
       - run: npx nx run @mangata-finance/types:lint
 
-      - name: Add branch to project.json in order to perform pre-release
-        if: ${{ github.event.inputs.branch != '' }}
+      - name: NPM version bump
         working-directory: packages/types
         run: |
-          sed -i "/\"branches\": \[/a { \"name\": \"${{ github.event.inputs.branch }}\", \"channel\": \"${{ github.event.inputs.branch }}\", \"prerelease\": \"${{ github.event.inputs.branch }}\" }," project.json
+          npm version prerelease --preid=${{ github.event.inputs.branch }}
 
-      - name: Commit and push changes
-        if: ${{ github.event.inputs.branch != '' }}
-        uses: devops-infra/action-commit-push@master
-        with:
-          github_token: ${{ secrets.GH_TOKEN }}
-          commit_message: "feat: type generation mangata node [only @mangata-finance/types]"
-
-      - name: Remove .git/COMMIT_EDITMSG
+      - name: git add and commit new version
         run: |
-          rm .git/COMMIT_EDITMSG
+          git config user.name mangatafinance
+          git config user.email solutions@mangata.finance
+          git add .
+          git commit -m "chore: updated to new prerelease version"
+          git push
 
-      - run: npx nx run @mangata-finance/types:semantic-release
+      - name: Build
+        run: npx nx run @mangata-finance/types:build
+
+      - name: Publish to NPM
+        working-directory: dist/packages/types
+        run: |
+          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+          npm publish --tag ${{ github.event.inputs.branch }} --access public
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 
