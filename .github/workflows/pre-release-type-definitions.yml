@@ -29,10 +29,6 @@ jobs:
 
       - run: npx nx run @mangata-finance/type-definitions:lint
 
-      - name: Remove .git/COMMIT_EDITMSG
-        run: |
-          rm .git/COMMIT_EDITMSG
-
       - run: npx nx run @mangata-finance/type-definitions:semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

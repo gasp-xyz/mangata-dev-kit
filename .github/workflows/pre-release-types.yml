@@ -90,11 +90,13 @@ jobs:
       - run: npx nx run @mangata-finance/types:lint
 
       - name: NPM version bump
+        if: ${{ github.event.inputs.branch != '' }}
         working-directory: packages/types
         run: |
           npm version prerelease --preid=${{ github.event.inputs.branch }}
 
       - name: git add and commit new version
+        if: ${{ github.event.inputs.branch != '' }}
         run: |
           git config user.name mangatafinance
           git config user.email solutions@mangata.finance
@@ -103,14 +105,23 @@ jobs:
           git push
 
       - name: Build
+        if: ${{ github.event.inputs.branch != '' }}
         run: npx nx run @mangata-finance/types:build
 
       - name: Publish to NPM
+        if: ${{ github.event.inputs.branch != '' }}
         working-directory: dist/packages/types
         run: |
           echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
           npm publish --tag ${{ github.event.inputs.branch }} --access public
         env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish rc to NPM
+        if: ${{ github.event.inputs.branch == '' }}
+        run: npx nx run @mangata-finance/types:semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 
