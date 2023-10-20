@@ -83,6 +83,15 @@ jobs:
 
       - run: npm ci
 
+      - name: Extract the latest version of type definitions
+        run: |
+          version=$(npm show @mangata-finance/type-definitions version)
+          echo "NPM package version of mangata type definitions is $version"
+          echo "MANGATA_TYPE_DEFINITIONS=$version" >> $GITHUB_ENV
+
+      - name: Install always latest type definitions
+        run: npm i @mangata-finance/type-definitions@${{ env.MANGATA_TYPE_DEFINITIONS }}
+
       - run: npx nx run @mangata-finance/types:generate-metadata
 
       - run: npx nx run @mangata-finance/types:build-types
