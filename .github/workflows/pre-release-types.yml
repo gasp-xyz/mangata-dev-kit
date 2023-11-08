@@ -40,7 +40,16 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v3
 
-      - name: Clone mangata node repository
+      - name: Clone mangata node repository with branch
+        if: ${{ github.event.inputs.branch != '' }}
+        uses: actions/checkout@v3
+        with:
+          repository: mangata-finance/mangata-node
+          path: mangata-repo
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Clone mangata node repository default develop
+        if: ${{ github.event.inputs.branch == '' }}
         uses: actions/checkout@v3
         with:
           repository: mangata-finance/mangata-node
@@ -71,6 +80,10 @@ jobs:
       - name: Generate the config
         working-directory: mangata-repo/devops/parachain-launch
         run: npx @open-web3/parachain-launch generate config.yml
+
+      - name: Remove obsolete node run args from generated docker-compose.yml
+        working-directory: mangata-repo/devops/parachain-launch/output
+        run: sed -i '/ws-external/d' docker-compose.yml
 
       - name: Run the Node
         working-directory: mangata-repo/devops/parachain-launch/output
@@ -132,6 +145,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
 
 
