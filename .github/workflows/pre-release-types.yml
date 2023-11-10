@@ -114,8 +114,12 @@ jobs:
       - name: NPM version bump
         if: ${{ github.event.inputs.branch != '' }}
         working-directory: packages/types
+        env:
+          INPUTS_BRANCH: ${{ github.event.inputs.branch }}
         run: |
-          npm version prerelease --preid=${{ github.event.inputs.branch }}
+          # Branch name sanitization added to avoid issues with npm version command
+          # Example `ci/new-branch` -> `ci-new-branch`
+          npm version prerelease --preid="${INPUTS_BRANCH//\//-}"
 
       - name: git add and commit new version
         if: ${{ github.event.inputs.branch != '' }}
@@ -133,11 +137,15 @@ jobs:
       - name: Publish to NPM
         if: ${{ github.event.inputs.branch != '' }}
         working-directory: dist/packages/types
-        run: |
-          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
-          npm publish --tag ${{ github.event.inputs.branch }} --access public
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          INPUTS_BRANCH: ${{ github.event.inputs.branch }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+          
+          # Branch name sanitization added to avoid issues with npm version command
+          # Example `ci/new-branch` -> `ci-new-branch`
+          npm publish --tag "${INPUTS_BRANCH//\//-}" --access public
 
       - name: Publish rc to NPM
         if: ${{ github.event.inputs.branch == '' }}
@@ -145,5 +153,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
 
