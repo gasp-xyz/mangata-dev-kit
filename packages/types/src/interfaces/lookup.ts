@@ -392,7 +392,10 @@ export default {
       PoolPromotionUpdated: '(u32,Option<u8>)',
       LiquidityActivated: '(AccountId32,u32,u128)',
       LiquidityDeactivated: '(AccountId32,u32,u128)',
-      RewardsClaimed: '(AccountId32,u32,u128)'
+      RewardsClaimed: '(AccountId32,u32,u128)',
+      ThirdPartyRewardsClaimed: '(AccountId32,u32,u32,u128)',
+      ThirdPartyLiquidityActivated: '(AccountId32,u32,u32,u128)',
+      ThirdPartyLiquidityDeactivated: '(AccountId32,u32,u32,u128)'
     }
   },
   /**
@@ -2234,7 +2237,7 @@ export default {
     _enum: {
       ActivateKind: 'Option<MangataTypesMultipurposeLiquidityActivateKind>',
       ActivatedLiquidity: 'u32',
-      LiquidityMining: 'Null'
+      NativeRewardsLiquidity: 'Null'
     }
   },
   /**
@@ -3398,7 +3401,7 @@ export default {
    **/
   PalletProofOfStakeScheduleRewardsCalculatorScheduleRewards: {
     pending: 'u128',
-    pendingSessionId: 'u64',
+    pendingSessionId: 'u32',
     total: 'u128'
   },
   /**
@@ -3414,8 +3417,8 @@ export default {
    * Lookup387: pallet_proof_of_stake::Schedule<T>
    **/
   PalletProofOfStakeSchedule: {
-    scheduledAt: 'u64',
-    lastSession: 'u64',
+    scheduledAt: 'u32',
+    lastSession: 'u32',
     liqToken: 'u32',
     rewardToken: 'u32',
     amountPerSession: 'u128'
@@ -3426,14 +3429,14 @@ export default {
   PalletProofOfStakeScheduleRewardsCalculatorActivatedLiquidityPerSchedule: {
     pendingPositive: 'u128',
     pendingNegative: 'u128',
-    pendingSessionId: 'u64',
+    pendingSessionId: 'u32',
     total: 'u128'
   },
   /**
    * Lookup390: pallet_proof_of_stake::pallet::Error<T>
    **/
   PalletProofOfStakeError: {
-    _enum: ['NotEnoughAssets', 'MathOverflow', 'NotEnoughRewardsEarned', 'NotAPromotedPool', 'PastTimeCalculation', 'LiquidityCheckpointMathError', 'CalculateRewardsMathError', 'MathError', 'CalculateRewardsAllMathError', 'MissingRewardsInfoError', 'DeprecatedExtrinsic', 'CannotScheduleRewardsInPast', 'PoolDoesNotExist', 'TooManySchedules', 'TooLittleRewards', 'TooSmallVolume', 'LiquidityLockedIn3rdpartyRewards']
+    _enum: ['NotEnoughAssets', 'MathOverflow', 'NotEnoughRewardsEarned', 'NotAPromotedPool', 'PastTimeCalculation', 'LiquidityCheckpointMathError', 'CalculateRewardsMathError', 'MathError', 'CalculateRewardsAllMathError', 'MissingRewardsInfoError', 'DeprecatedExtrinsic', 'CannotScheduleRewardsInPast', 'PoolDoesNotExist', 'TooManySchedules', 'TooLittleRewards', 'TooSmallVolume', 'LiquidityLockedIn3rdpartyRewards', 'NoThirdPartyPartyRewardsToClaim']
   },
   /**
    * Lookup391: pallet_fee_lock::pallet::FeeLockMetadataInfo<T>

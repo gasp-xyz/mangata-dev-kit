@@ -756,6 +756,7 @@ declare module '@polkadot/api-base/types/errors' {
        * Not enough rewards earned
        **/
       NotEnoughRewardsEarned: AugmentedError<ApiType>;
+      NoThirdPartyPartyRewardsToClaim: AugmentedError<ApiType>;
       /**
        * Past time calculation
        **/

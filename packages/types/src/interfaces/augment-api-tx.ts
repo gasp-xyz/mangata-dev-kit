@@ -510,7 +510,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::activate_liquidity_for_3rdparty_rewards`].
        **/
-      activateLiquidityFor3rdpartyRewards: AugmentedSubmittable<(liquidityTokenId: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array, rewardToken: u32 | AnyNumber | Uint8Array, useBalanceFrom: Option<PalletProofOfStakeThirdPartyActivationKind> | null | Uint8Array | PalletProofOfStakeThirdPartyActivationKind | { ActivateKind: any } | { ActivatedLiquidity: any } | { LiquidityMining: any } | string) => SubmittableExtrinsic<ApiType>, [u32, u128, u32, Option<PalletProofOfStakeThirdPartyActivationKind>]>;
+      activateLiquidityFor3rdpartyRewards: AugmentedSubmittable<(liquidityTokenId: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array, rewardToken: u32 | AnyNumber | Uint8Array, useBalanceFrom: Option<PalletProofOfStakeThirdPartyActivationKind> | null | Uint8Array | PalletProofOfStakeThirdPartyActivationKind | { ActivateKind: any } | { ActivatedLiquidity: any } | { NativeRewardsLiquidity: any } | string) => SubmittableExtrinsic<ApiType>, [u32, u128, u32, Option<PalletProofOfStakeThirdPartyActivationKind>]>;
       /**
        * See [`Pallet::activate_liquidity_for_native_rewards`].
        **/

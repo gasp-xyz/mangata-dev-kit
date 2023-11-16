@@ -446,7 +446,13 @@ declare module '@polkadot/types/lookup' {
     readonly asLiquidityDeactivated: ITuple<[AccountId32, u32, u128]>;
     readonly isRewardsClaimed: boolean;
     readonly asRewardsClaimed: ITuple<[AccountId32, u32, u128]>;
-    readonly type: 'PoolPromotionUpdated' | 'LiquidityActivated' | 'LiquidityDeactivated' | 'RewardsClaimed';
+    readonly isThirdPartyRewardsClaimed: boolean;
+    readonly asThirdPartyRewardsClaimed: ITuple<[AccountId32, u32, u32, u128]>;
+    readonly isThirdPartyLiquidityActivated: boolean;
+    readonly asThirdPartyLiquidityActivated: ITuple<[AccountId32, u32, u32, u128]>;
+    readonly isThirdPartyLiquidityDeactivated: boolean;
+    readonly asThirdPartyLiquidityDeactivated: ITuple<[AccountId32, u32, u32, u128]>;
+    readonly type: 'PoolPromotionUpdated' | 'LiquidityActivated' | 'LiquidityDeactivated' | 'RewardsClaimed' | 'ThirdPartyRewardsClaimed' | 'ThirdPartyLiquidityActivated' | 'ThirdPartyLiquidityDeactivated';
   }
 
   /** @name PalletFeeLockEvent (53) */
@@ -2469,8 +2475,8 @@ declare module '@polkadot/types/lookup' {
     readonly asActivateKind: Option<MangataTypesMultipurposeLiquidityActivateKind>;
     readonly isActivatedLiquidity: boolean;
     readonly asActivatedLiquidity: u32;
-    readonly isLiquidityMining: boolean;
-    readonly type: 'ActivateKind' | 'ActivatedLiquidity' | 'LiquidityMining';
+    readonly isNativeRewardsLiquidity: boolean;
+    readonly type: 'ActivateKind' | 'ActivatedLiquidity' | 'NativeRewardsLiquidity';
   }
 
   /** @name PalletFeeLockCall (229) */
@@ -3666,7 +3672,7 @@ declare module '@polkadot/types/lookup' {
   /** @name PalletProofOfStakeScheduleRewardsCalculatorScheduleRewards (377) */
   interface PalletProofOfStakeScheduleRewardsCalculatorScheduleRewards extends Struct {
     readonly pending: u128;
-    readonly pendingSessionId: u64;
+    readonly pendingSessionId: u32;
     readonly total: u128;
   }
 
@@ -3680,8 +3686,8 @@ declare module '@polkadot/types/lookup' {
 
   /** @name PalletProofOfStakeSchedule (387) */
   interface PalletProofOfStakeSchedule extends Struct {
-    readonly scheduledAt: u64;
-    readonly lastSession: u64;
+    readonly scheduledAt: u32;
+    readonly lastSession: u32;
     readonly liqToken: u32;
     readonly rewardToken: u32;
     readonly amountPerSession: u128;
@@ -3691,7 +3697,7 @@ declare module '@polkadot/types/lookup' {
   interface PalletProofOfStakeScheduleRewardsCalculatorActivatedLiquidityPerSchedule extends Struct {
     readonly pendingPositive: u128;
     readonly pendingNegative: u128;
-    readonly pendingSessionId: u64;
+    readonly pendingSessionId: u32;
     readonly total: u128;
   }
 
@@ -3714,7 +3720,8 @@ declare module '@polkadot/types/lookup' {
     readonly isTooLittleRewards: boolean;
     readonly isTooSmallVolume: boolean;
     readonly isLiquidityLockedIn3rdpartyRewards: boolean;
-    readonly type: 'NotEnoughAssets' | 'MathOverflow' | 'NotEnoughRewardsEarned' | 'NotAPromotedPool' | 'PastTimeCalculation' | 'LiquidityCheckpointMathError' | 'CalculateRewardsMathError' | 'MathError' | 'CalculateRewardsAllMathError' | 'MissingRewardsInfoError' | 'DeprecatedExtrinsic' | 'CannotScheduleRewardsInPast' | 'PoolDoesNotExist' | 'TooManySchedules' | 'TooLittleRewards' | 'TooSmallVolume' | 'LiquidityLockedIn3rdpartyRewards';
+    readonly isNoThirdPartyPartyRewardsToClaim: boolean;
+    readonly type: 'NotEnoughAssets' | 'MathOverflow' | 'NotEnoughRewardsEarned' | 'NotAPromotedPool' | 'PastTimeCalculation' | 'LiquidityCheckpointMathError' | 'CalculateRewardsMathError' | 'MathError' | 'CalculateRewardsAllMathError' | 'MissingRewardsInfoError' | 'DeprecatedExtrinsic' | 'CannotScheduleRewardsInPast' | 'PoolDoesNotExist' | 'TooManySchedules' | 'TooLittleRewards' | 'TooSmallVolume' | 'LiquidityLockedIn3rdpartyRewards' | 'NoThirdPartyPartyRewardsToClaim';
   }
 
   /** @name PalletFeeLockFeeLockMetadataInfo (391) */
