@@ -56,6 +56,10 @@ jobs:
         working-directory: mangata-repo/devops/parachain-launch
         run: npx @open-web3/parachain-launch generate config.yml
 
+      - name: Remove obsolete node run args from generated docker-compose.yml
+        working-directory: mangata-repo/devops/parachain-launch/output
+        run: sed -i '/ws-external/d' docker-compose.yml
+
       - name: Run the Node
         working-directory: mangata-repo/devops/parachain-launch/output
         run: |
@@ -95,7 +99,7 @@ jobs:
         uses: jonas-schievink/workflow-proxy@v1
         with:
           ref: refs/heads/main
-          workflow: pr-ui-tests.yml
+          workflow: pr-ui-chops-tests.yml
           repo: mangata-finance/microapps
           token: ${{ secrets.GH_TOKEN }}
           inputs: '{"sdkVersion": "${{ env.RC_SDK_VERSION }}", "peerDependencies": "${{ env.PEER_DEPENDENCIES }}"}'
