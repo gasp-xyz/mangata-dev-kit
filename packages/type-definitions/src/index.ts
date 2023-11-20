@@ -24,6 +24,27 @@ export const mTypes = {
 };
 
 export const mRpc = {
+  ProofOfStake: {
+    calculate_native_rewards_amount: {
+      description:
+        "Calculates and returns sold_token_amount while providing bought_token_amount and respective reserves",
+      params: [
+        {
+          name: "account",
+          type: "AccountId"
+        },
+        {
+          name: "liquidity_token",
+          type: "TokenId"
+        },
+        {
+          name: "rewards_token",
+          type: "TokenId"
+        }
+      ],
+      type: "Balance"
+    }
+  },
   xyk: {
     calculate_buy_price: {
       description:
