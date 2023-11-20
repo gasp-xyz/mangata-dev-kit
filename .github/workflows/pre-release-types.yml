@@ -103,21 +103,16 @@ jobs:
           echo "NPM package version of mangata type definitions is $version"
           echo "MANGATA_TYPE_DEFINITIONS=$version" >> $GITHUB_ENV
 
-      - name: Install always latest type definitions
-        if: ${{ github.event.inputs.branch == '' }}
-        run: npm i @mangata-finance/type-definitions@${{ env.MANGATA_TYPE_DEFINITIONS }}
-
       - name: Extract the tag version of type definitions based on branch
         if: ${{ github.event.inputs.branch != '' }}
         env:
           INPUTS_BRANCH: ${{ github.event.inputs.branch }}
         run: |
-          version=$(npm show @mangata-finance/type-definitions@${INPUTS_BRANCH//\//-} version)
+          version=$(npm show @mangata-finance/type-definitions@${INPUTS_BRANCH//\//-} version || npm show @mangata-finance/type-definitions version)
           echo "NPM package version of mangata type definitions is $version"
           echo "MANGATA_TYPE_DEFINITIONS=$version" >> $GITHUB_ENV
 
       - name: Install always latest type definitions
-        if: ${{ github.event.inputs.branch != '' }}
         run: npm i @mangata-finance/type-definitions@${{ env.MANGATA_TYPE_DEFINITIONS }}
 
       - run: npx nx run @mangata-finance/types:generate-metadata
