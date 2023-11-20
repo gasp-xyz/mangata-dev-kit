@@ -94,7 +94,7 @@ jobs:
       - name: Sleep for 1 minutes
         run: sleep 60s
 
-      - run: npm ci
+      - run: npm i
 
       - name: Extract the latest version of type definitions
         if: ${{ github.event.inputs.branch == '' }}
