@@ -6,6 +6,8 @@
   "private": true,
   "type": "module",
   "devDependencies": {
+    "@mangata-finance/types": "2.0.0",
+    "@mangata-finance/type-definitions": "2.0.0",
     "@goestav/nx-semantic-release": "1.0.0",
     "@nx/eslint-plugin": "16.9.1",
     "@nx/js": "16.9.1",
