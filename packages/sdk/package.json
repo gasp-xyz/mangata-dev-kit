@@ -20,7 +20,7 @@
     "@polkadot/types": "10.9.1"
   },
   "devDependencies": {
-    "@mangata-finance/types": "2.0.1-feature-3rdparty-rewards-merge.10"
+    "@mangata-finance/types": "2.0.1-feature-3rdparty-rewards-merge.12"
   },
   "dependencies": {
     "@mangata-finance/type-definitions": "2.0.1-feature-3rdparty-rewards-merge.0",
