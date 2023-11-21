@@ -47,7 +47,7 @@ beforeEach(async () => {
   };
 
   const data = await instance.batchAll(argsBatchAll);
-  const searchTerms = ["tokens", "Issued", testUser.address];
+  const searchTerms = ["tokens", "Created", testUser.address];
   const extrinsicData = getExtrinsicData({ data, searchTerms });
   firstTokenId = extrinsicData[0].eventData[0].data.toString();
   secondTokenId = extrinsicData[1].eventData[0].data.toString();

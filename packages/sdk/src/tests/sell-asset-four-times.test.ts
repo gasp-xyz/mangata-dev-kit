@@ -12,6 +12,7 @@ import {
 import { Batch } from "../types/utility";
 import { CreatePool, MultiswapSellAsset } from "../types/xyk";
 import { MangataGenericEvent } from "../types/common";
+import * as console from "console";
 
 let testUser: KeyringPair;
 let sudoUser: KeyringPair;
@@ -48,7 +49,7 @@ beforeEach(async () => {
   };
 
   const data = await instance.batchAll(argsBatchAll);
-  const searchTerms = ["tokens", "Issued", testUser.address];
+  const searchTerms = ["tokens", "Created", testUser.address];
   const extrinsicData = getExtrinsicData({ data, searchTerms });
   firstTokenId = extrinsicData[0].eventData[0].data.toString();
   secondTokenId = extrinsicData[1].eventData[0].data.toString();
