@@ -7,8 +7,6 @@
   "type": "module",
   "devDependencies": {
     "@goestav/nx-semantic-release": "1.0.0",
-    "@mangata-finance/type-definitions": "^2.0.1-feature-3rdparty-rewards-merge.0",
-    "@mangata-finance/types": "2.0.0",
     "@nx/eslint-plugin": "16.9.1",
     "@nx/js": "16.9.1",
     "@nx/linter": "16.9.1",
