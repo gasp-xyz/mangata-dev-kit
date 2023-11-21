@@ -80,7 +80,7 @@ declare module '@polkadot/api-base/types/calls' {
       /**
        * Collect information about a collation.
        **/
-      collectCollationInfo: AugmentedCall<ApiType, (header: Header | { parentHash?: any; number?: any; stateRoot?: any; extrinsicsRoot?: any; digest?: any; seed?: any; count?: any } | string | Uint8Array) => Observable<CollationInfo>>;
+      collectCollationInfo: AugmentedCall<ApiType, (header: Header | { parentHash?: any; number?: any; stateRoot?: any; extrinsicsRoot?: any; digest?: any } | string | Uint8Array) => Observable<CollationInfo>>;
       /**
        * Generic call
        **/
@@ -95,7 +95,7 @@ declare module '@polkadot/api-base/types/calls' {
       /**
        * Initialize a block with the given header.
        **/
-      initializeBlock: AugmentedCall<ApiType, (header: Header | { parentHash?: any; number?: any; stateRoot?: any; extrinsicsRoot?: any; digest?: any; seed?: any; count?: any } | string | Uint8Array) => Observable<Null>>;
+      initializeBlock: AugmentedCall<ApiType, (header: Header | { parentHash?: any; number?: any; stateRoot?: any; extrinsicsRoot?: any; digest?: any } | string | Uint8Array) => Observable<Null>>;
       /**
        * Returns the version of the runtime.
        **/
@@ -129,7 +129,7 @@ declare module '@polkadot/api-base/types/calls' {
       /**
        * Starts the off-chain task for given block header.
        **/
-      offchainWorker: AugmentedCall<ApiType, (header: Header | { parentHash?: any; number?: any; stateRoot?: any; extrinsicsRoot?: any; digest?: any; seed?: any; count?: any } | string | Uint8Array) => Observable<Null>>;
+      offchainWorker: AugmentedCall<ApiType, (header: Header | { parentHash?: any; number?: any; stateRoot?: any; extrinsicsRoot?: any; digest?: any } | string | Uint8Array) => Observable<Null>>;
       /**
        * Generic call
        **/
