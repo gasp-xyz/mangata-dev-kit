@@ -1,6 +1,6 @@
 {
   "name": "@mangata-finance/sdk",
-  "version": "2.1.1",
+  "version": "2.1.2-rc-sdk.1",
   "description": "Mangata SDK",
   "type": "module",
   "module": "./index.js",
@@ -8,7 +8,11 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "keywords": ["mangata", "sdk", "trading"],
+  "keywords": [
+    "mangata",
+    "sdk",
+    "trading"
+  ],
   "author": "Mangata Finance <solutions@mangata.finance>",
   "license": "ISC",
   "repository": {

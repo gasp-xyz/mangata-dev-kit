@@ -1,3 +1,10 @@
+## [2.1.2-rc-sdk.1](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/sdk-v2.1.1...@mangata-finance/sdk-v2.1.2-rc-sdk.1) (2023-11-21)
+
+
+### Bug Fixes
+
+* update to correct values activatedLPTokens and nonActivatedLPTokens ([1d94e47](https://github.com/mangata-finance/mangata-dev-kit/commit/1d94e4793f27fc1d955b5f5e4da1118ff12a7be6))
+
 # [2.1.0](https://github.com/mangata-finance/mangata-sdk/compare/v2.0.0...v2.1.0) (2023-10-12)
 
 
