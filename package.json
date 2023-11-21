@@ -36,5 +36,8 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@mangata-finance/type-definitions": "^2.0.1-feature-3rdparty-rewards-merge.0"
+  }
 }

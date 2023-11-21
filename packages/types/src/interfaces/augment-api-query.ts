@@ -7,10 +7,10 @@ import '@polkadot/api-base/types/storage';
 
 import type { ApiTypes, AugmentedQuery, QueryableStorageEntry } from '@polkadot/api-base/types';
 import type { Data } from '@polkadot/types';
-import type { BTreeMap, Bytes, Null, Option, U256, Vec, bool, u128, u16, u32, u64 } from '@polkadot/types-codec';
+import type { BTreeMap, Bytes, Null, Option, Vec, bool, u128, u16, u32, u64 } from '@polkadot/types-codec';
 import type { AnyNumber, ITuple } from '@polkadot/types-codec/types';
 import type { AccountId32, Call, H256, Perbill } from '@polkadot/types/interfaces/runtime';
-import type { CumulusPalletDmpQueueConfigData, CumulusPalletDmpQueuePageIndexData, CumulusPalletParachainSystemCodeUpgradeAuthorization, CumulusPalletParachainSystemRelayStateSnapshotMessagingStateSnapshot, CumulusPalletParachainSystemUnincludedSegmentAncestor, CumulusPalletParachainSystemUnincludedSegmentSegmentTracker, CumulusPalletXcmpQueueInboundChannelDetails, CumulusPalletXcmpQueueOutboundChannelDetails, CumulusPalletXcmpQueueQueueConfigData, FrameSupportDispatchPerDispatchClassWeight, FrameSystemAccountInfo, FrameSystemEventRecord, FrameSystemLastRuntimeUpgradeInfo, FrameSystemPhase, MangataRococoRuntimeSessionKeys, OrmlTokensAccountData, OrmlTokensBalanceLock, OrmlTokensReserveData, OrmlTraitsAssetRegistryAssetMetadata, PalletBootstrapBootstrapPhase, PalletCollectiveMangataVotes, PalletCrowdloanRewardsRewardInfo, PalletFeeLockAccountFeeLockDataInfo, PalletFeeLockFeeLockMetadataInfo, PalletIdentityRegistrarInfo, PalletIdentityRegistration, PalletIssuanceIssuanceInfo, PalletMaintenanceMaintenanceStatusInfo, PalletMultipurposeLiquidityRelockStatusInfo, PalletMultipurposeLiquidityReserveStatusInfo, PalletProofOfStakePromotedPools, PalletProofOfStakeRewardInfo, PalletProofOfStakeSchedule, PalletProofOfStakeScheduleRewardsCalculatorActivatedLiquidityPerSchedule, PalletProofOfStakeScheduleRewardsCalculatorScheduleRewards, PalletProofOfStakeSchedulesList, PalletProxyAnnouncement, PalletProxyProxyDefinition, PalletTransactionPaymentMangataReleases, PalletTreasuryProposal, PalletVestingMangataReleases, PalletVestingMangataVestingInfo, PalletXcmQueryStatus, PalletXcmRemoteLockedFungibleRecord, PalletXcmVersionMigrationStage, ParachainStakingAggregatorMetadataType, ParachainStakingBond, ParachainStakingCollatorCandidate, ParachainStakingCollatorSnapshot, ParachainStakingDelegator, ParachainStakingRoundCollatorRewardInfoType, ParachainStakingRoundInfo, ParachainStakingSetOrderedSetBond, PolkadotCorePrimitivesOutboundHrmpMessage, PolkadotPrimitivesV5AbridgedHostConfiguration, PolkadotPrimitivesV5PersistedValidationData, PolkadotPrimitivesV5UpgradeGoAhead, PolkadotPrimitivesV5UpgradeRestriction, SpConsensusAuraSr25519AppSr25519Public, SpCoreCryptoKeyTypeId, SpRuntimeDigest, SpTrieStorageProof, SpWeightsWeightV2Weight, StagingXcmV3MultiLocation, StagingXcmVersionedAssetId, StagingXcmVersionedMultiLocation } from '@polkadot/types/lookup';
+import type { CumulusPalletDmpQueueConfigData, CumulusPalletDmpQueuePageIndexData, CumulusPalletParachainSystemCodeUpgradeAuthorization, CumulusPalletParachainSystemRelayStateSnapshotMessagingStateSnapshot, CumulusPalletParachainSystemUnincludedSegmentAncestor, CumulusPalletParachainSystemUnincludedSegmentSegmentTracker, CumulusPalletXcmpQueueInboundChannelDetails, CumulusPalletXcmpQueueOutboundChannelDetails, CumulusPalletXcmpQueueQueueConfigData, FrameSupportDispatchPerDispatchClassWeight, FrameSystemAccountInfo, FrameSystemEventRecord, FrameSystemLastRuntimeUpgradeInfo, FrameSystemPhase, MangataRococoRuntimeSessionKeys, OrmlTokensAccountData, OrmlTokensBalanceLock, OrmlTokensReserveData, OrmlTraitsAssetRegistryAssetMetadata, PalletBootstrapBootstrapPhase, PalletCollectiveMangataVotes, PalletCrowdloanRewardsRewardInfo, PalletFeeLockAccountFeeLockDataInfo, PalletFeeLockFeeLockMetadataInfo, PalletIdentityRegistrarInfo, PalletIdentityRegistration, PalletIssuanceIssuanceInfo, PalletMaintenanceMaintenanceStatusInfo, PalletMultipurposeLiquidityRelockStatusInfo, PalletMultipurposeLiquidityReserveStatusInfo, PalletProofOfStakePromotedPools, PalletProofOfStakeRewardInfo, PalletProxyAnnouncement, PalletProxyProxyDefinition, PalletTransactionPaymentMangataReleases, PalletTreasuryProposal, PalletVestingMangataReleases, PalletVestingMangataVestingInfo, PalletXcmQueryStatus, PalletXcmRemoteLockedFungibleRecord, PalletXcmVersionMigrationStage, ParachainStakingAggregatorMetadataType, ParachainStakingBond, ParachainStakingCollatorCandidate, ParachainStakingCollatorSnapshot, ParachainStakingDelegator, ParachainStakingRoundCollatorRewardInfoType, ParachainStakingRoundInfo, ParachainStakingSetOrderedSetBond, PolkadotCorePrimitivesOutboundHrmpMessage, PolkadotPrimitivesV5AbridgedHostConfiguration, PolkadotPrimitivesV5PersistedValidationData, PolkadotPrimitivesV5UpgradeGoAhead, PolkadotPrimitivesV5UpgradeRestriction, SpConsensusAuraSr25519AppSr25519Public, SpCoreCryptoKeyTypeId, SpRuntimeDigest, SpTrieStorageProof, SpWeightsWeightV2Weight, StagingXcmV3MultiLocation, StagingXcmVersionedAssetId, StagingXcmVersionedMultiLocation } from '@polkadot/types/lookup';
 import type { Observable } from '@polkadot/types/types';
 
 export type __AugmentedQuery<ApiType extends ApiTypes> = AugmentedQuery<ApiType, () => unknown>;
@@ -585,25 +585,6 @@ declare module '@polkadot/api-base/types/storage' {
     };
     proofOfStake: {
       /**
-       * Tracks how much liquidity user activated for particular (liq token, reward token) pair
-       * StorageNMap was used because it only require single read to know if user deactivated all
-       * liquidity associated with particular liquidity_token that is rewarded. If so part of the
-       * liquididty tokens can be unlocked.
-       **/
-      activatedLiquidityForSchedules: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: u32 | AnyNumber | Uint8Array, arg3: u32 | AnyNumber | Uint8Array) => Observable<Option<u128>>, [AccountId32, u32, u32]> & QueryableStorageEntry<ApiType, [AccountId32, u32, u32]>;
-      /**
-       * Tracks how much of the liquidity was activated for schedule rewards and not yet
-       * liquidity mining rewards. That information is essential to properly handle token unlcocks
-       * when liquidity is deactivated.
-       **/
-      activatedLockedLiquidityForSchedules: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: u32 | AnyNumber | Uint8Array) => Observable<u128>, [AccountId32, u32]> & QueryableStorageEntry<ApiType, [AccountId32, u32]>;
-      /**
-       * Tracks how much of the liquidity was activated for schedule rewards and not yet
-       * liquidity mining rewards. That information is essential to properly handle token unlcocks
-       * when liquidity is deactivated.
-       **/
-      activatedNativeRewardsLiq: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: u32 | AnyNumber | Uint8Array) => Observable<u128>, [AccountId32, u32]> & QueryableStorageEntry<ApiType, [AccountId32, u32]>;
-      /**
        * Stores information about pool weight and accumulated rewards. The accumulated
        * rewards amount is the number of rewards that can be claimed per liquidity
        * token. Here is tracked the number of rewards per liquidity token relationship.
@@ -611,33 +592,7 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       promotedPoolRewards: AugmentedQuery<ApiType, () => Observable<BTreeMap<u32, PalletProofOfStakePromotedPools>>, []> & QueryableStorageEntry<ApiType, []>;
       rewardsInfo: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: u32 | AnyNumber | Uint8Array) => Observable<PalletProofOfStakeRewardInfo>, [AccountId32, u32]> & QueryableStorageEntry<ApiType, [AccountId32, u32]>;
-      /**
-       * Stores information about pool weight and accumulated rewards
-       **/
-      rewardsInfoForScheduleRewards: AugmentedQuery<ApiType, (arg1: AccountId32 | string | Uint8Array, arg2: ITuple<[u32, u32]> | [u32 | AnyNumber | Uint8Array, u32 | AnyNumber | Uint8Array]) => Observable<PalletProofOfStakeRewardInfo>, [AccountId32, ITuple<[u32, u32]>]> & QueryableStorageEntry<ApiType, [AccountId32, ITuple<[u32, u32]>]>;
-      /**
-       * List of activated schedules sorted by expiry date
-       **/
-      rewardsSchedules: AugmentedQuery<ApiType, () => Observable<BTreeMap<ITuple<[u32, u32, u32, u128, u64]>, Null>>, []> & QueryableStorageEntry<ApiType, []>;
-      rewardsSchedulesList: AugmentedQuery<ApiType, (arg: u64 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[PalletProofOfStakeSchedule, Option<u64>]>>>, [u64]> & QueryableStorageEntry<ApiType, [u64]>;
-      /**
-       * Maps liquidity token to list of tokens that it ever was rewarded with
-       **/
-      rewardTokensPerPool: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: u32 | AnyNumber | Uint8Array) => Observable<Null>, [u32, u32]> & QueryableStorageEntry<ApiType, [u32, u32]>;
-      scheduleRewardsPerLiquidity: AugmentedQuery<ApiType, (arg: ITuple<[u32, u32]> | [u32 | AnyNumber | Uint8Array, u32 | AnyNumber | Uint8Array]) => Observable<ITuple<[U256, u64]>>, [ITuple<[u32, u32]>]> & QueryableStorageEntry<ApiType, [ITuple<[u32, u32]>]>;
-      /**
-       * How much scheduled rewards per single liquidty_token should be distribute_rewards
-       * the **value is multiplied by u128::MAX** to avoid floating point arithmetic
-       **/
-      scheduleRewardsTotal: AugmentedQuery<ApiType, (arg: ITuple<[u32, u32]> | [u32 | AnyNumber | Uint8Array, u32 | AnyNumber | Uint8Array]) => Observable<PalletProofOfStakeScheduleRewardsCalculatorScheduleRewards>, [ITuple<[u32, u32]>]> & QueryableStorageEntry<ApiType, [ITuple<[u32, u32]>]>;
-      schedulesListMetadata: AugmentedQuery<ApiType, () => Observable<PalletProofOfStakeSchedulesList>, []> & QueryableStorageEntry<ApiType, []>;
       totalActivatedLiquidity: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<u128>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
-      /**
-       * Tracks number of activated liquidity per schedule. It is used for calculation of
-       * "cumulative rewrds amount" per 1 liquidity token. Therefore activation/deactivation needs
-       * to be deffered same way as schedule rewards are delayed.
-       **/
-      totalActivatedLiquidityForSchedules: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: u32 | AnyNumber | Uint8Array) => Observable<PalletProofOfStakeScheduleRewardsCalculatorActivatedLiquidityPerSchedule>, [u32, u32]> & QueryableStorageEntry<ApiType, [u32, u32]>;
       /**
        * Generic query
        **/
