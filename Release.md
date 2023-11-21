@@ -36,6 +36,6 @@ Here is a step-by-step guide to the release process:
 
 1. Create a branch from the main branch.
 2. Make the necessary code changes within the specified package directories.
-3. If you intend to generate a pre-release based on your alterations, create an rc/* branch from your working branch. This will activate pre-release processes using GitHub actions tailored to the specific packages you modified.
+3. If you intend to generate a pre-release based on your alterations, create an rc/sdk/* (or rc/types/* or rc/definitions/*) branch from your working branch. This will activate pre-release processes using GitHub actions tailored to the specific packages you modified.
 4. After confirming everything is in order, initiate a pull request (PR) to merge your changes into the main branch.
 5. Following the successful merge into the main branch, the release process will be executed automatically.
