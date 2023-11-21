@@ -3,7 +3,7 @@ name: Pre-release types
 on:
   push:
     branches:
-      - 'rc/*'
+      - 'rc/types/*'
     paths:
       - packages/types/**
   workflow_dispatch:
@@ -97,12 +97,23 @@ jobs:
       - run: npm ci
 
       - name: Extract the latest version of type definitions
+        if: ${{ github.event.inputs.branch == '' }}
         run: |
           version=$(npm show @mangata-finance/type-definitions version)
           echo "NPM package version of mangata type definitions is $version"
           echo "MANGATA_TYPE_DEFINITIONS=$version" >> $GITHUB_ENV
 
-      - name: Install always latest type definitions
+      - name: Extract the tag version of type definitions based on branch
+        if: ${{ github.event.inputs.branch != '' }}
+        env:
+          INPUTS_BRANCH: ${{ github.event.inputs.branch }}
+        run: |
+          sanitized_branch=$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')
+          version=$(npm show @mangata-finance/type-definitions@${sanitized_branch} version || npm show @mangata-finance/type-definitions version)
+          echo "NPM package version of mangata type definitions is $version"
+          echo "MANGATA_TYPE_DEFINITIONS=$version" >> $GITHUB_ENV
+
+      - name: Install type definitions
         run: npm i @mangata-finance/type-definitions@${{ env.MANGATA_TYPE_DEFINITIONS }}
 
       - run: npx nx run @mangata-finance/types:generate-metadata

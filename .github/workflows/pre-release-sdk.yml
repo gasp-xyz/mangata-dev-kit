@@ -3,7 +3,7 @@ name: Pre-release sdk
 on:
   push:
     branches:
-      - 'rc/*'
+      - 'rc/sdk/*'
     paths:
       - packages/sdk/**
 

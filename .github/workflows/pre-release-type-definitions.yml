@@ -3,7 +3,7 @@ name: Pre-release type definitions
 on:
   push:
     branches:
-      - 'rc/*'
+      - 'rc/definitions/*'
     paths:
       - packages/type-definitions/**
 
