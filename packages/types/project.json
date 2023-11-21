@@ -11,20 +11,15 @@
         "outputPath": "dist/packages/types",
         "main": "packages/types/src/index.ts",
         "tsConfig": "packages/types/tsconfig.lib.json",
-        "assets": ["packages/types/*.md"],
-        "transformers": [
-          {
-            "name": "typescript-transform-paths/nx-transformer"
-          }
-        ]
+        "assets": ["packages/types/*.md"]
       }
     },
     "build-types": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "npx esno node_modules/.bin/polkadot-types-from-defs --package @mangata-finance/types/interfaces --input packages/types/src/interfaces --endpoint packages/types/metadata.json",
-          "npx esno node_modules/.bin/polkadot-types-from-chain --package @mangata-finance/types/interfaces --endpoint packages/types/metadata.json --output packages/types/src/interfaces"
+          "npx tsx node_modules/.bin/polkadot-types-from-defs --package @mangata-finance/types/interfaces --input packages/types/src/interfaces --endpoint packages/types/metadata.json",
+          "npx tsx node_modules/.bin/polkadot-types-from-chain --package @mangata-finance/types/interfaces --endpoint packages/types/metadata.json --output packages/types/src/interfaces"
         ],
         "parallel": false
       }
