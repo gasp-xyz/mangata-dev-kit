@@ -10,7 +10,7 @@ import type { Data } from '@polkadot/types';
 import type { Bytes, Compact, Option, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { AnyNumber, IMethod, ITuple } from '@polkadot/types-codec/types';
 import type { AccountId32, Call, H256, MultiAddress, Perbill, Permill } from '@polkadot/types/interfaces/runtime';
-import type { CommonRuntimeConfigPalletProxyProxyType, CumulusPrimitivesParachainInherentParachainInherentData, MangataRococoRuntimeOriginCaller, MangataRococoRuntimeSessionKeys, MangataTypesAssetsCustomMetadata, MangataTypesMultipurposeLiquidityActivateKind, MangataTypesMultipurposeLiquidityBondKind, OrmlTraitsAssetRegistryAssetMetadata, PalletIdentityBitFlags, PalletIdentityIdentityInfo, PalletIdentityJudgement, PalletIssuanceTgeInfo, PalletVestingMangataVestingInfo, ParachainStakingMetadataUpdateAction, ParachainStakingPairedOrLiquidityToken, SpRuntimeMultiSignature, SpWeightsWeightV2Weight, StagingXcmV3MultiLocation, StagingXcmV3WeightLimit, StagingXcmVersionedMultiAsset, StagingXcmVersionedMultiAssets, StagingXcmVersionedMultiLocation, StagingXcmVersionedXcm } from '@polkadot/types/lookup';
+import type { CommonRuntimeConfigPalletProxyProxyType, CumulusPrimitivesParachainInherentParachainInherentData, MangataRococoRuntimeOriginCaller, MangataRococoRuntimeSessionKeys, MangataTypesAssetsCustomMetadata, MangataTypesMultipurposeLiquidityActivateKind, MangataTypesMultipurposeLiquidityBondKind, OrmlTraitsAssetRegistryAssetMetadata, PalletIdentityBitFlags, PalletIdentityIdentityInfo, PalletIdentityJudgement, PalletIssuanceTgeInfo, PalletProofOfStakeThirdPartyActivationKind, PalletVestingMangataVestingInfo, ParachainStakingMetadataUpdateAction, ParachainStakingPairedOrLiquidityToken, SpRuntimeMultiSignature, SpWeightsWeightV2Weight, StagingXcmV3MultiLocation, StagingXcmV3WeightLimit, StagingXcmVersionedMultiAsset, StagingXcmVersionedMultiAssets, StagingXcmVersionedMultiLocation, StagingXcmVersionedXcm } from '@polkadot/types/lookup';
 
 export type __AugmentedSubmittable = AugmentedSubmittable<() => unknown>;
 export type __SubmittableExtrinsic<ApiType extends ApiTypes> = SubmittableExtrinsic<ApiType>;
@@ -508,6 +508,22 @@ declare module '@polkadot/api-base/types/submittable' {
        **/
       activateLiquidity: AugmentedSubmittable<(liquidityTokenId: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array, useBalanceFrom: Option<MangataTypesMultipurposeLiquidityActivateKind> | null | Uint8Array | MangataTypesMultipurposeLiquidityActivateKind | 'AvailableBalance' | 'StakedUnactivatedReserves' | 'UnspentReserves' | number) => SubmittableExtrinsic<ApiType>, [u32, u128, Option<MangataTypesMultipurposeLiquidityActivateKind>]>;
       /**
+       * See [`Pallet::activate_liquidity_for_3rdparty_rewards`].
+       **/
+      activateLiquidityFor3rdpartyRewards: AugmentedSubmittable<(liquidityTokenId: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array, rewardToken: u32 | AnyNumber | Uint8Array, useBalanceFrom: Option<PalletProofOfStakeThirdPartyActivationKind> | null | Uint8Array | PalletProofOfStakeThirdPartyActivationKind | { ActivateKind: any } | { ActivatedLiquidity: any } | { NativeRewardsLiquidity: any } | string) => SubmittableExtrinsic<ApiType>, [u32, u128, u32, Option<PalletProofOfStakeThirdPartyActivationKind>]>;
+      /**
+       * See [`Pallet::activate_liquidity_for_native_rewards`].
+       **/
+      activateLiquidityForNativeRewards: AugmentedSubmittable<(liquidityTokenId: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array, useBalanceFrom: Option<MangataTypesMultipurposeLiquidityActivateKind> | null | Uint8Array | MangataTypesMultipurposeLiquidityActivateKind | 'AvailableBalance' | 'StakedUnactivatedReserves' | 'UnspentReserves' | number) => SubmittableExtrinsic<ApiType>, [u32, u128, Option<MangataTypesMultipurposeLiquidityActivateKind>]>;
+      /**
+       * See [`Pallet::claim_3rdparty_rewards`].
+       **/
+      claim3rdpartyRewards: AugmentedSubmittable<(liquidityTokenId: u32 | AnyNumber | Uint8Array, rewardToken: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u32]>;
+      /**
+       * See [`Pallet::claim_native_rewards`].
+       **/
+      claimNativeRewards: AugmentedSubmittable<(liquidityTokenId: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
+      /**
        * See [`Pallet::claim_rewards_all`].
        **/
       claimRewardsAll: AugmentedSubmittable<(liquidityTokenId: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
@@ -515,6 +531,18 @@ declare module '@polkadot/api-base/types/submittable' {
        * See [`Pallet::deactivate_liquidity`].
        **/
       deactivateLiquidity: AugmentedSubmittable<(liquidityTokenId: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u128]>;
+      /**
+       * See [`Pallet::deactivate_liquidity_for_3rdparty_rewards`].
+       **/
+      deactivateLiquidityFor3rdpartyRewards: AugmentedSubmittable<(liquidityTokenId: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array, rewardToken: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u128, u32]>;
+      /**
+       * See [`Pallet::deactivate_liquidity_for_native_rewards`].
+       **/
+      deactivateLiquidityForNativeRewards: AugmentedSubmittable<(liquidityTokenId: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u128]>;
+      /**
+       * See [`Pallet::reward_pool`].
+       **/
+      rewardPool: AugmentedSubmittable<(pool: ITuple<[u32, u32]> | [u32 | AnyNumber | Uint8Array, u32 | AnyNumber | Uint8Array], tokenId: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array, scheduleEnd: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [ITuple<[u32, u32]>, u32, u128, u32]>;
       /**
        * See [`Pallet::update_pool_promotion`].
        **/

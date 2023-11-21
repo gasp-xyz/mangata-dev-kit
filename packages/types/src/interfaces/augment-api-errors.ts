@@ -731,8 +731,13 @@ declare module '@polkadot/api-base/types/errors' {
     proofOfStake: {
       CalculateRewardsAllMathError: AugmentedError<ApiType>;
       CalculateRewardsMathError: AugmentedError<ApiType>;
+      /**
+       * Cannot schedule rewards in past
+       **/
+      CannotScheduleRewardsInPast: AugmentedError<ApiType>;
       DeprecatedExtrinsic: AugmentedError<ApiType>;
       LiquidityCheckpointMathError: AugmentedError<ApiType>;
+      LiquidityLockedIn3rdpartyRewards: AugmentedError<ApiType>;
       MathError: AugmentedError<ApiType>;
       /**
        * Math overflow
@@ -751,10 +756,27 @@ declare module '@polkadot/api-base/types/errors' {
        * Not enough rewards earned
        **/
       NotEnoughRewardsEarned: AugmentedError<ApiType>;
+      NoThirdPartyPartyRewardsToClaim: AugmentedError<ApiType>;
       /**
        * Past time calculation
        **/
       PastTimeCalculation: AugmentedError<ApiType>;
+      /**
+       * Pool does not exist
+       **/
+      PoolDoesNotExist: AugmentedError<ApiType>;
+      /**
+       * Too little rewards per session
+       **/
+      TooLittleRewards: AugmentedError<ApiType>;
+      /**
+       * Too many schedules
+       **/
+      TooManySchedules: AugmentedError<ApiType>;
+      /**
+       * Too small volume of the pool
+       **/
+      TooSmallVolume: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
