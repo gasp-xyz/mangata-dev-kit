@@ -113,6 +113,7 @@ jobs:
           echo "MANGATA_TYPE_DEFINITIONS=$version" >> $GITHUB_ENV
 
       - name: Install always latest type definitions
+        working-directory: packages/types
         run: npm i @mangata-finance/type-definitions@${{ env.MANGATA_TYPE_DEFINITIONS }}
 
       - run: npx nx run @mangata-finance/types:generate-metadata
