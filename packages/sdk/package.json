@@ -1,6 +1,6 @@
 {
   "name": "@mangata-finance/sdk",
-  "version": "2.1.2-rc-sdk.1",
+  "version": "2.1.2-rc-sdk.2",
   "description": "Mangata SDK",
   "type": "module",
   "module": "./index.js",

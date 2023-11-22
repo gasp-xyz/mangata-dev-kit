@@ -1,3 +1,10 @@
+## [2.1.2-rc-sdk.2](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/sdk-v2.1.2-rc-sdk.1...@mangata-finance/sdk-v2.1.2-rc-sdk.2) (2023-11-22)
+
+
+### Bug Fixes
+
+* remove any from rpc ([d4111d6](https://github.com/mangata-finance/mangata-dev-kit/commit/d4111d6c7f21ef3519161c50a2abdf48c5375fc8))
+
 ## [2.1.2-rc-sdk.1](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/sdk-v2.1.1...@mangata-finance/sdk-v2.1.2-rc-sdk.1) (2023-11-21)
 
 
