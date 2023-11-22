@@ -10,7 +10,7 @@ export const getTradeableTokens = async (
 ) => {
     logger.info("getTradeableTokens");
     const api = await instancePromise;
-    const tokens = await (api.rpc as any).xyk.get_tradeable_tokens()
+    const tokens = await api.rpc.xyk.get_tradeable_tokens()
     const tradeableTokens: TradeAbleTokens[] = tokens.map((item: any) => ({
         tokenId: item.tokenId.toString(),
         decimals: parseInt(item.decimals, 10),

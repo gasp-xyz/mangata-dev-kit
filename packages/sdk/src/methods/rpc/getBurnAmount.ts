@@ -17,7 +17,7 @@ export const getBurnAmount = async (
   });
   const api = await instancePromise;
   const { firstTokenId, secondTokenId, amount } = args;
-  const result = await (api.rpc as any).xyk.get_burn_amount(
+  const result = await api.rpc.xyk.get_burn_amount(
     firstTokenId,
     secondTokenId,
     amount

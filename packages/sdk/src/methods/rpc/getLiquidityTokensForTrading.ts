@@ -10,7 +10,7 @@ export const getLiquidityTokensForTrading = async (
 ) => {
     logger.info("getLiquidityTokensForTrading");
     const api = await instancePromise;
-    const lpTokens = await (api.rpc as any).xyk.get_liq_tokens_for_trading()
+    const lpTokens = await api.rpc.xyk.get_liq_tokens_for_trading()
     const lpTokensForTrading: string[] = lpTokens.map((item: any) => item.toString());
     return lpTokensForTrading
 };

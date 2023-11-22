@@ -16,7 +16,7 @@ export const isBuyAssetLockFree = async (
     amount: amount.toString()
   });
   const api = await instancePromise;
-  const result = await (api.rpc as any).xyk.is_buy_asset_lock_free(
+  const result = await api.rpc.xyk.is_buy_asset_lock_free(
     tokenIds,
     amount
   );
