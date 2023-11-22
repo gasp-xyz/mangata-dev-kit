@@ -22,3 +22,6 @@ export default {
     TokenId: "u32",
   }
 }
+
+export { default as pos } from './pos/definitions.js';
+export { default as xyk } from './xyk/definitions.js';
