@@ -765,6 +765,7 @@ declare module '@polkadot/api-base/types/errors' {
        * Pool does not exist
        **/
       PoolDoesNotExist: AugmentedError<ApiType>;
+      SoloTokenPromotionForbiddenError: AugmentedError<ApiType>;
       /**
        * Too little rewards per session
        **/
