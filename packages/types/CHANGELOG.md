@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/types-v2.0.0...@mangata-finance/types-v2.1.0) (2023-12-11)
+
+
+### Features
+
+* update metadata ([1b9a31e](https://github.com/mangata-finance/mangata-dev-kit/commit/1b9a31e3af2c59791ebe9f37c6669b43f4b6dbad))
+
 # [2.0.0](https://github.com/mangata-finance/types/compare/v1.0.0...v2.0.0) (2023-10-12)
 
 
