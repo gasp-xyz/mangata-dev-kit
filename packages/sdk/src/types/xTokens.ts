@@ -6,13 +6,13 @@ import {
   Prettify
 } from "./common";
 import { Merge, Except } from "type-fest";
-import { StagingXcmVersionedMultiAsset, StagingXcmVersionedMultiLocation, StagingXcmVersionedMultiAssets, StagingXcmV3WeightLimit } from "@polkadot/types/lookup"
+import { XcmVersionedMultiAsset, XcmVersionedMultiLocation, XcmVersionedMultiAssets, XcmV3WeightLimit } from "@polkadot/types/lookup"
 
 export type XcmTxOptions = Partial<
   Omit<TxOptions, "statusCallback" | "extrinsicStatus">
 >;
 
-export type Deposit<A = string | Uint8Array | StagingXcmVersionedMultiAsset | { V2: any; } | { V3: any; }, D = StagingXcmVersionedMultiLocation | { V2: any } | { V3: any } | string | Uint8Array, W = StagingXcmV3WeightLimit | { Unlimited: any } | { Limited: any } | string | Uint8Array> = Prettify<
+export type Deposit<A = string | Uint8Array | XcmVersionedMultiAsset | { V2: any; } | { V3: any; }, D = XcmVersionedMultiLocation | { V2: any } | { V3: any } | string | Uint8Array, W = XcmV3WeightLimit | { Unlimited: any } | { Limited: any } | string | Uint8Array> = Prettify<
   Merge<
     ExtrinsicCommon,
     {
@@ -45,11 +45,11 @@ export type MoonriverWithdraw = Merge<
 >;
 
 export type RelayDeposit<
-  A = StagingXcmVersionedMultiAssets | { V2: any } | { V3: any } | string | Uint8Array,
-  D = StagingXcmVersionedMultiLocation | { V2: any } | { V3: any } | string | Uint8Array,
+  A = XcmVersionedMultiAssets | { V2: any } | { V3: any } | string | Uint8Array,
+  D = XcmVersionedMultiLocation | { V2: any } | { V3: any } | string | Uint8Array,
   F = number,
-  B = StagingXcmVersionedMultiLocation | { V2: any } | { V3: any } | string | Uint8Array,
-  W = StagingXcmV3WeightLimit | { Unlimited: any } | { Limited: any } | string | Uint8Array
+  B = XcmVersionedMultiLocation | { V2: any } | { V3: any } | string | Uint8Array,
+  W = XcmV3WeightLimit | { Unlimited: any } | { Limited: any } | string | Uint8Array
 > = Prettify<
   Merge<
     ExtrinsicCommon,
