@@ -20,14 +20,13 @@
     "url": "https://github.com/mangata-finance/mangata-dev-kit"
   },
   "peerDependencies": {
-    "@polkadot/api": "10.9.1",
-    "@polkadot/types": "10.9.1"
+    "@polkadot/api": "10.9.1"
   },
   "devDependencies": {
-    "@mangata-finance/types": "2.0.1-feature-3rdparty-rewards-merge.13"
+    "@mangata-finance/types": "2.1.0"
   },
   "dependencies": {
-    "@mangata-finance/type-definitions": "2.0.1-feature-3rdparty-rewards-merge.0",
+    "@mangata-finance/type-definitions": "2.1.0",
     "big.js": "6.2.1",
     "tslog": "4.8.2",
     "tslib": "^2.3.0"

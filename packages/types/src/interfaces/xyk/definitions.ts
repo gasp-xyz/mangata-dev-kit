@@ -1,30 +1,6 @@
-import { OverrideBundleDefinition } from "@polkadot/types/types";
-
-export const mTypes = {
-  ShufflingSeed: {
-    seed: "H256",
-    proof: "H512"
-  },
-  Header: {
-    parentHash: "Hash",
-    number: "Compact<BlockNumber>",
-    stateRoot: "Hash",
-    extrinsicsRoot: "Hash",
-    digest: "Digest",
-    seed: "ShufflingSeed",
-    count: "BlockNumber"
-  },
-  RpcAssetMetadata: {
-    tokenId: "TokenId",
-    decimals: "u32",
-    name: "Vec<u8>",
-    symbol: "Vec<u8>"
-  },
-  TokenId: "u32",
-};
-
-export const mRpc = {
-  xyk: {
+export default {
+  types: {},
+  rpc: {
     calculate_buy_price: {
       description:
         "Calculates and returns sold_token_amount while providing bought_token_amount and respective reserves",
@@ -216,59 +192,5 @@ export const mRpc = {
       params: [],
       type: "Vec<TokenId>"
     }
-  },
-  pos: {
-    calculate_native_rewards_amount: {
-      description: "Calculates amount of available native rewards",
-      params: [
-        {
-          name: "account",
-          type: "AccountId"
-        },
-        {
-          name: "liquidity_token",
-          type: "TokenId"
-        }
-      ],
-      type: "Balance"
-    },
-    calculate_3rdparty_rewards_amount: {
-      description: "Calculates amount of available 3rdparty rewards",
-      params: [
-        {
-          name: "account",
-          type: "AccountId"
-        },
-        {
-          name: "liquidity_token",
-          type: "TokenId"
-        },
-        {
-          name: "rewards_token",
-          type: "TokenId"
-        }
-      ],
-      type: "Balance"
-    },
-    calculate_3rdparty_rewards_all: {
-      description: "Calculates all amount of available 3rdparty rewards",
-      params: [
-        {
-          name: "account",
-          type: "AccountId"
-        }
-      ],
-      type: "Balance"
-    }
   }
-};
-
-export const mangataTypesBundleForPolkadotApps: OverrideBundleDefinition = {
-  types: [
-    {
-      minmax: [0, undefined],
-      types: mTypes
-    }
-  ],
-  rpc: mRpc
-};
+}

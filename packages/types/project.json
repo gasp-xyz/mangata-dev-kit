@@ -50,7 +50,7 @@
       "options": {
         "branches": [
           "main",
-          { "name": "rc/*", "channel": "rc", "prerelease": "rc" }
+          { "name": "rc/types/*", "channel": "rc", "prerelease": "rc" }
         ],
         "buildTarget": "@mangata-finance/types:build",
         "repositoryUrl": "https://github.com/mangata-finance/mangata-dev-kit",

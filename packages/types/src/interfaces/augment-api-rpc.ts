@@ -5,10 +5,11 @@
 // this is required to allow for ambient/previous definitions
 import '@polkadot/rpc-core/types/jsonrpc';
 
+import type { RpcAssetMetadata, TokenId } from '@mangata-finance/types/interfaces/default';
 import type { AugmentedRpc } from '@polkadot/rpc-core/types';
 import type { Metadata, StorageKey } from '@polkadot/types';
 import type { Bytes, HashMap, Json, Null, Option, Text, U256, U64, Vec, bool, f64, u32, u64 } from '@polkadot/types-codec';
-import type { AnyNumber, Codec } from '@polkadot/types-codec/types';
+import type { AnyNumber, Codec, ITuple } from '@polkadot/types-codec/types';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
 import type { EpochAuthorship } from '@polkadot/types/interfaces/babe';
 import type { BeefySignedCommitment } from '@polkadot/types/interfaces/beefy';
@@ -25,7 +26,7 @@ import type { MmrHash, MmrLeafBatchProof } from '@polkadot/types/interfaces/mmr'
 import type { StorageKind } from '@polkadot/types/interfaces/offchain';
 import type { FeeDetails, RuntimeDispatchInfoV1 } from '@polkadot/types/interfaces/payment';
 import type { RpcMethods } from '@polkadot/types/interfaces/rpc';
-import type { AccountId, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, SignedBlock, StorageData } from '@polkadot/types/interfaces/runtime';
+import type { AccountId, Balance, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, SignedBlock, StorageData } from '@polkadot/types/interfaces/runtime';
 import type { MigrationStatusResult, ReadProof, RuntimeVersion, TraceBlockResponse } from '@polkadot/types/interfaces/state';
 import type { ApplyExtrinsicResult, ChainProperties, ChainType, Health, NetworkState, NodeRole, PeerInfo, SyncState } from '@polkadot/types/interfaces/system';
 import type { IExtrinsic, Observable } from '@polkadot/types/types';
@@ -425,6 +426,20 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        **/
       queryInfo: AugmentedRpc<(extrinsic: Bytes | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<RuntimeDispatchInfoV1>>;
     };
+    pos: {
+      /**
+       * Calculates all amount of available 3rdparty rewards
+       **/
+      calculate_3rdparty_rewards_all: AugmentedRpc<(account: AccountId | string | Uint8Array) => Observable<Balance>>;
+      /**
+       * Calculates amount of available 3rdparty rewards
+       **/
+      calculate_3rdparty_rewards_amount: AugmentedRpc<(account: AccountId | string | Uint8Array, liquidity_token: TokenId | AnyNumber | Uint8Array, rewards_token: TokenId | AnyNumber | Uint8Array) => Observable<Balance>>;
+      /**
+       * Calculates amount of available native rewards
+       **/
+      calculate_native_rewards_amount: AugmentedRpc<(account: AccountId | string | Uint8Array, liquidity_token: TokenId | AnyNumber | Uint8Array) => Observable<Balance>>;
+    };
     rpc: {
       /**
        * Retrieves the list of RPC methods that are exposed by the node
@@ -612,6 +627,60 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        * Returns sha3 of the given data
        **/
       sha3: AugmentedRpc<(data: Bytes | string | Uint8Array) => Observable<H256>>;
+    };
+    xyk: {
+      /**
+       * Calculates how much amount x we need to swap from total_amount, so that after y = swap(x), the resulting balance equals (total_amount - x) / y = pool_x / pool_y - the resulting amounts can then be used to `mint_liquidity` with minimal leftover after operation
+       **/
+      calculate_balanced_sell_amount: AugmentedRpc<(total_amount: Balance | AnyNumber | Uint8Array, reserve_amount: Balance | AnyNumber | Uint8Array) => Observable<Balance>>;
+      /**
+       * Calculates and returns sold_token_amount while providing bought_token_amount and respective reserves
+       **/
+      calculate_buy_price: AugmentedRpc<(input_reserve: Balance | AnyNumber | Uint8Array, output_reserve: Balance | AnyNumber | Uint8Array, sell_amount: Balance | AnyNumber | Uint8Array) => Observable<Balance>>;
+      /**
+       * Same as calculate_buy_price, but providing token_id instead of reserves. Reserves are fetched by function.
+       **/
+      calculate_buy_price_id: AugmentedRpc<(sold_token_id: TokenId | AnyNumber | Uint8Array, bought_token_id: TokenId | AnyNumber | Uint8Array, buy_amount: Balance | AnyNumber | Uint8Array) => Observable<Balance>>;
+      /**
+       * Calculate rewards amount of liquidity token id for the user
+       **/
+      calculate_rewards_amount: AugmentedRpc<(user: AccountId | string | Uint8Array, liquidity_asset_id: TokenId | AnyNumber | Uint8Array) => Observable<Balance>>;
+      /**
+       * Calculates and returns bought_token_amount while providing sold_token_amount and respective reserves
+       **/
+      calculate_sell_price: AugmentedRpc<(input_reserve: Balance | AnyNumber | Uint8Array, output_reserve: Balance | AnyNumber | Uint8Array, sell_amount: Balance | AnyNumber | Uint8Array) => Observable<Balance>>;
+      /**
+       * Same as calculate_sell_price, but providing token_id instead of reserves. Reserves are fetched by function.
+       **/
+      calculate_sell_price_id: AugmentedRpc<(sold_token_id: TokenId | AnyNumber | Uint8Array, bought_token_id: TokenId | AnyNumber | Uint8Array, sell_amount: Balance | AnyNumber | Uint8Array) => Observable<Balance>>;
+      /**
+       * Returns amounts of tokens received by burning provided liquidity_token_amount in pool of provided token ids
+       **/
+      get_burn_amount: AugmentedRpc<(first_asset_id: TokenId | AnyNumber | Uint8Array, second_asset_id: TokenId | AnyNumber | Uint8Array, liquidity_asset_amount: Balance | AnyNumber | Uint8Array) => Observable<ITuple<[Balance, Balance]>>>;
+      /**
+       * 
+       **/
+      get_liq_tokens_for_trading: AugmentedRpc<() => Observable<Vec<TokenId>>>;
+      /**
+       * 
+       **/
+      get_max_instant_burn_amount: AugmentedRpc<(user: AccountId | string | Uint8Array, liquidity_asset_id: TokenId | AnyNumber | Uint8Array) => Observable<Balance>>;
+      /**
+       * Instant unreserve amount
+       **/
+      get_max_instant_unreserve_amount: AugmentedRpc<(user: AccountId | string | Uint8Array, liquidity_asset_id: TokenId | AnyNumber | Uint8Array) => Observable<Balance>>;
+      /**
+       * 
+       **/
+      get_tradeable_tokens: AugmentedRpc<() => Observable<Vec<RpcAssetMetadata>>>;
+      /**
+       * 
+       **/
+      is_buy_asset_lock_free: AugmentedRpc<(path: Vec<TokenId> | (TokenId | AnyNumber | Uint8Array)[], input_amount: Balance | AnyNumber | Uint8Array) => Observable<Option<bool>>>;
+      /**
+       * 
+       **/
+      is_sell_asset_lock_free: AugmentedRpc<(path: Vec<TokenId> | (TokenId | AnyNumber | Uint8Array)[], input_amount: Balance | AnyNumber | Uint8Array) => Observable<Option<bool>>>;
     };
   } // RpcInterface
 } // declare module
