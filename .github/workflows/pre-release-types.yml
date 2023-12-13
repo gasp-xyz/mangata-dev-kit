@@ -73,7 +73,13 @@ jobs:
           cargo install websocat
         shell: bash
 
+      - name: Replace parachain docker image reference in config to develop
+        if: ${{ github.event.inputs.branch == '' }}
+        working-directory: mangata-repo/devops/parachain-launch
+        run: sed -i 's+mangatasolutions/mangata-node:.*+mangatasolutions/mangata-node:develop+g' config.yml
+
       - name: Replace parachain docker image reference in config
+        if: ${{ github.event.inputs.branch != '' }}
         working-directory: mangata-repo/devops/parachain-launch
         run: sed -i 's+mangatasolutions/mangata-node:.*+${{ github.event.inputs.parachainDocker }}+g' config.yml
 
