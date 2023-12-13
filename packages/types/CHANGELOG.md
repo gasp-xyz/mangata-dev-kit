@@ -1,3 +1,17 @@
+# [2.2.0](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/types-v2.1.0...@mangata-finance/types-v2.2.0) (2023-12-13)
+
+
+### Features
+
+* update to esm main file with postfix js ([4f1cab2](https://github.com/mangata-finance/mangata-dev-kit/commit/4f1cab2c62826b0ec3d8edd0eb198ed08e5ca8dc))
+
+# [2.2.0-rc.1](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/types-v2.1.0...@mangata-finance/types-v2.2.0-rc.1) (2023-12-13)
+
+
+### Features
+
+* update to esm main file with postfix js ([4f1cab2](https://github.com/mangata-finance/mangata-dev-kit/commit/4f1cab2c62826b0ec3d8edd0eb198ed08e5ca8dc))
+
 # [2.1.0](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/types-v2.0.0...@mangata-finance/types-v2.1.0) (2023-12-11)
 
 
