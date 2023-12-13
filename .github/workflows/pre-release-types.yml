@@ -102,9 +102,13 @@ jobs:
 
       - run: npm i
 
-      - run: npx nx run @mangata-finance/types:generate-metadata
+      - name: Generate metadata
+        if: ${{ github.event.inputs.branch != '' }}
+        run: npx nx run @mangata-finance/types:generate-metadata
 
-      - run: npx nx run @mangata-finance/types:build-types
+      - name: Build types
+        if: ${{ github.event.inputs.branch != '' }}
+        run: npx nx run @mangata-finance/types:build-types
 
       - run: npx nx run @mangata-finance/types:lint
 
