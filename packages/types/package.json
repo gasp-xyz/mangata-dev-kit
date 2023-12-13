@@ -15,9 +15,6 @@
     "types"
   ],
   "license": "GPL-3.0",
-  "devDependencies": {
-    "@mangata-finance/type-definitions": "2.0.0"
-  },
   "peerDependencies": {
     "@polkadot/api": "^10.9.1"
   },
