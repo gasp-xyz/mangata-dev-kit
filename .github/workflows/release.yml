@@ -14,7 +14,7 @@ jobs:
           fetch-depth: 0
       - uses: nrwl/nx-set-shas@v3
 
-      - run: npm ci
+      - run: npm i
 
       - run: npx nx run-many --target=semantic-release --parallel=false
         env:
