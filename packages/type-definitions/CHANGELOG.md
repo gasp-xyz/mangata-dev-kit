@@ -1,3 +1,10 @@
+# [2.1.0-rc.1](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/type-definitions-v2.0.0...@mangata-finance/type-definitions-v2.1.0-rc.1) (2023-12-13)
+
+
+### Features
+
+* add new rpc ([ab6ecec](https://github.com/mangata-finance/mangata-dev-kit/commit/ab6ecece584d2e9c04e30ee49073a2f504ad1ae4))
+
 # [2.0.0](https://github.com/mangata-finance/types-definitions/compare/v1.0.0...v2.0.0) (2023-10-12)
 
 
