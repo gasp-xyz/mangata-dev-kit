@@ -1,3 +1,12 @@
+## [2.1.2-rc-sdk.3](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/sdk-v2.1.2-rc-sdk.2...@mangata-finance/sdk-v2.1.2-rc-sdk.3) (2023-12-13)
+
+
+### Bug Fixes
+
+* update types ([ce10ac4](https://github.com/mangata-finance/mangata-dev-kit/commit/ce10ac41b6b0467beed5c2054c3b2e2cfa41194e))
+* update types for xtokens ([5bf0e8a](https://github.com/mangata-finance/mangata-dev-kit/commit/5bf0e8a28abe855ab554e462c83bed9147606980))
+* update types version ([ef3e023](https://github.com/mangata-finance/mangata-dev-kit/commit/ef3e02395117bd2e2f3ca8ed791c0622283c2b3f))
+
 ## [2.1.2-rc-sdk.2](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/sdk-v2.1.2-rc-sdk.1...@mangata-finance/sdk-v2.1.2-rc-sdk.2) (2023-11-22)
 
 
