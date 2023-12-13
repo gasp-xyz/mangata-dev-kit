@@ -1,3 +1,25 @@
+## [2.2.1](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/types-v2.2.0...@mangata-finance/types-v2.2.1) (2023-12-13)
+
+
+### Bug Fixes
+
+* update project and package json ([17df292](https://github.com/mangata-finance/mangata-dev-kit/commit/17df292674987f5c2b594e9d4d274b1f33255a3c))
+* update types ([3568c09](https://github.com/mangata-finance/mangata-dev-kit/commit/3568c09834b0d5bb0def5e48a9ba706576bea706))
+
+## [2.2.1-rc.2](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/types-v2.2.1-rc.1...@mangata-finance/types-v2.2.1-rc.2) (2023-12-13)
+
+
+### Bug Fixes
+
+* update types ([3568c09](https://github.com/mangata-finance/mangata-dev-kit/commit/3568c09834b0d5bb0def5e48a9ba706576bea706))
+
+## [2.2.1-rc.1](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/types-v2.2.0...@mangata-finance/types-v2.2.1-rc.1) (2023-12-13)
+
+
+### Bug Fixes
+
+* update project and package json ([17df292](https://github.com/mangata-finance/mangata-dev-kit/commit/17df292674987f5c2b594e9d4d274b1f33255a3c))
+
 # [2.2.0](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/types-v2.1.0...@mangata-finance/types-v2.2.0) (2023-12-13)
 
 
