@@ -1,5 +1,7 @@
 import { OverrideBundleDefinition } from "@polkadot/types/types";
 
+export const TEST = "THIS IS A TEST"
+
 export const mTypes = {
   ShufflingSeed: {
     seed: "H256",

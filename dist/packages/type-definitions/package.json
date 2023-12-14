@@ -1,0 +1,36 @@
+{
+  "name": "@mangata-finance/type-definitions",
+  "version": "2.1.0",
+  "description": "Type definitions for Mangata Finance",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mangata-finance/mangata-dev-kit"
+  },
+  "peerDependencies": {
+    "@polkadot/types": "^10.9.1"
+  },
+  "keywords": [
+    "mangata",
+    "type",
+    "definitions"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "GPL-3.0",
+  "type": "module",
+  "module": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "private": false,
+  "main": "./src/index.js"
+}

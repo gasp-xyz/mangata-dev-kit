@@ -1,4 +1,6 @@
+export {TEST} from "@mangata-finance/type-definitions"
 export { signTx } from "./utils/signTx";
+
 
 export { Mangata } from "./mangata";
 
