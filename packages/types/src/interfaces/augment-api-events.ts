@@ -621,6 +621,7 @@ declare module '@polkadot/api-base/types/events' {
       ThirdPartyLiquidityActivated: AugmentedEvent<ApiType, [AccountId32, u32, u32, u128]>;
       ThirdPartyLiquidityDeactivated: AugmentedEvent<ApiType, [AccountId32, u32, u32, u128]>;
       ThirdPartyRewardsClaimed: AugmentedEvent<ApiType, [AccountId32, u32, u32, u128]>;
+      ThirdPartySuccessfulPoolPromotion: AugmentedEvent<ApiType, [AccountId32, u32, u32, u128]>;
       /**
        * Generic event
        **/
