@@ -372,6 +372,12 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        **/
       subscribeJustifications: AugmentedRpc<() => Observable<JustificationNotification>>;
     };
+    metamask: {
+      /**
+       * 
+       **/
+      get_eip712_sign_data: AugmentedRpc<(call: Text | string) => Observable<Text>>;
+    };
     mmr: {
       /**
        * Generate MMR proof for the given block numbers.

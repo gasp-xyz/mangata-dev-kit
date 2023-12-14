@@ -2578,7 +2578,9 @@ declare module '@polkadot/types/lookup' {
     readonly asSr25519: SpCoreSr25519Signature;
     readonly isEcdsa: boolean;
     readonly asEcdsa: SpCoreEcdsaSignature;
-    readonly type: 'Ed25519' | 'Sr25519' | 'Ecdsa';
+    readonly isEth: boolean;
+    readonly asEth: SpCoreEcdsaSignature;
+    readonly type: 'Ed25519' | 'Sr25519' | 'Ecdsa' | 'Eth';
   }
 
   /** @name SpCoreEd25519Signature (237) */

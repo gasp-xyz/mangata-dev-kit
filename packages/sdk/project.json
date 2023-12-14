@@ -22,7 +22,9 @@
     },
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
         "lintFilePatterns": [
           "packages/sdk/**/*.ts"
@@ -31,7 +33,9 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["{options.reportsDirectory}"],
+      "outputs": [
+        "{options.reportsDirectory}"
+      ],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../coverage/packages/sdk"
@@ -42,7 +46,11 @@
       "options": {
         "branches": [
           "main",
-          { "name": "rc/sdk/*", "channel": "rc-sdk", "prerelease": "rc-sdk" }
+          {
+            "name": "rc/sdk/*",
+            "channel": "rc-sdk",
+            "prerelease": "rc-sdk"
+          }
         ],
         "buildTarget": "@mangata-finance/sdk:build",
         "repositoryUrl": "https://github.com/mangata-finance/mangata-dev-kit",

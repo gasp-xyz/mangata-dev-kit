@@ -1,5 +1,13 @@
 export default {
   types: {
+    MultiSignature: {
+      _enum: {
+        Ed25519: 'Ed25519Signature',
+        Sr25519: 'Sr25519Signature',
+        Ecdsa: 'EcdsaSignature',
+        Eth: 'EcdsaSignature',
+      }
+    },
     ShufflingSeed: {
       seed: "H256",
       proof: "H512"
@@ -26,3 +34,4 @@ export default {
 
 export { default as pos } from './pos/definitions.js';
 export { default as xyk } from './xyk/definitions.js';
+export { default as metamask } from './metamask/definitions.js';

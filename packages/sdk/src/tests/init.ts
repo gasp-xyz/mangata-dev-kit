@@ -1,8 +1,15 @@
 import { Mangata } from "../mangata";
+import { signTxMetamask } from "../utils/signTx";
+import { logger, setLoggerOptions } from "../utils/mangataLogger";
 import { expect, it } from "vitest";
 import { Address, MangataGenericEvent, MangataInstance, TokenAmount } from "../types/common";
 import { v4 as uuidv4 } from "uuid";
 import { Keyring } from "@polkadot/api";
+
+setLoggerOptions({
+  type: "pretty",
+  hideLogPositionForProduction: false
+})
 
 export const instance = Mangata.instance(["ws://127.0.0.1:9946"])
 
@@ -54,4 +61,19 @@ export const createMangataToken = async (
 it("It should check whether instance is connected", async () => {
   const api = await instance.api()
   expect(api.isConnected).toBe(true)
+})
+
+it("It submit signed tx and wait for result", async () => {
+  const api = await instance.api()
+
+  const keyring = new Keyring({ type: "sr25519" });
+  let alice = keyring.addFromUri("//Alice");
+  let bob = keyring.addFromUri("//Alice");
+
+  let tx = api.tx.tokens.transfer(bob.address, 0, 1000000000000000);
+  // await tx.signAsync(alice);
+
+  let resp = await signTxMetamask(api, tx);
+  console.log(resp);
+
 })

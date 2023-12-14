@@ -1,7 +1,8 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Compact, Struct, u32 } from '@polkadot/types-codec';
+import type { Bytes, Compact, Enum, Struct, u32 } from '@polkadot/types-codec';
+import type { EcdsaSignature, Ed25519Signature, Sr25519Signature } from '@polkadot/types/interfaces/extrinsics';
 import type { BlockNumber, Digest, H256, H512, Hash } from '@polkadot/types/interfaces/runtime';
 
 /** @name Header */
@@ -13,6 +14,19 @@ export interface Header extends Struct {
   readonly digest: Digest;
   readonly seed: ShufflingSeed;
   readonly count: BlockNumber;
+}
+
+/** @name MultiSignature */
+export interface MultiSignature extends Enum {
+  readonly isEd25519: boolean;
+  readonly asEd25519: Ed25519Signature;
+  readonly isSr25519: boolean;
+  readonly asSr25519: Sr25519Signature;
+  readonly isEcdsa: boolean;
+  readonly asEcdsa: EcdsaSignature;
+  readonly isEth: boolean;
+  readonly asEth: EcdsaSignature;
+  readonly type: 'Ed25519' | 'Sr25519' | 'Ecdsa' | 'Eth';
 }
 
 /** @name RpcAssetMetadata */
