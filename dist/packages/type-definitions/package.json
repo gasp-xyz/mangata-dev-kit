@@ -23,8 +23,8 @@
   "types": "./src/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.d.ts",
-      "import": "./src/index.js"
+      "types": "./dist/packages/type-definitions/src/index.d.ts",
+      "import": "./dist/packages/type-definitions/src/index.js"
     }
   },
   "publishConfig": {

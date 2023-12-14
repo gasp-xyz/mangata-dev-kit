@@ -29,8 +29,8 @@
   },
   "exports": {
     ".": {
-      "types": "./index.d.ts",
-      "import": "./index.js"
+      "types": "./dist/packages/sdk/index.d.ts",
+      "import": "./dist/packages/sdk/index.js"
     }
   },
   "publishConfig": {
