@@ -1,3 +1,10 @@
+## [2.1.2-rc.1](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/type-definitions-v2.1.1...@mangata-finance/type-definitions-v2.1.2-rc.1) (2023-12-19)
+
+
+### Bug Fixes
+
+* update return type ([b394578](https://github.com/mangata-finance/mangata-dev-kit/commit/b3945780e17cff45303bd0052b0a7403caa4ec66))
+
 ## [2.1.1](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/type-definitions-v2.1.0...@mangata-finance/type-definitions-v2.1.1) (2023-12-19)
 
 
