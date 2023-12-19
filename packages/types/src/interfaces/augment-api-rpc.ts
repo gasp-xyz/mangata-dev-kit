@@ -430,7 +430,7 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
       /**
        * Calculates all amount of available 3rdparty rewards
        **/
-      calculate_3rdparty_rewards_all: AugmentedRpc<(account: AccountId | string | Uint8Array) => Observable<Vec<ITuple<[TokenId, TokenId, Balance]>>>>;
+      calculate_3rdparty_rewards_all: AugmentedRpc<(account: AccountId | string | Uint8Array) => Observable<Balance>>;
       /**
        * Calculates amount of available 3rdparty rewards
        **/

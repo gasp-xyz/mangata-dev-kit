@@ -395,8 +395,7 @@ export default {
       RewardsClaimed: '(AccountId32,u32,u128)',
       ThirdPartyRewardsClaimed: '(AccountId32,u32,u32,u128)',
       ThirdPartyLiquidityActivated: '(AccountId32,u32,u32,u128)',
-      ThirdPartyLiquidityDeactivated: '(AccountId32,u32,u32,u128)',
-      ThirdPartySuccessfulPoolPromotion: '(AccountId32,u32,u32,u128)'
+      ThirdPartyLiquidityDeactivated: '(AccountId32,u32,u32,u128)'
     }
   },
   /**
