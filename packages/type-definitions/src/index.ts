@@ -258,7 +258,7 @@ export const mRpc = {
           type: "AccountId"
         }
       ],
-      type: "[TokenId, TokenId, Balance][]"
+      type: "Vec<(TokenId, TokenId, Balance)>"
     }
   }
 };
