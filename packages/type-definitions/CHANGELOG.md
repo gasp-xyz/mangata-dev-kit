@@ -1,3 +1,31 @@
+## [2.1.2](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/type-definitions-v2.1.1...@mangata-finance/type-definitions-v2.1.2) (2023-12-19)
+
+
+### Bug Fixes
+
+* update return type ([b394578](https://github.com/mangata-finance/mangata-dev-kit/commit/b3945780e17cff45303bd0052b0a7403caa4ec66))
+
+## [2.1.2-rc.1](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/type-definitions-v2.1.1...@mangata-finance/type-definitions-v2.1.2-rc.1) (2023-12-19)
+
+
+### Bug Fixes
+
+* update return type ([b394578](https://github.com/mangata-finance/mangata-dev-kit/commit/b3945780e17cff45303bd0052b0a7403caa4ec66))
+
+## [2.1.1](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/type-definitions-v2.1.0...@mangata-finance/type-definitions-v2.1.1) (2023-12-19)
+
+
+### Bug Fixes
+
+* update project json ([1b935bf](https://github.com/mangata-finance/mangata-dev-kit/commit/1b935bfd818cbb98c68319b7da2a6ddb53a0dbce))
+
+## [2.1.1-rc.1](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/type-definitions-v2.1.0...@mangata-finance/type-definitions-v2.1.1-rc.1) (2023-12-19)
+
+
+### Bug Fixes
+
+* update project json ([1b935bf](https://github.com/mangata-finance/mangata-dev-kit/commit/1b935bfd818cbb98c68319b7da2a6ddb53a0dbce))
+
 # [2.1.0](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/type-definitions-v2.0.0...@mangata-finance/type-definitions-v2.1.0) (2023-12-13)
 
 
