@@ -258,7 +258,7 @@ export const mRpc = {
           type: "AccountId"
         }
       ],
-      type: "Balance"
+      type: "[TokenId, TokenId, Balance][]"
     }
   }
 };

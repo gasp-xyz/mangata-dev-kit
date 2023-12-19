@@ -11,12 +11,7 @@
         "outputPath": "dist/packages/type-definitions",
         "main": "packages/type-definitions/src/index.ts",
         "tsConfig": "packages/type-definitions/tsconfig.lib.json",
-        "assets": ["packages/type-definitions/*.md"],
-        "transformers": [
-          {
-            "name": "typescript-transform-paths/nx-transformer"
-          }
-        ]
+        "assets": ["packages/type-definitions/*.md"]
       }
     },
     "lint": {
