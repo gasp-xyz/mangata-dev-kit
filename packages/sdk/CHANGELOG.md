@@ -1,3 +1,10 @@
+# [2.2.0-rc-sdk.1](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/sdk-v2.1.2-rc-sdk.4...@mangata-finance/sdk-v2.2.0-rc-sdk.1) (2024-01-12)
+
+
+### Features
+
+* update readme ([9da3134](https://github.com/mangata-finance/mangata-dev-kit/commit/9da313470fe99bd44845014b8de5df90896af397))
+
 ## [2.1.2-rc-sdk.4](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/sdk-v2.1.2-rc-sdk.3...@mangata-finance/sdk-v2.1.2-rc-sdk.4) (2023-12-19)
 
 
