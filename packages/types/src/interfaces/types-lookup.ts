@@ -452,7 +452,9 @@ declare module '@polkadot/types/lookup' {
     readonly asThirdPartyLiquidityActivated: ITuple<[AccountId32, u32, u32, u128]>;
     readonly isThirdPartyLiquidityDeactivated: boolean;
     readonly asThirdPartyLiquidityDeactivated: ITuple<[AccountId32, u32, u32, u128]>;
-    readonly type: 'PoolPromotionUpdated' | 'LiquidityActivated' | 'LiquidityDeactivated' | 'RewardsClaimed' | 'ThirdPartyRewardsClaimed' | 'ThirdPartyLiquidityActivated' | 'ThirdPartyLiquidityDeactivated';
+    readonly isThirdPartySuccessfulPoolPromotion: boolean;
+    readonly asThirdPartySuccessfulPoolPromotion: ITuple<[AccountId32, u32, u32, u128]>;
+    readonly type: 'PoolPromotionUpdated' | 'LiquidityActivated' | 'LiquidityDeactivated' | 'RewardsClaimed' | 'ThirdPartyRewardsClaimed' | 'ThirdPartyLiquidityActivated' | 'ThirdPartyLiquidityDeactivated' | 'ThirdPartySuccessfulPoolPromotion';
   }
 
   /** @name PalletFeeLockEvent (53) */

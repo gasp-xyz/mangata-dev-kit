@@ -41,7 +41,7 @@ export default {
           type: "AccountId"
         }
       ],
-      type: "Balance"
+      type: "Vec<(TokenId, TokenId, Balance)>"
     }
   }
 }
