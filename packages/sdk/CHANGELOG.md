@@ -10,6 +10,7 @@
 
 ### Bug Fixes
 
+<<<<<<< HEAD
 * update types and definitions ([37ac5d9](https://github.com/mangata-finance/mangata-dev-kit/commit/37ac5d9a3952097f0a941873936270fc7b5326e5))
 
 ## [2.1.2](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/sdk-v2.1.1...@mangata-finance/sdk-v2.1.2) (2023-12-19)
@@ -36,6 +37,10 @@
 
 * update to correct values activatedLPTokens and nonActivatedLPTokens ([1d94e47](https://github.com/mangata-finance/mangata-dev-kit/commit/1d94e4793f27fc1d955b5f5e4da1118ff12a7be6))
 
+=======
+* updates return type ([38e6535](https://github.com/mangata-finance/mangata-dev-kit/commit/38e65350ba5956bfaf8866491af08ed5c733b08e))
+
+>>>>>>> main
 # [2.1.0](https://github.com/mangata-finance/mangata-sdk/compare/v2.0.0...v2.1.0) (2023-10-12)
 
 
