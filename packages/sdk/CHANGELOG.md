@@ -1,3 +1,20 @@
+# [2.2.0](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/sdk-v2.1.2...@mangata-finance/sdk-v2.2.0) (2024-01-25)
+
+
+### Bug Fixes
+
+* remove any from rpc ([d4111d6](https://github.com/mangata-finance/mangata-dev-kit/commit/d4111d6c7f21ef3519161c50a2abdf48c5375fc8))
+* update to correct values activatedLPTokens and nonActivatedLPTokens ([1d94e47](https://github.com/mangata-finance/mangata-dev-kit/commit/1d94e4793f27fc1d955b5f5e4da1118ff12a7be6))
+* update types ([ce10ac4](https://github.com/mangata-finance/mangata-dev-kit/commit/ce10ac41b6b0467beed5c2054c3b2e2cfa41194e))
+* update types and definitions ([37ac5d9](https://github.com/mangata-finance/mangata-dev-kit/commit/37ac5d9a3952097f0a941873936270fc7b5326e5))
+* update types for xtokens ([5bf0e8a](https://github.com/mangata-finance/mangata-dev-kit/commit/5bf0e8a28abe855ab554e462c83bed9147606980))
+* update types version ([ef3e023](https://github.com/mangata-finance/mangata-dev-kit/commit/ef3e02395117bd2e2f3ca8ed791c0622283c2b3f))
+
+
+### Features
+
+* update readme ([9da3134](https://github.com/mangata-finance/mangata-dev-kit/commit/9da313470fe99bd44845014b8de5df90896af397))
+
 # [2.2.0-rc-sdk.2](https://github.com/mangata-finance/mangata-dev-kit/compare/@mangata-finance/sdk-v2.2.0-rc-sdk.1...@mangata-finance/sdk-v2.2.0-rc-sdk.2) (2024-01-23)
 
 
