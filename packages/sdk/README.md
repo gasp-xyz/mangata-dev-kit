@@ -1,7 +1,7 @@
 ## Mangata Finance SDK
 
 <p>
-    The Mangata SDK is a comprehensive toolset designed for facilitating seamless communication with the Mangata Substrate node.
+    The Mangata SDK is a comprehensive toolset designed for facilitating seamless communication with the Mangata node.
 </p>
 
 ![Artwork](https://blog.mangata.finance/assets/posts/themis-cover.png)

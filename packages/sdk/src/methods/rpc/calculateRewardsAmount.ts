@@ -16,7 +16,7 @@ export const calculateRewardsAmount = async (
   });
   const api = await instancePromise;
   const { address, liquidityTokenId } = args;
-  const rewards = await (api.rpc as any).xyk.calculate_rewards_amount(
+  const rewards = await api.rpc.xyk.calculate_rewards_amount(
     address,
     liquidityTokenId
   );

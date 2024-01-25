@@ -1,4 +1,5 @@
 import { ApiPromise } from "@polkadot/api";
+import { BN } from "@polkadot/util";
 import { PoolWithShare } from "../../types/query";
 import { BN_ZERO } from "../../utils/bnConstants";
 import { calculateLiquidityShare } from "../../utils/calculateLiquidityShare";
@@ -41,10 +42,17 @@ export const getInvestedPools = async (
           firstTokenId,
           secondTokenId
         );
+      const rewardsInfo = await api.query.proofOfStake.rewardsInfo(address, asset.id)
+      const reserveStatus = await api.query.multiPurposeLiquidity.reserveStatus(address, asset.id)
+      const stakedUnactivatedReserves = new BN(reserveStatus.stakedUnactivatedReserves)
+      const unspentReserves = new BN(reserveStatus.unspentReserves)
+      const activatedLPTokens = new BN(rewardsInfo.activatedAmount)
+      const nonActivatedLPTokens = userLiquidityBalance.free.add(stakedUnactivatedReserves).add(unspentReserves)
+
       const share = await calculateLiquidityShare(
         api,
         asset.id,
-        userLiquidityBalance.free.add(userLiquidityBalance.reserved)
+        activatedLPTokens.add(nonActivatedLPTokens)
       );
 
       return {
@@ -61,8 +69,8 @@ export const getInvestedPools = async (
         secondTokenRatio: share.eq(BN_ZERO)
           ? BN_ZERO
           : getRatio(secondTokenAmount, firstTokenAmount),
-        activatedLPTokens: userLiquidityBalance.reserved,
-        nonActivatedLPTokens: userLiquidityBalance.free
+        activatedLPTokens: activatedLPTokens,
+        nonActivatedLPTokens: nonActivatedLPTokens
       } as PoolWithShare;
     });
 

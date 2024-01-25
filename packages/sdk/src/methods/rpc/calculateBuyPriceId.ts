@@ -18,7 +18,7 @@ export const calculateBuyPriceId = async (
     amount: amount.toString()
   });
   const api = await instancePromise;
-  const price = await (api.rpc as any).xyk.calculate_buy_price_id(
+  const price = await api.rpc.xyk.calculate_buy_price_id(
     soldTokenId,
     boughtTokenId,
     amount

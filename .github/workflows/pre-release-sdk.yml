@@ -92,8 +92,8 @@ jobs:
 
       - name: Latest released rc version
         run: |
-          rcVersion=$(npm show @mangata-finance/sdk dist-tags.rc)
-          echo "RC_SDK_VERSION=rcVersion" >> $GITHUB_ENV
+          rcVersion=$(npm show @mangata-finance/sdk dist-tags.rc-sdk)
+          echo "RC_SDK_VERSION=$rcVersion" >> $GITHUB_ENV
 
       - name: Invoke workflow in microapps repo with inputs
         uses: jonas-schievink/workflow-proxy@v1

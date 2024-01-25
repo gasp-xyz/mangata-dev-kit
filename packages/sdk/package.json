@@ -1,6 +1,6 @@
 {
   "name": "@mangata-finance/sdk",
-  "version": "2.1.2",
+  "version": "2.2.0-rc-sdk.2",
   "description": "Mangata SDK",
   "type": "module",
   "module": "./index.js",
@@ -23,10 +23,10 @@
     "@polkadot/api": "10.9.1"
   },
   "devDependencies": {
-    "@mangata-finance/types": "2.0.0"
+    "@mangata-finance/types": "2.2.2"
   },
   "dependencies": {
-    "@mangata-finance/type-definitions": "2.0.0",
+    "@mangata-finance/type-definitions": "2.1.2",
     "big.js": "6.2.1",
     "tslog": "4.8.2",
     "tslib": "^2.3.0"
