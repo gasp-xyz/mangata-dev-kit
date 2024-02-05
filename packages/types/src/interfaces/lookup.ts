@@ -2333,7 +2333,8 @@ export default {
     _enum: {
       Ed25519: 'SpCoreEd25519Signature',
       Sr25519: 'SpCoreSr25519Signature',
-      Ecdsa: 'SpCoreEcdsaSignature'
+      Ecdsa: 'SpCoreEcdsaSignature',
+      Eth: 'SpCoreEcdsaSignature'
     }
   },
   /**
