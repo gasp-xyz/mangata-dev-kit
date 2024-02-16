@@ -25,6 +25,7 @@ declare module '@polkadot/api-base/types/errors' {
        * Another asset was already register with this asset id.
        **/
       ConflictingAssetId: AugmentedError<ApiType>;
+      ConflictingL1Asset: AugmentedError<ApiType>;
       /**
        * Another asset was already register with this location.
        **/
@@ -816,6 +817,27 @@ declare module '@polkadot/api-base/types/errors' {
        * A call which is incompatible with the proxy type's filter was attempted.
        **/
       Unproxyable: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    rolldown: {
+      AddressDeserializationFailure: AugmentedError<ApiType>;
+      EmptyUpdate: AugmentedError<ApiType>;
+      InvalidUpdate: AugmentedError<ApiType>;
+      OperationFailed: AugmentedError<ApiType>;
+      ReadRightsExhausted: AugmentedError<ApiType>;
+      RequestDoesNotExist: AugmentedError<ApiType>;
+      TooManyRequests: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    sequencerStaking: {
+      MathOverflow: AugmentedError<ApiType>;
+      OperationFailed: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
