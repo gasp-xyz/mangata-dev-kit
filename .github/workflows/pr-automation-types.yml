@@ -82,6 +82,7 @@ jobs:
 
   release-types:
     runs-on: ubuntu-latest
+    needs: [release-type-definitions]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -173,6 +174,80 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
           
+          # Branch name sanitization added to avoid issues with npm version command
+          # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
+          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')" --access public
+
+  release-sdk:
+    runs-on: ubuntu-latest
+    needs: [release-type-definitions, release-types]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: nrwl/nx-set-shas@v3
+
+      - name: Setup Node version and cache dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Type definitions version for branch
+        run: |
+          branchTypeDefinitionsVersion=$(npm show @mangata-finance/type-definitions dist-tags.${{ github.event.inputs.branchPreRelease }})
+          echo "BRANCH_TYPE_DEFINITIONS_VERSION=branchTypeDefinitionsVersion" >> $GITHUB_ENV
+
+      - name: Types version for branch
+        run: |
+          branchTypesVersion=$(npm show @mangata-finance/types dist-tags.${{ github.event.inputs.branchPreRelease }})
+          echo "BRANCH_TYPES_VERSION=branchTypesVersion" >> $GITHUB_ENV
+
+      - name: Update types dependency version
+        working-directory: packages/types
+        run: |
+          NEW_TYPES_VERSION=${{ env.BRANCH_TYPES_VERSION }}  # Set the new version here
+          jq '.devDependencies["@mangata-finance/types"] = $NEW_VERSION' package.json > temp.json && mv temp.json package.json
+
+      - name: Update type definitions dependency version
+        working-directory: packages/type-definitions
+        run: |
+          NEW_TYPE_DEFINITIONS_VERSION=${{ env.BRANCH_TYPE_DEFINITIONS_VERSION }}  # Set the new version here
+          jq '.dependencies["@mangata-finance/type-definitions"] = $NEW_TYPE_DEFINITIONS_VERSION' package.json > temp.json && mv temp.json package.json
+
+      - run: npm i
+
+      - run: npx nx run @mangata-finance/sdk:lint
+
+      - name: NPM version bump
+        working-directory: packages/sdk
+        env:
+          INPUTS_BRANCH: ${{ github.event.inputs.branchPreRelease }}
+        run: |
+          # Branch name sanitization added to avoid issues with npm version command
+          # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
+          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')"
+
+      - name: git add and commit new version
+        run: |
+          git config user.name mangatafinance
+          git config user.email solutions@mangata.finance
+          git add .
+          git commit -m "chore: updated sdk to new prerelease version"
+          git push
+
+      - name: Build sdk
+        run: npx nx run @mangata-finance/sdk:build
+
+      - name: Publish to NPM
+        working-directory: dist/packages/sdk
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          INPUTS_BRANCH: ${{ github.event.inputs.branchPreRelease }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')" --access public
