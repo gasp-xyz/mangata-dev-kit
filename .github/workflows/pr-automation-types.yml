@@ -1,0 +1,76 @@
+name: PR Automation types
+on:
+  push:
+    branches:
+      - '*'
+      - '!main'
+      - '!develop'
+      - '!rc/types/*'
+      - '!rc/definitions/*'
+      - '!rc/sdk/*'
+
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  id-token: write
+  deployments: write
+  checks: write
+
+jobs:
+  release-type-definitions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: nrwl/nx-set-shas@v3
+
+      - name: Setup Node version and cache dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - run: npm ci
+
+      - run: npx nx run @mangata-finance/type-definitions:lint
+
+      - name: Get branch names
+        id: branch-names
+        uses: tj-actions/branch-names@v8
+
+      - name: NPM version bump type definitions
+        working-directory: packages/type-definitions
+        env:
+          INPUTS_BRANCH: ${{ steps.branch-names.outputs.current_branch }}
+        run: |
+          # Branch name sanitization added to avoid issues with npm version command
+          # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
+          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')"
+
+      - name: git add and commit new version
+        run: |
+          git config user.name mangatafinance
+          git config user.email solutions@mangata.finance
+          git add .
+          git commit -m "chore: updated to new prerelease version"
+          git push
+
+      - name: Build type definitions
+        run: npx nx run @mangata-finance/type-definitions:build
+
+      - name: Publish type definitions to NPM
+        working-directory: dist/packages/type-definitions
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          INPUTS_BRANCH: ${{ steps.branch-names.outputs.current_branch }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+
+          # Branch name sanitization added to avoid issues with npm version command
+          # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
+          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')" --access public
+
