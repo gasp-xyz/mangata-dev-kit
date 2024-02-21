@@ -1,13 +1,23 @@
 name: PR Automation types
+
 on:
-  push:
-    branches:
-      - '*'
-      - '!main'
-      - '!develop'
-      - '!rc/types/*'
-      - '!rc/definitions/*'
-      - '!rc/sdk/*'
+  workflow_dispatch:
+    inputs:
+      parachainDocker:
+        description: "Parachain docker reference"
+        type: string
+        required: true
+        default: "mangatasolutions/mangata-node:develop"
+      branchPreRelease:
+        description: "Branch for pre-release"
+        type: string
+        required: true
+        default: ""
+      branchMangataNode:
+        description: "Branch for mangata-node"
+        type: string
+        required: true
+        default: "develop"
 
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
@@ -34,18 +44,14 @@ jobs:
           node-version: "18"
           cache: "npm"
 
-      - run: npm ci
+      - run: npm i
 
       - run: npx nx run @mangata-finance/type-definitions:lint
-
-      - name: Get branch names
-        id: branch-names
-        uses: tj-actions/branch-names@v8
 
       - name: NPM version bump type definitions
         working-directory: packages/type-definitions
         env:
-          INPUTS_BRANCH: ${{ steps.branch-names.outputs.current_branch }}
+          INPUTS_BRANCH: ${{ github.event.inputs.branchPreRelease }}
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
@@ -56,7 +62,7 @@ jobs:
           git config user.name mangatafinance
           git config user.email solutions@mangata.finance
           git add .
-          git commit -m "chore: updated to new prerelease version"
+          git commit -m "chore: updated type definitions to new prerelease version"
           git push
 
       - name: Build type definitions
@@ -66,7 +72,7 @@ jobs:
         working-directory: dist/packages/type-definitions
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          INPUTS_BRANCH: ${{ steps.branch-names.outputs.current_branch }}
+          INPUTS_BRANCH: ${{ github.event.inputs.branchPreRelease }}
         run: |
           echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
 
@@ -74,3 +80,99 @@ jobs:
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')" --access public
 
+  release-types:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: nrwl/nx-set-shas@v3
+
+      - name: Clone mangata node repository
+        uses: actions/checkout@v4
+        with:
+          repository: mangata-finance/mangata-node
+          path: mangata-repo
+          ref: ${{ github.event.inputs.branchMangataNode }}
+
+      - name: Setup Node version and cache dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install WASM toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          target: wasm32-unknown-unknown
+
+      - name: Install websocat
+        run: |
+          cargo install websocat
+        shell: bash
+
+      - name: Replace parachain docker image reference in config
+        working-directory: mangata-repo/devops/parachain-launch
+        run: sed -i 's+mangatasolutions/mangata-node:.*+${{ github.event.inputs.parachainDocker }}+g' config.yml
+
+      - name: Generate the config
+        working-directory: mangata-repo/devops/parachain-launch
+        run: npx @open-web3/parachain-launch generate config.yml
+
+      - name: Remove obsolete node run args from generated docker-compose.yml
+        working-directory: mangata-repo/devops/parachain-launch/output
+        run: sed -i '/ws-external/d' docker-compose.yml
+
+      - name: Run the Node
+        working-directory: mangata-repo/devops/parachain-launch/output
+        run: |
+          docker-compose up -d --build
+          docker ps
+
+      - name: Sleep for 1 minutes
+        run: sleep 60s
+
+      - run: npm i
+
+      - name: Generate metadata
+        run: npx nx run @mangata-finance/types:generate-metadata
+
+      - name: Build types
+        run: npx nx run @mangata-finance/types:build-types
+
+      - name: Lint types
+        run: npx nx run @mangata-finance/types:lint
+
+      - name: NPM version bump
+        working-directory: packages/types
+        env:
+          INPUTS_BRANCH: ${{ github.event.inputs.branchPreRelease }}
+        run: |
+          # Branch name sanitization added to avoid issues with npm version command
+          # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
+          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')"
+
+      - name: git add and commit new version
+        run: |
+          git config user.name mangatafinance
+          git config user.email solutions@mangata.finance
+          git add .
+          git commit -m "chore: updated types to new prerelease version"
+          git push
+
+      - name: Build types
+        run: npx nx run @mangata-finance/types:build
+
+      - name: Publish to NPM
+        working-directory: dist/packages/types
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          INPUTS_BRANCH: ${{ github.event.inputs.branchPreRelease }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+          
+          # Branch name sanitization added to avoid issues with npm version command
+          # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
+          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')" --access public
