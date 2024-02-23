@@ -33,8 +33,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - uses: nrwl/nx-set-shas@v3
 
@@ -44,7 +42,7 @@ jobs:
           node-version: "18"
           cache: "npm"
 
-      - run: npm i
+      - run: npm ci
 
       - run: npx nx run @mangata-finance/type-definitions:lint
 
@@ -63,7 +61,8 @@ jobs:
           git config user.email solutions@mangata.finance
           git add .
           git commit -m "chore: updated type definitions to new prerelease version"
-          git push
+          git pull origin ${{ github.event.inputs.branchPreRelease }} --rebase
+          git push origin ${{ github.event.inputs.branchPreRelease }}
 
       - name: Build type definitions
         run: npx nx run @mangata-finance/type-definitions:build
@@ -85,8 +84,6 @@ jobs:
     needs: [release-type-definitions]
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - uses: nrwl/nx-set-shas@v3
 
@@ -135,7 +132,7 @@ jobs:
       - name: Sleep for 1 minutes
         run: sleep 60s
 
-      - run: npm i
+      - run: npm ci
 
       - name: Generate metadata
         run: npx nx run @mangata-finance/types:generate-metadata
@@ -155,13 +152,20 @@ jobs:
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')"
 
+      - name: Remove Cloned Repository
+        run: rm -rf mangata-repo
+
+      - name: Sleep for 1 minutes
+        run: sleep 60s
+
       - name: git add and commit new version
         run: |
           git config user.name mangatafinance
           git config user.email solutions@mangata.finance
           git add .
           git commit -m "chore: updated types to new prerelease version"
-          git push
+          git pull origin ${{ github.event.inputs.branchPreRelease }} --rebase
+          git push origin ${{ github.event.inputs.branchPreRelease }}
 
       - name: Build types
         run: npx nx run @mangata-finance/types:build
@@ -183,8 +187,6 @@ jobs:
     needs: [release-type-definitions, release-types]
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - uses: nrwl/nx-set-shas@v3
 
@@ -196,25 +198,27 @@ jobs:
 
       - name: Type definitions version for branch
         run: |
-          branchTypeDefinitionsVersion=$(npm show @mangata-finance/type-definitions dist-tags.${{ github.event.inputs.branchPreRelease }})
-          echo "BRANCH_TYPE_DEFINITIONS_VERSION=branchTypeDefinitionsVersion" >> $GITHUB_ENV
+          branchTypeDefinitionsVersion=$(npm show @mangata-finance/type-definitions dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g')")
+          echo "BRANCH_TYPE_DEFINITIONS_VERSION=$branchTypeDefinitionsVersion" >> $GITHUB_ENV
 
       - name: Types version for branch
         run: |
-          branchTypesVersion=$(npm show @mangata-finance/types dist-tags.${{ github.event.inputs.branchPreRelease }})
-          echo "BRANCH_TYPES_VERSION=branchTypesVersion" >> $GITHUB_ENV
+          branchTypesVersion=$(npm show @mangata-finance/types dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g')")
+          echo "BRANCH_TYPES_VERSION=$branchTypesVersion" >> $GITHUB_ENV
 
       - name: Update types dependency version
-        working-directory: packages/types
+        working-directory: packages/sdk
         run: |
-          NEW_TYPES_VERSION=${{ env.BRANCH_TYPES_VERSION }}  # Set the new version here
-          jq '.devDependencies["@mangata-finance/types"] = $NEW_VERSION' package.json > temp.json && mv temp.json package.json
+          sed -i "s/\"@mangata-finance\/types\": \".*\"/\"@mangata-finance\/types\": \"${{env.BRANCH_TYPES_VERSION}}\"/" package.json
 
       - name: Update type definitions dependency version
-        working-directory: packages/type-definitions
+        working-directory: packages/sdk
         run: |
-          NEW_TYPE_DEFINITIONS_VERSION=${{ env.BRANCH_TYPE_DEFINITIONS_VERSION }}  # Set the new version here
-          jq '.dependencies["@mangata-finance/type-definitions"] = $NEW_TYPE_DEFINITIONS_VERSION' package.json > temp.json && mv temp.json package.json
+          sed -i "s/\"@mangata-finance\/type-definitions\": \".*\"/\"@mangata-finance\/type-definitions\": \"${{env.BRANCH_TYPE_DEFINITIONS_VERSION}}\"/" package.json
+
+      - name: Show package.json
+        working-directory: packages/sdk
+        run: cat package.json
 
       - run: npm i
 
@@ -235,7 +239,8 @@ jobs:
           git config user.email solutions@mangata.finance
           git add .
           git commit -m "chore: updated sdk to new prerelease version"
-          git push
+          git pull origin ${{ github.event.inputs.branchPreRelease }} --rebase
+          git push origin ${{ github.event.inputs.branchPreRelease }}
 
       - name: Build sdk
         run: npx nx run @mangata-finance/sdk:build
@@ -251,3 +256,14 @@ jobs:
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')" --access public
+
+      - name: Show released versions
+        run: |
+          echo "Version of @mangata-finance/type-definitions:"
+          npm show @mangata-finance/type-definitions dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g')"
+          
+          echo "Version of @mangata-finance/types:"
+          npm show @mangata-finance/types dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g')"
+          
+          echo "Version of @mangata-finance/sdk:"
+          npm show @mangata-finance/sdk dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g')"
