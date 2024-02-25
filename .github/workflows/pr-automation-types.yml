@@ -53,7 +53,7 @@ jobs:
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
-          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')"
+          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
 
       - name: git add and commit new version
         run: |
@@ -77,7 +77,7 @@ jobs:
 
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
-          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')" --access public
+          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')" --access public
 
   release-types:
     runs-on: ubuntu-latest
@@ -150,7 +150,7 @@ jobs:
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
-          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')"
+          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
 
       - name: Remove Cloned Repository
         run: rm -rf mangata-repo
@@ -180,7 +180,7 @@ jobs:
           
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
-          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')" --access public
+          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')" --access public
 
   release-sdk:
     runs-on: ubuntu-latest
@@ -198,12 +198,12 @@ jobs:
 
       - name: Type definitions version for branch
         run: |
-          branchTypeDefinitionsVersion=$(npm show @mangata-finance/type-definitions dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g')")
+          branchTypeDefinitionsVersion=$(npm show @mangata-finance/type-definitions dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g; s@_@-@g')")
           echo "BRANCH_TYPE_DEFINITIONS_VERSION=$branchTypeDefinitionsVersion" >> $GITHUB_ENV
 
       - name: Types version for branch
         run: |
-          branchTypesVersion=$(npm show @mangata-finance/types dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g')")
+          branchTypesVersion=$(npm show @mangata-finance/types dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g; s@_@-@g')")
           echo "BRANCH_TYPES_VERSION=$branchTypesVersion" >> $GITHUB_ENV
 
       - name: Update types dependency version
@@ -231,7 +231,7 @@ jobs:
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
-          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')"
+          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
 
       - name: git add and commit new version
         run: |
@@ -255,15 +255,15 @@ jobs:
 
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
-          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')" --access public
+          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')" --access public
 
       - name: Show released versions
         run: |
           echo "Version of @mangata-finance/type-definitions:"
-          npm show @mangata-finance/type-definitions dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g')"
+          npm show @mangata-finance/type-definitions dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
           
           echo "Version of @mangata-finance/types:"
-          npm show @mangata-finance/types dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g')"
+          npm show @mangata-finance/types dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
           
           echo "Version of @mangata-finance/sdk:"
-          npm show @mangata-finance/sdk dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g')"
+          npm show @mangata-finance/sdk dist-tags."$(echo "${{ github.event.inputs.branchPreRelease }}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
