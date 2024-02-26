@@ -50,15 +50,6 @@ jobs:
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
 
-#      - name: git add and commit new version
-#        run: |
-#          git config user.name mangatafinance
-#          git config user.email solutions@mangata.finance
-#          git add .
-#          git commit -m "chore: updated type definitions to new prerelease version"
-#          git pull origin ${{ github.event.inputs.branch }} --rebase
-#          git push origin ${{ github.event.inputs.branch }}
-
       - name: Build type definitions
         run: npx nx run @mangata-finance/type-definitions:build
 
@@ -153,15 +144,6 @@ jobs:
       - name: Sleep for 1 minutes
         run: sleep 60s
 
-#      - name: git add and commit new version
-#        run: |
-#          git config user.name mangatafinance
-#          git config user.email solutions@mangata.finance
-#          git add .
-#          git commit -m "chore: updated types to new prerelease version"
-#          git pull origin ${{ github.event.inputs.branch }} --rebase
-#          git push origin ${{ github.event.inputs.branch }}
-
       - name: Build types
         run: npx nx run @mangata-finance/types:build
 
@@ -234,7 +216,6 @@ jobs:
           git config user.email solutions@mangata.finance
           git add .
           git commit -m "chore: updated to new prerelease version"
-#          git pull origin ${{ github.event.inputs.branch }} --rebase
           git push origin ${{ github.event.inputs.branch }}
 
       - name: Build sdk
