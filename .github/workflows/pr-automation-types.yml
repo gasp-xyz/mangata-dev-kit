@@ -90,11 +90,9 @@ jobs:
     needs: [release-type-definitions]
     steps:
       - uses: actions/checkout@v4
-
-      - name: fetch and reset
-        run: |
-          git fetch ${{ needs.release-type-definitions.outputs.COMMIT_HASH_TYPE_DEFINITIONS }}
-          git reset --hard ${{ needs.release-type-definitions.outputs.COMMIT_HASH_TYPE_DEFINITIONS }}
+        with:
+          fetch-depth: 2
+      - run: git checkout HEAD^
 
       - uses: nrwl/nx-set-shas@v3
 
