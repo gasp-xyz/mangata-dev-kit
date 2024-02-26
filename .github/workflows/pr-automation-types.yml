@@ -92,6 +92,8 @@ jobs:
     needs: [release-type-definitions]
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
 
       - uses: nrwl/nx-set-shas@v3
 
@@ -151,9 +153,6 @@ jobs:
       - name: Lint types
         run: npx nx run @mangata-finance/types:lint
 
-      - name: Fetch
-        run: git fetch --prune --unshallow
-
       - name: NPM version bump
         working-directory: packages/types
         env:
@@ -205,6 +204,8 @@ jobs:
     needs: [release-type-definitions, release-types]
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
 
       - uses: nrwl/nx-set-shas@v3
 
@@ -241,9 +242,6 @@ jobs:
       - run: npm i
 
       - run: npx nx run @mangata-finance/sdk:lint
-
-      - name: Fetch
-        run: git fetch --prune --unshallow
 
       - name: NPM version bump
         working-directory: packages/sdk
