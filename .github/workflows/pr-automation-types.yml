@@ -90,8 +90,6 @@ jobs:
     needs: [release-type-definitions]
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ needs.release-type-definitions.outputs.COMMIT_HASH_TYPE_DEFINITIONS }}
 
       - name: fetch and reset
         run: |
@@ -207,8 +205,6 @@ jobs:
     needs: [release-type-definitions, release-types]
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ needs.release-types.outputs.COMMIT_HASH_TYPES }}
 
       - name: fetch and reset
         run: |
