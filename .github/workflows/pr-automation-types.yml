@@ -170,9 +170,9 @@ jobs:
         run: |
           git config user.name mangatafinance
           git config user.email solutions@mangata.finance
-          git pull origin ${{ github.event.inputs.branch }}
           git add .
           git commit -m "chore: updated types to new prerelease version"
+          git pull origin ${{ github.event.inputs.branch }}
           git push origin ${{ github.event.inputs.branch }}
 
       - name: Sleep for 1 minutes
@@ -257,6 +257,7 @@ jobs:
           git config user.email solutions@mangata.finance
           git add .
           git commit -m "chore: updated sdk to new prerelease version"
+          git pull origin ${{ github.event.inputs.branch }}
           git push
 
       - name: Build sdk
