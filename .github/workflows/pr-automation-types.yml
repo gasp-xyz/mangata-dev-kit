@@ -30,6 +30,8 @@ jobs:
       COMMIT_HASH_TYPE_DEFINITIONS: ${{ steps.commit-hash-type-definitions.outputs.COMMIT_HASH_TYPE_DEFINITIONS }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
 
       - uses: nrwl/nx-set-shas@v3
 
@@ -90,6 +92,8 @@ jobs:
     needs: [release-type-definitions]
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
 
       - uses: nrwl/nx-set-shas@v3
 
@@ -149,6 +153,8 @@ jobs:
       - name: Lint types
         run: npx nx run @mangata-finance/types:lint
 
+      - uses: actions/checkout@v4
+
       - name: NPM version bump
         working-directory: packages/types
         env:
@@ -163,8 +169,6 @@ jobs:
 
       - name: Sleep for 1 minutes
         run: sleep 60s
-
-      - uses: actions/checkout@v4
 
       - name: git add and commit new version
         run: |
@@ -202,6 +206,8 @@ jobs:
     needs: [release-type-definitions, release-types]
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
 
       - uses: nrwl/nx-set-shas@v3
 
@@ -239,6 +245,8 @@ jobs:
 
       - run: npx nx run @mangata-finance/sdk:lint
 
+      - uses: actions/checkout@v4
+
       - name: NPM version bump
         working-directory: packages/sdk
         env:
@@ -248,7 +256,6 @@ jobs:
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
 
-      - uses: actions/checkout@v4
       - name: git add and commit new version
         run: |
           git config user.name mangatafinance
