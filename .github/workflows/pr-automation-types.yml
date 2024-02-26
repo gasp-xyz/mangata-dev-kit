@@ -172,7 +172,7 @@ jobs:
           git config user.email solutions@mangata.finance
           git add .
           git commit -m "chore: updated types to new prerelease version"
-          git pull origin ${{ github.event.inputs.branch }}
+          git pull origin ${{ github.event.inputs.branch }} --rebase
           git push origin ${{ github.event.inputs.branch }}
 
       - name: Sleep for 1 minutes
@@ -257,7 +257,7 @@ jobs:
           git config user.email solutions@mangata.finance
           git add .
           git commit -m "chore: updated sdk to new prerelease version"
-          git pull origin ${{ github.event.inputs.branch }}
+          git pull origin ${{ github.event.inputs.branch }} --rebase
           git push
 
       - name: Build sdk
