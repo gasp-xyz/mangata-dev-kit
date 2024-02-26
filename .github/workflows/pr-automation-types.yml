@@ -91,7 +91,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
       - run: git checkout HEAD^
 
       - uses: nrwl/nx-set-shas@v3
@@ -204,7 +204,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
       - run: git checkout HEAD^
 
       - uses: nrwl/nx-set-shas@v3
