@@ -90,6 +90,10 @@ jobs:
       COMMIT_HASH_TYPES: ${{ steps.commit-hash-types.outputs.COMMIT_HASH_TYPES }}
     needs: [release-type-definitions]
     steps:
+      - name: Print latest commit hash
+        run: |
+          echo "COMMIT: ${{ needs.release-type-definitions.outputs.COMMIT_HASH_TYPE_DEFINITIONS }}"
+          
       - uses: actions/checkout@v4
         with:
           ref: ${{ needs.release-type-definitions.outputs.COMMIT_HASH_TYPE_DEFINITIONS }}
