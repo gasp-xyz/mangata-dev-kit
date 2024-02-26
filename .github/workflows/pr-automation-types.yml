@@ -92,8 +92,6 @@ jobs:
     needs: [release-type-definitions]
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.inputs.branch }}
 
       - uses: nrwl/nx-set-shas@v3
 
@@ -153,7 +151,8 @@ jobs:
       - name: Lint types
         run: npx nx run @mangata-finance/types:lint
 
-      - uses: actions/checkout@v4
+      - name: Fetch
+        run: git fetch --prune --unshallow
 
       - name: NPM version bump
         working-directory: packages/types
@@ -206,8 +205,6 @@ jobs:
     needs: [release-type-definitions, release-types]
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.inputs.branch }}
 
       - uses: nrwl/nx-set-shas@v3
 
@@ -245,7 +242,8 @@ jobs:
 
       - run: npx nx run @mangata-finance/sdk:lint
 
-      - uses: actions/checkout@v4
+      - name: Fetch
+        run: git fetch --prune --unshallow
 
       - name: NPM version bump
         working-directory: packages/sdk
@@ -262,9 +260,6 @@ jobs:
           git config user.email solutions@mangata.finance 
           git add .
           git commit -m "chore: updated sdk to new prerelease version"
-          git pull origin ${{ github.event.inputs.branch }} --rebase
-          git checkout --ours package-lock.json
-          git rebase --continue
           git push
 
       - name: Build sdk
