@@ -26,6 +26,8 @@ permissions:
 jobs:
   release-type-definitions:
     runs-on: ubuntu-latest
+    outputs:
+      COMMIT_HASH_TYPE_DEFINITIONS: ${{ steps.commit-hash-type-definitions.outputs.COMMIT_HASH_TYPE_DEFINITIONS }}
     steps:
       - uses: actions/checkout@v4
 
@@ -50,6 +52,23 @@ jobs:
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
 
+      - name: git add and commit new version
+        run: |
+          git config user.name mangatafinance
+          git config user.email solutions@mangata.finance
+          git add .
+          git commit -m "chore: updated type definitions to new prerelease version"
+          git push
+
+      - name: Sleep for 1 minutes
+        run: sleep 60s
+
+      - name: Fetch latest commit hash
+        id: commit-hash-type-definitions
+        run: |
+          COMMIT_HASH_TYPE_DEFINITIONS=$(git rev-parse HEAD)
+          echo "COMMIT_HASH_TYPE_DEFINITIONS=$COMMIT_HASH_TYPE_DEFINITIONS" >> $GITHUB_ENV
+
       - name: Build type definitions
         run: npx nx run @mangata-finance/type-definitions:build
 
@@ -67,9 +86,13 @@ jobs:
 
   release-types:
     runs-on: ubuntu-latest
+    outputs:
+      COMMIT_HASH_TYPES: ${{ steps.commit-hash-types.outputs.COMMIT_HASH_TYPES }}
     needs: [release-type-definitions]
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.release-type-definitions.outputs.COMMIT_HASH_TYPE_DEFINITIONS }}
 
       - uses: nrwl/nx-set-shas@v3
 
@@ -118,7 +141,7 @@ jobs:
       - name: Sleep for 1 minutes
         run: sleep 60s
 
-      - run: npm ci
+      - run: npm i
 
       - name: Generate metadata
         run: npx nx run @mangata-finance/types:generate-metadata
@@ -144,6 +167,23 @@ jobs:
       - name: Sleep for 1 minutes
         run: sleep 60s
 
+      - name: git add and commit new version
+        run: |
+          git config user.name mangatafinance
+          git config user.email solutions@mangata.finance
+          git add .
+          git commit -m "chore: updated types to new prerelease version"
+          git push
+
+      - name: Sleep for 1 minutes
+        run: sleep 60s
+
+      - name: Fetch latest commit hash
+        id: commit-hash-types
+        run: |
+          COMMIT_HASH_TYPES=$(git rev-parse HEAD)
+          echo "COMMIT_HASH_TYPES=$COMMIT_HASH_TYPES" >> $GITHUB_ENV
+
       - name: Build types
         run: npx nx run @mangata-finance/types:build
 
@@ -164,6 +204,8 @@ jobs:
     needs: [release-type-definitions, release-types]
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.release-types.outputs.COMMIT_HASH_TYPES }}
 
       - uses: nrwl/nx-set-shas@v3
 
@@ -215,8 +257,8 @@ jobs:
           git config user.name mangatafinance
           git config user.email solutions@mangata.finance
           git add .
-          git commit -m "chore: updated to new prerelease version"
-          git push origin ${{ github.event.inputs.branch }}
+          git commit -m "chore: updated sdk to new prerelease version"
+          git push
 
       - name: Build sdk
         run: npx nx run @mangata-finance/sdk:build
