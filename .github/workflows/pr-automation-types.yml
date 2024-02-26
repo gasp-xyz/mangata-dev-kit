@@ -92,7 +92,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: git checkout HEAD^
 
       - uses: nrwl/nx-set-shas@v3
 
@@ -171,9 +170,10 @@ jobs:
         run: |
           git config user.name mangatafinance
           git config user.email solutions@mangata.finance
+          git pull origin ${{ github.event.inputs.branch }}
           git add .
           git commit -m "chore: updated types to new prerelease version"
-          git push
+          git push origin ${{ github.event.inputs.branch }}
 
       - name: Sleep for 1 minutes
         run: sleep 60s
@@ -205,7 +205,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: git checkout HEAD^
 
       - uses: nrwl/nx-set-shas@v3
 
