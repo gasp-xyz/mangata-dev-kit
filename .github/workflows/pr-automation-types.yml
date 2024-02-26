@@ -66,8 +66,7 @@ jobs:
       - name: Fetch latest commit hash
         id: commit-hash-type-definitions
         run: |
-          COMMIT_HASH_TYPE_DEFINITIONS=$(git rev-parse HEAD)
-          echo "COMMIT_HASH_TYPE_DEFINITIONS=$COMMIT_HASH_TYPE_DEFINITIONS" >> $GITHUB_ENV
+          echo "COMMIT_HASH_TYPE_DEFINITIONS=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
       - name: Build type definitions
         run: npx nx run @mangata-finance/type-definitions:build
@@ -185,8 +184,7 @@ jobs:
       - name: Fetch latest commit hash
         id: commit-hash-types
         run: |
-          COMMIT_HASH_TYPES=$(git rev-parse HEAD)
-          echo "COMMIT_HASH_TYPES=$COMMIT_HASH_TYPES" >> $GITHUB_ENV
+          echo "COMMIT_HASH_TYPES=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
       - name: Build types
         run: npx nx run @mangata-finance/types:build
