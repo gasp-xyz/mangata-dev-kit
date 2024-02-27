@@ -28,11 +28,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
 
       - uses: nrwl/nx-set-shas@v3
 
       - name: Setup Node version and cache dependencies
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "18"
           cache: "npm"
@@ -56,8 +58,7 @@ jobs:
           git config user.email solutions@mangata.finance
           git add .
           git commit -m "chore: updated type definitions to new prerelease version"
-          git pull origin ${{ github.event.inputs.branch }} --rebase
-          git push origin ${{ github.event.inputs.branch }}
+          git push
 
       - name: Build type definitions
         run: npx nx run @mangata-finance/type-definitions:build
@@ -79,6 +80,8 @@ jobs:
     needs: [release-type-definitions]
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
 
       - uses: nrwl/nx-set-shas@v3
 
@@ -90,7 +93,7 @@ jobs:
           ref: ${{ github.event.inputs.branch }}
 
       - name: Setup Node version and cache dependencies
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "18"
           cache: "npm"
@@ -159,7 +162,6 @@ jobs:
           git config user.email solutions@mangata.finance
           git add .
           git commit -m "chore: updated types to new prerelease version"
-          git pull origin ${{ github.event.inputs.branch }} --rebase
           git push origin ${{ github.event.inputs.branch }}
 
       - name: Build types
@@ -182,11 +184,13 @@ jobs:
     needs: [release-type-definitions, release-types]
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
 
       - uses: nrwl/nx-set-shas@v3
 
       - name: Setup Node version and cache dependencies
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "18"
           cache: "npm"
@@ -211,10 +215,6 @@ jobs:
         run: |
           sed -i "s/\"@mangata-finance\/type-definitions\": \".*\"/\"@mangata-finance\/type-definitions\": \"${{env.BRANCH_TYPE_DEFINITIONS_VERSION}}\"/" package.json
 
-      - name: Show package.json
-        working-directory: packages/sdk
-        run: cat package.json
-
       - run: npm i
 
       - run: npx nx run @mangata-finance/sdk:lint
@@ -231,11 +231,10 @@ jobs:
       - name: git add and commit new version
         run: |
           git config user.name mangatafinance
-          git config user.email solutions@mangata.finance
+          git config user.email solutions@mangata.finance 
           git add .
           git commit -m "chore: updated sdk to new prerelease version"
-          git pull origin ${{ github.event.inputs.branch }} --rebase
-          git push origin ${{ github.event.inputs.branch }}
+          git push
 
       - name: Build sdk
         run: npx nx run @mangata-finance/sdk:build
