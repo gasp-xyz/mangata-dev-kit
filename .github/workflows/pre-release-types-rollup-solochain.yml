@@ -1,0 +1,139 @@
+name: Pre-release types rollup solochain
+
+on:
+  push:
+    branches:
+      - 'rc/types/*'
+    paths:
+      - packages/types/**
+  workflow_dispatch:
+    inputs:
+      parachainDocker:
+        description: "Name of the parachain docker reference"
+        type: string
+        required: false
+        default: "mangatasolutions/rollup-node:eth-rollup-develop"
+      branch:
+        description: "Branch where to make pre release"
+        type: string
+        required: false
+        default: ""
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+env:
+  API_URL: "ws://127.0.0.1:9947"
+
+permissions:
+  contents: write
+  id-token: write
+  deployments: write
+  checks: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: nrwl/nx-set-shas@v4
+
+      - name: Clone mangata node repository with branch
+        if: ${{ github.event.inputs.branch != '' }}
+        uses: actions/checkout@v4
+        with:
+          repository: mangata-finance/mangata-node
+          path: mangata-repo
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Clone mangata node repository `eth-rollup-develop`
+        if: ${{ github.event.inputs.branch == '' }}
+        uses: actions/checkout@v3
+        with:
+          repository: mangata-finance/mangata-node
+          path: mangata-repo
+          ref: eth-rollup-develop
+
+      - name: Setup Node version and cache dependencies
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install WASM toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          target: wasm32-unknown-unknown
+
+      - name: Install websocat
+        run: cargo install websocat
+
+      - name: Run the Node
+        working-directory: mangata-repo
+        run: |
+          export NODE_IMAGE=${{ github.event.inputs.parachainDocker }}
+          docker-compose up -d
+          docker ps
+
+      - name: Sleep for 1 minutes
+        run: sleep 60s
+
+      - run: npm i
+
+      - name: Generate metadata
+        if: ${{ github.event.inputs.branch != '' }}
+        run: npx nx run @mangata-finance/types:generate-metadata
+
+      - name: Build types
+        if: ${{ github.event.inputs.branch != '' }}
+        run: npx nx run @mangata-finance/types:build-types
+
+      - run: npx nx run @mangata-finance/types:lint
+
+      - name: NPM version bump
+        if: ${{ github.event.inputs.branch != '' }}
+        working-directory: packages/types
+        env:
+          INPUTS_BRANCH: ${{ github.event.inputs.branch }}
+        run: |
+          # Branch name sanitization added to avoid issues with npm version command
+          # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
+          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
+
+      - name: git add and commit new version
+        if: ${{ github.event.inputs.branch != '' }}
+        run: |
+          git config user.name mangatafinance
+          git config user.email solutions@mangata.finance
+          git add .
+          git commit -m "chore: updated to new prerelease version"
+          git push
+
+      - name: Build
+        if: ${{ github.event.inputs.branch != '' }}
+        run: npx nx run @mangata-finance/types:build
+
+      - name: Publish to NPM
+        if: ${{ github.event.inputs.branch != '' }}
+        working-directory: dist/packages/types
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          INPUTS_BRANCH: ${{ github.event.inputs.branch }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+          
+          # Branch name sanitization added to avoid issues with npm version command
+          # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
+          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')" --access public
+
+      - name: Publish rc to NPM
+        if: ${{ github.event.inputs.branch == '' }}
+        run: npx nx run @mangata-finance/types:semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+
