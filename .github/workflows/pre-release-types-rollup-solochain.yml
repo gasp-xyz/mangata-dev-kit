@@ -5,8 +5,9 @@ on:
     branches:
       - 'rc/types/*'
       - 'feat/add-support-for-solochain-MGX-1001'
-    paths:
-      - packages/types/**
+    # TODO: put back before closing PR
+    # paths:
+    #   - packages/types/**
   workflow_dispatch:
     inputs:
       parachainDocker:
