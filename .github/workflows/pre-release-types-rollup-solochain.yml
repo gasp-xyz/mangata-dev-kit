@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'rc/types/*'
+      - 'feat/add-support-for-solochain-MGX-1001'
     paths:
       - packages/types/**
   workflow_dispatch:
@@ -12,7 +13,7 @@ on:
         description: "Name of the parachain docker reference"
         type: string
         required: false
-        default: "mangatasolutions/rollup-node:eth-rollup-develop"
+        default: "mangatasolutions/rollup-node:53c527a67582de8b7099d76d86c44c200e053f2b"
       branch:
         description: "Branch where to make pre release"
         type: string
@@ -50,11 +51,13 @@ jobs:
 
       - name: Clone mangata node repository `eth-rollup-develop`
         if: ${{ github.event.inputs.branch == '' }}
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: mangata-finance/mangata-node
           path: mangata-repo
-          ref: eth-rollup-develop
+          #TODO change after finishing
+          # ref: eth-rollup-develop
+          ref: ci/eth-develop-solochain-workflow-updates-MGX-1001
 
       - name: Setup Node version and cache dependencies
         uses: actions/setup-node@v4
