@@ -1,5 +1,4 @@
 import { SubmittableExtrinsic } from '@polkadot/api/types';
-import { ISubmittableResult } from '@polkadot/types/types';
 import { AnyTuple } from '@polkadot/types-codec/types';
 import { GenericExtrinsic } from '@polkadot/types';
 import { ApiPromise } from '@polkadot/api';
@@ -165,32 +164,8 @@ export const signTx = async (
 
     try {
       const subscriptionState = { isSubscribed: false };
-      if (txOptions?.signer) {
-        await tx.signAsync(account, { nonce, signer: txOptions?.signer });
 
-        const unsub = await tx.send(async (result) => {
-          subscribeToExtrinsic(
-            api,
-            tx,
-            result,
-            extractedAccount,
-            txOptions,
-            subscriptionState,
-            resolve,
-            reject,
-            unsub
-          );
-
-          if (result?.isError) {
-            reject(`Tx([${tx.hash.toString()}]) Transaction error`);
-            const nonce = await api.rpc.system.accountNextIndex(
-              extractedAccount
-            );
-            const currentNonce: BN = nonce.toBn();
-            dbInstance.setNonce(extractedAccount, currentNonce);
-          }
-        });
-      } else if (txOptions?.metamaskProvider) {
+      if (txOptions?.metamaskProvider) {
         const metamaskTx = api.createType(
           'Extrinsic',
           { method: tx.method },
@@ -234,6 +209,31 @@ export const signTx = async (
             );
           }
         );
+      } else {
+        await tx.signAsync(account, { nonce, signer: txOptions?.signer });
+
+        const unsub = await tx.send(async (result) => {
+          await subscribeToExtrinsic(
+            api,
+            tx,
+            result,
+            extractedAccount,
+            txOptions,
+            subscriptionState,
+            resolve,
+            reject,
+            unsub
+          );
+
+          if (result?.isError) {
+            reject(`Tx([${tx.hash.toString()}]) Transaction error`);
+            const nonce = await api.rpc.system.accountNextIndex(
+              extractedAccount
+            );
+            const currentNonce: BN = nonce.toBn();
+            dbInstance.setNonce(extractedAccount, currentNonce);
+          }
+        });
       }
     } catch (error: any) {
       const nonce = await api.rpc.system.accountNextIndex(extractedAccount);
