@@ -260,6 +260,32 @@ export const mRpc = {
       ],
       type: "Vec<(TokenId, TokenId, Balance)>"
     }
+  },
+  rolldown: {
+    get_pending_updates_hash: {
+      description: "",
+      params: [],
+      type: "H256"
+    },
+    get_pending_updates: {
+      description: "",
+      params: [],
+      type: "Vec<u8>"
+    },
+    verify_pending_requests: {
+      description: "",
+      params: [
+        {
+          name: "hash",
+          type: "H256"
+        },
+        {
+          name: "request_id",
+          type: "u128"
+        }
+      ],
+      type: "bool"
+    }
   }
 };
 
