@@ -4,10 +4,8 @@ on:
   push:
     branches:
       - 'rc/types/*'
-      - 'feat/add-support-for-solochain-MGX-1001'
-    # TODO: put back before closing PR
-    # paths:
-    #   - packages/types/**
+    paths:
+      - packages/types/**
   workflow_dispatch:
     inputs:
       parachainDocker:
@@ -24,7 +22,7 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 env:
-  API_URL: "ws://127.0.0.1:9947"
+  API_URL: "ws://127.0.0.1:9944"
 
 permissions:
   contents: write
@@ -56,9 +54,7 @@ jobs:
         with:
           repository: mangata-finance/mangata-node
           path: mangata-repo
-          #TODO change after finishing
-          # ref: eth-rollup-develop
-          ref: ci/eth-develop-solochain-workflow-updates-MGX-1001
+          ref: eth-rollup-develop
 
       - name: Setup Node version and cache dependencies
         uses: actions/setup-node@v4
