@@ -1,6 +1,6 @@
 import { Mangata } from "../mangata";
 import { signTx } from "../utils/signTx";
-import { logger, setLoggerOptions } from "../utils/mangataLogger";
+import { setLoggerOptions } from "../utils/mangataLogger";
 import { expect, it } from "vitest";
 import { Address, MangataGenericEvent, MangataInstance, TokenAmount } from "../types/common";
 import { v4 as uuidv4 } from "uuid";
@@ -67,12 +67,12 @@ it("It submit signed tx and wait for result", async () => {
   const api = await instance.api()
 
   const keyring = new Keyring({ type: "sr25519" });
-  let alice = keyring.addFromUri("//Alice");
-  let bob = keyring.addFromUri("//Alice");
+  const alice = keyring.addFromUri("//Alice");
+  const bob = keyring.addFromUri("//Alice");
 
-  let tx = api.tx.tokens.transfer(bob.address, 0, 1000000000000000);
+  const tx = api.tx.tokens.transfer(bob.address, 0, 1000000000000000);
 
-  let resp = await signTx(api, tx, alice);
+  const resp = await signTx(api, tx, alice);
   console.log(resp);
 
 })

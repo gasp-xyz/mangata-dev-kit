@@ -12,7 +12,6 @@ import {
 import { Batch } from "../types/utility";
 import { CreatePool, MultiswapSellAsset } from "../types/xyk";
 import { MangataGenericEvent } from "../types/common";
-import * as console from "console";
 
 let testUser: KeyringPair;
 let sudoUser: KeyringPair;
