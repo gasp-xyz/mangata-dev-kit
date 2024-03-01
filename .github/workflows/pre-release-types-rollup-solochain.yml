@@ -79,7 +79,7 @@ jobs:
         working-directory: mangata-repo
         run: |
           export NODE_IMAGE=${INPUTS_PARACHAINDOCKER:-mangatasolutions/rollup-node:53c527a67582de8b7099d76d86c44c200e053f2b}
-          echo $NODE_IMAGE
+          echo "Starting nodes with image: ${NODE_IMAGE}"
           docker compose up -d
           docker ps
 
