@@ -67,10 +67,10 @@ jobs:
           cache: "npm"
 
       - name: Install WASM toolchain
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@v1
         with:
           toolchain: nightly
-          target: wasm32-unknown-unknown
+          targets: wasm32-unknown-unknown
 
       - name: Install websocat
         run: cargo install websocat
@@ -79,6 +79,7 @@ jobs:
         working-directory: mangata-repo
         run: |
           export NODE_IMAGE=${INPUTS_PARACHAINDOCKER:-mangatasolutions/rollup-node:53c527a67582de8b7099d76d86c44c200e053f2b}
+          echo $NODE_IMAGE
           docker compose up -d
           docker ps
 
