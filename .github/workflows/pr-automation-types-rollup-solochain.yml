@@ -48,7 +48,7 @@ jobs:
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
-          npm version prerelease --preid="solo-$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
+          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
 
       - name: git add and commit new version
         run: |
@@ -127,7 +127,7 @@ jobs:
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
-          npm version prerelease --preid="solo-$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
+          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
       
       - name: Remove Cloned Repository
         run: rm -rf mangata-repo
@@ -199,7 +199,7 @@ jobs:
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
-          npm version prerelease--preid="solo-$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
+          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
 
       - name: git add and commit new version
         run: |
