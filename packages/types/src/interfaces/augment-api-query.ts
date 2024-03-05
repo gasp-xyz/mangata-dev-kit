@@ -668,10 +668,11 @@ declare module '@polkadot/api-base/types/storage' {
     };
     rolldown: {
       l2OriginUpdatesCounter: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
-      lastProcessedRequestOnL2: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
+      lastProcessedRequestOnL2: AugmentedQuery<ApiType, () => Observable<U256>, []> & QueryableStorageEntry<ApiType, []>;
       pendingRequests: AugmentedQuery<ApiType, (arg: U256 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[AccountId32, PalletRolldownMessagesL1Update]>>>, [U256]> & QueryableStorageEntry<ApiType, [U256]>;
       pendingUpdates: AugmentedQuery<ApiType, (arg: U256 | AnyNumber | Uint8Array) => Observable<Option<PalletRolldownPendingUpdate>>, [U256]> & QueryableStorageEntry<ApiType, [U256]>;
-      prevLastProcessedRequestOnL2: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
+      requestToExecute: AugmentedQuery<ApiType, (arg: u128 | AnyNumber | Uint8Array) => Observable<ITuple<[u128, PalletRolldownMessagesL1Update]>>, [u128]> & QueryableStorageEntry<ApiType, [u128]>;
+      requestToExecuteCnt: AugmentedQuery<ApiType, () => Observable<Option<u128>>, []> & QueryableStorageEntry<ApiType, []>;
       sequencerCount: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
       sequencerRights: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<Option<PalletRolldownSequencerRights>>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
