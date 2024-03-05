@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - 'rc/types/*'
-    paths:
-      - packages/types/**
+    # TODO: put back before closing PR
+    # paths:
+    #   - packages/types/**
   workflow_dispatch:
     inputs:
       parachainDocker:
@@ -54,7 +55,9 @@ jobs:
         with:
           repository: mangata-finance/mangata-node
           path: mangata-repo
-          ref: eth-rollup-develop
+          #TODO change after finishing
+          # ref: eth-rollup-develop
+          ref: ci/eth-develop-solochain-workflow-updates-MGX-1001
 
       - name: Setup Node version and cache dependencies
         uses: actions/setup-node@v4
@@ -136,5 +139,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-
