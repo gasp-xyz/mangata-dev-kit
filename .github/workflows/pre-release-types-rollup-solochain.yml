@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - 'rc/types/*'
+      # TODO: remove before closing PR
+      - 'feat/add-support-for-solochain-MGX-1001'
     # TODO: put back before closing PR
     # paths:
     #   - packages/types/**
