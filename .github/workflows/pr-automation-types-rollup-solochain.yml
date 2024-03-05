@@ -122,8 +122,9 @@ jobs:
 
       - name: Run the Node
         working-directory: mangata-repo
+        env:
+          NODE_IMAGE: ${{ github.event.inputs.parachainDocker || 'mangatasolutions/rollup-node:53c527a67582de8b7099d76d86c44c200e053f2b' }}
         run: |
-          export NODE_IMAGE=${INPUTS_PARACHAINDOCKER:-mangatasolutions/rollup-node:53c527a67582de8b7099d76d86c44c200e053f2b}
           echo "Starting nodes with image: ${NODE_IMAGE}"
           docker compose up -d
           docker ps
