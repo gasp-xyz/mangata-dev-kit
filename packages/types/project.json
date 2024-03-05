@@ -38,6 +38,12 @@
       "options": {
         "cwd": "packages/types",
         "command": "echo '{\"id\":1,\"jsonrpc\":\"2.0\",\"method\":\"state_getMetadata\",\"params\":[]}' | websocat -n1 -B 99999999 ws://127.0.0.1:9946 > metadata.json"
+      },
+    "generate-metadata-solochain": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/types",
+        "command": "echo '{\"id\":1,\"jsonrpc\":\"2.0\",\"method\":\"state_getMetadata\",\"params\":[]}' | websocat -n1 -B 99999999 ws://127.0.0.1:9944 > metadata.json"
       }
     },
     "semantic-release": {

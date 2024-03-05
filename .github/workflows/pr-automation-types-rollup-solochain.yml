@@ -133,7 +133,7 @@ jobs:
 
       - run: npm ci
 
-      - run: npx nx run @mangata-finance/types:generate-metadata
+      - run: npx nx run @mangata-finance/types:generate-metadata-solochain
       - run: npx nx run @mangata-finance/types:build-types
       - run: npx nx run @mangata-finance/types:lint
 
