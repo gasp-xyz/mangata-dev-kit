@@ -26,3 +26,4 @@ export default {
 
 export { default as pos } from './pos/definitions.js';
 export { default as xyk } from './xyk/definitions.js';
+export { default as rolldown } from './rolldown/definitions.js';
