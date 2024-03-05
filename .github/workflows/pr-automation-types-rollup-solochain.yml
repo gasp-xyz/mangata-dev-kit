@@ -1,10 +1,6 @@
 name: PR automation types rollup solochain
 
 on:
-  push:
-    branches:
-      # TODO: remove before closing PR
-      - 'feat/add-support-for-solochain-MGX-1001'
   workflow_dispatch:
     inputs:
       parachainDocker:
@@ -27,7 +23,7 @@ permissions:
   checks: write
 
 env:
-  INPUTS_BRANCH: ${{ github.event.inputs.branch || github.ref }}
+  INPUTS_BRANCH: ${{ github.event.inputs.branch || github.ref_name }}
 
 jobs:
   release-type-definitions:
@@ -35,12 +31,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ env.INPUTS_BRANCH }}
-
+          fetch-depth: 0
       - uses: nrwl/nx-set-shas@v4
 
-      - name: Setup Node version and cache dependencies
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "18"
           cache: "npm"
@@ -84,26 +78,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - uses: nrwl/nx-set-shas@v4
 
       - name: Clone mangata node repository
-        if: ${{ github.event.inputs.branch != '' }}
         uses: actions/checkout@v4
         with:
           repository: mangata-finance/mangata-node
           path: mangata-repo
-          ref: ${{ github.event.inputs.branch }}
-
-      #TODO remove this block when finished
-      - name: Clone mangata node repository `eth-rollup-develop`
-        if: ${{ github.event.inputs.branch == '' }}
-        uses: actions/checkout@v4
-        with:
-          repository: mangata-finance/mangata-node
-          path: mangata-repo
-          # ref: eth-rollup-develop
-          ref: ci/eth-develop-solochain-workflow-updates-MGX-1001
+          ref: ${{ env.INPUTS_BRANCH }}
 
       - name: Setup Node version and cache dependencies
         uses: actions/setup-node@v4
@@ -149,13 +131,12 @@ jobs:
         run: rm -rf mangata-repo
       
       - name: git add and commit new version
-        if: ${{ github.event.inputs.branch != '' }}
         run: |
           git config user.name mangatafinance
           git config user.email solutions@mangata.finance
           git add .
           git commit -m "chore: updated to new prerelease version"
-          git push origin ${{ github.event.inputs.branch }}
+          git push origin ${{ env.INPUTS_BRANCH }}
 
       - name: Build types
         run: npx nx run @mangata-finance/types:build
@@ -189,12 +170,12 @@ jobs:
 
       - name: Type definitions version for branch
         run: |
-          branchTypeDefinitionsVersion=$(npm show @mangata-finance/type-definitions dist-tags."$(echo "${{ github.event.inputs.branch }}" | sed -E 's@[/\.]@-@g; s@_@-@g')")
+          branchTypeDefinitionsVersion=$(npm show @mangata-finance/type-definitions dist-tags."$(echo "${{ env.INPUTS_BRANCH  }}" | sed -E 's@[/\.]@-@g; s@_@-@g')")
           echo "BRANCH_TYPE_DEFINITIONS_VERSION=$branchTypeDefinitionsVersion" >> $GITHUB_ENV
 
       - name: Types version for branch
         run: |
-          branchTypesVersion=$(npm show @mangata-finance/types dist-tags."$(echo "${{ github.event.inputs.branch }}" | sed -E 's@[/\.]@-@g; s@_@-@g')")
+          branchTypesVersion=$(npm show @mangata-finance/types dist-tags."$(echo "${{ env.INPUTS_BRANCH  }}" | sed -E 's@[/\.]@-@g; s@_@-@g')")
           echo "BRANCH_TYPES_VERSION=$branchTypesVersion" >> $GITHUB_ENV
 
       - name: Update types dependency version
@@ -213,8 +194,6 @@ jobs:
 
       - name: NPM version bump
         working-directory: packages/sdk
-        env:
-          INPUTS_BRANCH: ${{ github.event.inputs.branch }}
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
@@ -245,10 +224,10 @@ jobs:
       - name: Show released versions
         run: |
           echo "Version of @mangata-finance/type-definitions:"
-          npm show @mangata-finance/type-definitions dist-tags."$(echo "${{ github.event.inputs.branch }}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
+          npm show @mangata-finance/type-definitions dist-tags."$(echo "${{ env.INPUTS_BRANCH }}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
           
           echo "Version of @mangata-finance/types:"
-          npm show @mangata-finance/types dist-tags."$(echo "${{ github.event.inputs.branch }}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
+          npm show @mangata-finance/types dist-tags."$(echo "${{ env.INPUTS_BRANCH  }}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
           
           echo "Version of @mangata-finance/sdk:"
-          npm show @mangata-finance/sdk dist-tags."$(echo "${{ github.event.inputs.branch }}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
+          npm show @mangata-finance/sdk dist-tags."$(echo "${{ env.INPUTS_BRANCH  }}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
