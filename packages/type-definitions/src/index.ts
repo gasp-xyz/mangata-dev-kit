@@ -284,7 +284,7 @@ export const mRpc = {
           type: "u128"
         }
       ],
-      type: "bool"
+      type: "Option<bool>"
     }
   }
 };

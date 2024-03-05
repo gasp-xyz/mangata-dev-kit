@@ -23,7 +23,7 @@ export default {
           type: "u128"
         }
       ],
-      type: "bool"
+      type: "Option<bool>"
     }
   }
 }
