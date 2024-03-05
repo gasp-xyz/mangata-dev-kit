@@ -32,6 +32,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event.inputs.branch }}
       - uses: nrwl/nx-set-shas@v4
 
       - uses: actions/setup-node@v4
@@ -78,6 +79,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.ref }}
       - uses: nrwl/nx-set-shas@v4
 
       - name: Clone mangata node repository
