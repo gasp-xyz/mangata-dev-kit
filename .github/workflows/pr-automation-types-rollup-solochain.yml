@@ -26,13 +26,16 @@ permissions:
   deployments: write
   checks: write
 
+env:
+  INPUTS_BRANCH: ${{ github.event.inputs.branch || github.ref }}
+
 jobs:
   release-type-definitions:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        # with:
-        #   ref: ${{ github.event.inputs.branch }}
+        with:
+          ref: ${{ env.INPUTS_BRANCH }}
 
       - uses: nrwl/nx-set-shas@v4
 
@@ -47,8 +50,6 @@ jobs:
 
       - name: NPM version bump type definitions
         working-directory: packages/type-definitions
-        env:
-          INPUTS_BRANCH: ${{ github.event.inputs.branch }}
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
@@ -69,7 +70,6 @@ jobs:
         working-directory: dist/packages/type-definitions
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          INPUTS_BRANCH: ${{ github.event.inputs.branch }}
         run: |
           echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
 
@@ -139,8 +139,6 @@ jobs:
 
       - name: NPM version bump
         working-directory: packages/types
-        env:
-          INPUTS_BRANCH: ${{ github.event.inputs.branch }}
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
@@ -165,7 +163,6 @@ jobs:
         working-directory: dist/packages/types
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          INPUTS_BRANCH: ${{ github.event.inputs.branch || 'ci/eth-develop-solochain-workflow-updates-MGX-1001' }}
         run: |
           echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
           
@@ -237,7 +234,6 @@ jobs:
         working-directory: dist/packages/sdk
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          INPUTS_BRANCH: ${{ github.event.inputs.branch }}
         run: |
           echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
 
