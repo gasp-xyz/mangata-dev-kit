@@ -3,12 +3,24 @@ export default {
   rpc: {
     get_pending_updates_hash: {
       description: "",
-      params: [],
+      params: [
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
+        }
+      ],
       type: "H256"
     },
     get_pending_updates: {
       description: "",
-      params: [],
+      params: [
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
+        }
+      ],
       type: "Vec<u8>"
     },
     verify_pending_requests: {
@@ -21,6 +33,11 @@ export default {
         {
           name: "request_id",
           type: "u128"
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
         }
       ],
       type: "Option<bool>"
