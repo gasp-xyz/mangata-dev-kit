@@ -31,15 +31,14 @@ jobs:
         with:
           ref: ${{ github.event.inputs.branch }}
 
-      - uses: nrwl/nx-set-shas@v3
-
       - name: Setup Node version and cache dependencies
         uses: actions/setup-node@v4
         with:
           node-version: "18"
           cache: "npm"
+      - uses: nrwl/nx-set-shas@v4
 
-      - run: npm i
+      - run: npm ci
 
       - run: npx nx run @mangata-finance/type-definitions:lint
 
@@ -82,8 +81,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-
-      - uses: nrwl/nx-set-shas@v3
+      
+      - name: Setup Node version and cache dependencies
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+      - uses: nrwl/nx-set-shas@v4
 
       - name: Clone mangata node repository
         uses: actions/checkout@v4
@@ -92,11 +96,6 @@ jobs:
           path: mangata-repo
           ref: ${{ github.event.inputs.branch }}
 
-      - name: Setup Node version and cache dependencies
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-          cache: "npm"
 
       - name: Install WASM toolchain
         uses: actions-rs/toolchain@v1
@@ -105,9 +104,7 @@ jobs:
           target: wasm32-unknown-unknown
 
       - name: Install websocat
-        run: |
-          cargo install websocat
-        shell: bash
+        run: cargo install websocat
 
       - name: Replace parachain docker image reference in config
         working-directory: mangata-repo/devops/parachain-launch
@@ -130,7 +127,7 @@ jobs:
       - name: Sleep for 1 minutes
         run: sleep 60s
 
-      - run: npm i
+      - run: npm ci
 
       - name: Generate metadata
         run: npx nx run @mangata-finance/types:generate-metadata
@@ -187,13 +184,12 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - uses: nrwl/nx-set-shas@v3
-
       - name: Setup Node version and cache dependencies
         uses: actions/setup-node@v4
         with:
           node-version: "18"
           cache: "npm"
+      - uses: nrwl/nx-set-shas@v4
 
       - name: Type definitions version for branch
         run: |
@@ -215,7 +211,7 @@ jobs:
         run: |
           sed -i "s/\"@mangata-finance\/type-definitions\": \".*\"/\"@mangata-finance\/type-definitions\": \"${{env.BRANCH_TYPE_DEFINITIONS_VERSION}}\"/" package.json
 
-      - run: npm i
+      - run: npm ci
 
       - run: npx nx run @mangata-finance/sdk:lint
 
