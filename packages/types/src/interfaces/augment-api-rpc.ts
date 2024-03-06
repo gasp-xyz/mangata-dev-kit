@@ -452,7 +452,7 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
       /**
        * 
        **/
-      verify_pending_requests: AugmentedRpc<(hash: H256 | string | Uint8Array, request_id: u128 | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Option<bool>>>;
+      verify_pending_requests: AugmentedRpc<(hash: H256 | string | Uint8Array, request_id: u128 | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<bool>>;
     };
     rpc: {
       /**
