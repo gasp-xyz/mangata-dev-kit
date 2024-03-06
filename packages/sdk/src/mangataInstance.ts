@@ -37,19 +37,6 @@ import {
   TokenId
 } from "./types/common";
 import { mintLiquidity } from "./methods/xyk/mintLiquidity";
-import { depositFromParachain } from "./methods/xTokens/depositFromParachain";
-import {
-  Deposit,
-  DepositFromKusamaFee,
-  DepositFromParachainFee,
-  DepositFromStatemineFee,
-  MoonriverWithdraw,
-  RelayDeposit,
-  RelayWithdraw,
-  Withdraw,
-  WithdrawFee,
-  WithdrawKsmFee
-} from "./types/xTokens";
 import { createPool } from "./methods/xyk/createPool";
 import { claimRewards } from "./methods/xyk/claimRewards";
 import { claimRewardsAll } from "./methods/xyk/claimRewardsAll";
@@ -78,21 +65,14 @@ import { getTokenBalance } from "./methods/query/getTokenBalance";
 import { getTotalIssuance } from "./methods/query/getTotalIssuance";
 import { getLiquidityTokenId } from "./methods/query/getLiquidityTokenId";
 import { getNonce } from "./methods/query/getNonce";
-import { withdraw } from "./methods/xTokens/withdraw";
-import { withdrawKsm } from "./methods/xTokens/withdrawKsm";
 import { batch } from "./methods/utility/batch";
 import { batchAll } from "./methods/utility/batchAll";
 import { forceBatch } from "./methods/utility/forceBatch";
 import { getOrCreateInstance } from "./utils/getOrCreateInstance";
 import { waitForNewBlock } from "./methods/rpc/waitForNewBlock";
-import { depositFromKusama } from "./methods/xTokens/depositFromKusama";
-import { depositFromStatemine } from "./methods/xTokens/depositFromStatemine";
 import { calculateMintingFutureRewards } from "./utils/calculateMintingFutureRewards";
 import { Batch } from "./types/utility";
 import { getActivateLiquidityFee } from "./methods/fee/getActivateLiquidityFee";
-import { getDepositFromParachainFee } from "./methods/fee/getDepositFromParachainFee";
-import { getWithdrawFee } from "./methods/fee/getWithdrawFee";
-import { getWithdrawKsmFee } from "./methods/fee/getWithdrawKsmFee";
 import { getDeactivateLiquidityFee } from "./methods/fee/getDeactivateLiquidityFee";
 import { getClaimRewardsFee } from "./methods/fee/getClaimRewardsFee";
 import { getCreatePoolFee } from "./methods/fee/getCreatePoolFee";
@@ -102,12 +82,8 @@ import { getTransferAllTokenFee } from "./methods/fee/getTransferAllTokenFee";
 import { getTransferTokenFee } from "./methods/fee/getTransferTokenFee";
 import { multiswapBuyAsset } from "./methods/xyk/multiswapBuyAsset";
 import { multiswapSellAsset } from "./methods/xyk/multiswapSellAsset";
-import { getDepositFromKusamaFee } from "./methods/fee/getDepositFromKusamaFee";
-import { getDepositFromStatemineFee } from "./methods/fee/getDepositFromStatemineFee";
 import { isBuyAssetLockFree } from "./methods/rpc/isBuyAssetLockFree";
 import { isSellAssetLockFree } from "./methods/rpc/isSellAssetLockFree";
-import { withdrawToMoonriver } from "./methods/xTokens/withdrawToMoonriver";
-import { getWithdrawFromMoonriverFee } from "./methods/fee/getWithdrawFromMoonriverFee";
 import {getTradeableTokens} from "./methods/rpc/getTradeableTokens";
 import {getLiquidityTokensForTrading} from "./methods/rpc/getLiquidityTokensForTrading";
 import { logger } from "./utils/mangataLogger";
@@ -126,19 +102,6 @@ export function createMangataInstance(urls: string[]): MangataInstance {
     batch:  (args: Batch) =>  batch(instancePromise, args),
     batchAll:  (args: Batch) =>  batchAll(instancePromise, args),
     forceBatch:  (args: Batch) =>  forceBatch(instancePromise, args),
-    xTokens: {
-      depositFromParachain:  (args: Deposit) =>
-         depositFromParachain(args),
-      depositFromKusama:  (args: RelayDeposit) =>
-         depositFromKusama(args),
-      depositFromStatemine:  (args: RelayDeposit) =>
-         depositFromStatemine(args),
-      withdraw:  (args: Withdraw) =>  withdraw(instancePromise, args),
-      withdrawKsm:  (args: RelayWithdraw) =>
-         withdrawKsm(instancePromise, args),
-      withdrawToMoonriver:  (args: MoonriverWithdraw) =>
-         withdrawToMoonriver(instancePromise, args)
-    },
     xyk: {
       deactivateLiquidity:  (args: Liquidity) =>
          deactivateLiquidity(instancePromise, args, false),
@@ -281,18 +244,6 @@ export function createMangataInstance(urls: string[]): MangataInstance {
          getTotalIssuanceOfTokens(instancePromise)
     },
     fee: {
-      depositFromParachain:  (args: DepositFromParachainFee) =>
-         getDepositFromParachainFee(args),
-      depositFromKusama: (args: DepositFromKusamaFee) =>
-        getDepositFromKusamaFee(args),
-      depositFromStatemine: (args: DepositFromStatemineFee) =>
-        getDepositFromStatemineFee(args),
-      withdraw:  (args: WithdrawFee) =>
-         getWithdrawFee(instancePromise, args),
-      withdrawKsm:  (args: WithdrawKsmFee) =>
-         getWithdrawKsmFee(instancePromise, args),
-      withdrawFromMoonriver:  (args: MoonriverWithdraw) =>
-         getWithdrawFromMoonriverFee(instancePromise, args),
       activateLiquidity:  (args: ActivateLiquidityFee) =>
          getActivateLiquidityFee(instancePromise, args),
       deactivateLiquidity:  (args: DeactivateLiquidityFee) =>

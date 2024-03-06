@@ -8,7 +8,7 @@ import '@polkadot/rpc-core/types/jsonrpc';
 import type { RpcAssetMetadata, TokenId } from '@mangata-finance/types/interfaces/default';
 import type { AugmentedRpc } from '@polkadot/rpc-core/types';
 import type { Metadata, StorageKey } from '@polkadot/types';
-import type { Bytes, HashMap, Json, Null, Option, Text, U256, U64, Vec, bool, f64, u32, u64 } from '@polkadot/types-codec';
+import type { Bytes, HashMap, Json, Null, Option, Text, U256, U64, Vec, bool, f64, u128, u32, u64 } from '@polkadot/types-codec';
 import type { AnyNumber, Codec, ITuple } from '@polkadot/types-codec/types';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
 import type { EpochAuthorship } from '@polkadot/types/interfaces/babe';
@@ -439,6 +439,20 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        * Calculates amount of available native rewards
        **/
       calculate_native_rewards_amount: AugmentedRpc<(account: AccountId | string | Uint8Array, liquidity_token: TokenId | AnyNumber | Uint8Array) => Observable<Balance>>;
+    };
+    rolldown: {
+      /**
+       * 
+       **/
+      get_pending_updates: AugmentedRpc<(at?: Hash | string | Uint8Array) => Observable<Bytes>>;
+      /**
+       * 
+       **/
+      get_pending_updates_hash: AugmentedRpc<(at?: Hash | string | Uint8Array) => Observable<H256>>;
+      /**
+       * 
+       **/
+      verify_pending_requests: AugmentedRpc<(hash: H256 | string | Uint8Array, request_id: u128 | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Option<bool>>>;
     };
     rpc: {
       /**
