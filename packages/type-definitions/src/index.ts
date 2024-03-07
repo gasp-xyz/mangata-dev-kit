@@ -301,7 +301,7 @@ export const mRpc = {
           isOptional: true
         }
       ],
-      type: "Option<bool>"
+      type: "bool"
     }
   }
 };

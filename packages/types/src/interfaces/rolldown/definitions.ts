@@ -1,7 +1,7 @@
 export default {
   types: {},
   rpc: {
-    get_pending_updates_hash: {
+    pending_updates_hash: {
       description: "",
       params: [
         {
@@ -12,7 +12,7 @@ export default {
       ],
       type: "H256"
     },
-    get_pending_updates: {
+    pending_updates: {
       description: "",
       params: [
         {
@@ -40,7 +40,7 @@ export default {
           isOptional: true
         }
       ],
-      type: "Option<bool>"
+      type: "bool"
     }
   }
 }
