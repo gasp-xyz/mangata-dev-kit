@@ -5,6 +5,14 @@ export const mTypes = {
     seed: "H256",
     proof: "H512"
   },
+  MultiSignature: {
+    _enum: {
+      Ed25519: 'Ed25519Signature',
+      Sr25519: 'Sr25519Signature',
+      Ecdsa: 'EcdsaSignature',
+      Eth: 'EcdsaSignature',
+    }
+  },
   Header: {
     parentHash: "Hash",
     number: "Compact<BlockNumber>",
@@ -302,6 +310,18 @@ export const mRpc = {
         }
       ],
       type: "bool"
+    }
+  },
+  metamask: {
+    get_eip712_sign_data: {
+      description: "Returns eip712 compatible SignedData V4 struct",
+      params: [
+        {
+          name: "call",
+          type: "String"
+        },
+      ],
+      type: "String"
     }
   }
 };
