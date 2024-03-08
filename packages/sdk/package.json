@@ -26,6 +26,7 @@
     "@mangata-finance/types": "2.2.3-eth-rollup-develop.15"
   },
   "dependencies": {
+    "@metamask/sdk": "0.16.0",
     "@mangata-finance/type-definitions": "2.1.3-eth-rollup-develop.9",
     "big.js": "6.2.1",
     "tslog": "4.8.2",
