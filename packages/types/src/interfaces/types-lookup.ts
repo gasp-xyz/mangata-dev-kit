@@ -1448,17 +1448,20 @@ declare module '@polkadot/types/lookup' {
     readonly depositRecipient: U8aFixed;
     readonly tokenAddress: U8aFixed;
     readonly amount: U256;
+    readonly blockHash: H256;
   }
 
   /** @name PalletRolldownMessagesCancelResolution (149) */
   interface PalletRolldownMessagesCancelResolution extends Struct {
     readonly l2RequestId: U256;
     readonly cancelJustified: bool;
+    readonly blockHash: H256;
   }
 
   /** @name PalletRolldownMessagesL2UpdatesToRemove (151) */
   interface PalletRolldownMessagesL2UpdatesToRemove extends Struct {
     readonly l2UpdatesToRemove: Vec<U256>;
+    readonly blockHash: H256;
   }
 
   /** @name OrmlTokensModuleCall (153) */

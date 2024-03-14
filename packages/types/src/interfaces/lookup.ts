@@ -1302,20 +1302,23 @@ export default {
   PalletRolldownMessagesDeposit: {
     depositRecipient: '[u8;20]',
     tokenAddress: '[u8;20]',
-    amount: 'U256'
+    amount: 'U256',
+    blockHash: 'H256'
   },
   /**
    * Lookup149: pallet_rolldown::messages::CancelResolution
    **/
   PalletRolldownMessagesCancelResolution: {
     l2RequestId: 'U256',
-    cancelJustified: 'bool'
+    cancelJustified: 'bool',
+    blockHash: 'H256'
   },
   /**
    * Lookup151: pallet_rolldown::messages::L2UpdatesToRemove
    **/
   PalletRolldownMessagesL2UpdatesToRemove: {
-    l2UpdatesToRemove: 'Vec<U256>'
+    l2UpdatesToRemove: 'Vec<U256>',
+    blockHash: 'H256'
   },
   /**
    * Lookup153: orml_tokens::module::Call<T>
