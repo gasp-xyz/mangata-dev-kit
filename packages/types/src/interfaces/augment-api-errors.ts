@@ -290,30 +290,6 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
-    cumulusXcm: {
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
-    dmpQueue: {
-      /**
-       * Dmp message processing is blocked by maintenance mode
-       **/
-      DmpMsgProcessingBlockedByMaintenanceMode: AugmentedError<ApiType>;
-      /**
-       * The amount of weight given is possibly not enough for executing the message.
-       **/
-      OverLimit: AugmentedError<ApiType>;
-      /**
-       * The message index given is unknown.
-       **/
-      Unknown: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
     feeLock: {
       /**
        * The lock cannot be unlocked yet
@@ -343,6 +319,42 @@ declare module '@polkadot/api-base/types/errors' {
        * An unexpected failure has occured
        **/
       UnexpectedFailure: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    grandpa: {
+      /**
+       * Attempt to signal GRANDPA change with one already pending.
+       **/
+      ChangePending: AugmentedError<ApiType>;
+      /**
+       * A given equivocation report is valid but already previously reported.
+       **/
+      DuplicateOffenceReport: AugmentedError<ApiType>;
+      /**
+       * An equivocation proof provided as part of an equivocation report is invalid.
+       **/
+      InvalidEquivocationProof: AugmentedError<ApiType>;
+      /**
+       * A key ownership proof provided as part of an equivocation report is invalid.
+       **/
+      InvalidKeyOwnershipProof: AugmentedError<ApiType>;
+      /**
+       * Attempt to signal GRANDPA pause when the authority set isn't live
+       * (either paused or already pending pause).
+       **/
+      PauseFailed: AugmentedError<ApiType>;
+      /**
+       * Attempt to signal GRANDPA resume when the authority set isn't paused
+       * (either live or already pending resume).
+       **/
+      ResumeFailed: AugmentedError<ApiType>;
+      /**
+       * Cannot signal forced change so soon after last.
+       **/
+      TooSoon: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
@@ -482,6 +494,10 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       NotInMaintenanceMode: AugmentedError<ApiType>;
       /**
+       * Upgrade blocked by Maintenance
+       **/
+      UpgradeBlockedByMaintenance: AugmentedError<ApiType>;
+      /**
        * Generic error
        **/
       [key: string]: AugmentedError<ApiType>;
@@ -511,27 +527,6 @@ declare module '@polkadot/api-base/types/errors' {
        * Provided index for relock is out of bounds
        **/
       RelockInstanceIndexOOB: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
-    ormlXcm: {
-      /**
-       * The version of the `Versioned` value used is not able to be
-       * interpreted.
-       **/
-      BadVersion: AugmentedError<ApiType>;
-      /**
-       * The message and destination was recognized as being reachable but
-       * the operation could not be completed.
-       **/
-      SendFailure: AugmentedError<ApiType>;
-      /**
-       * The message and destination combination was not recognized as being
-       * reachable.
-       **/
-      Unreachable: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
@@ -592,138 +587,6 @@ declare module '@polkadot/api-base/types/errors' {
       TooLowCurrentStakingLiquidityTokensCount: AugmentedError<ApiType>;
       TooLowDelegationCountToDelegate: AugmentedError<ApiType>;
       TooLowDelegationCountToLeaveDelegators: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
-    parachainSystem: {
-      /**
-       * The inherent which supplies the host configuration did not run this block.
-       **/
-      HostConfigurationNotAvailable: AugmentedError<ApiType>;
-      /**
-       * No code upgrade has been authorized.
-       **/
-      NothingAuthorized: AugmentedError<ApiType>;
-      /**
-       * No validation function upgrade is currently scheduled.
-       **/
-      NotScheduled: AugmentedError<ApiType>;
-      /**
-       * Attempt to upgrade validation function while existing upgrade pending.
-       **/
-      OverlappingUpgrades: AugmentedError<ApiType>;
-      /**
-       * Polkadot currently prohibits this parachain from upgrading its validation function.
-       **/
-      ProhibitedByPolkadot: AugmentedError<ApiType>;
-      /**
-       * The supplied validation function has compiled into a blob larger than Polkadot is
-       * willing to run.
-       **/
-      TooBig: AugmentedError<ApiType>;
-      /**
-       * The given code upgrade has not been authorized.
-       **/
-      Unauthorized: AugmentedError<ApiType>;
-      /**
-       * Upgrades are blocked due to maintenance mode
-       **/
-      UpgradeBlockedByMaintenanceMode: AugmentedError<ApiType>;
-      /**
-       * The inherent which supplies the validation data did not run this block.
-       **/
-      ValidationDataNotAvailable: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
-    polkadotXcm: {
-      /**
-       * The given account is not an identifiable sovereign account for any location.
-       **/
-      AccountNotSovereign: AugmentedError<ApiType>;
-      /**
-       * The location is invalid since it already has a subscription from us.
-       **/
-      AlreadySubscribed: AugmentedError<ApiType>;
-      /**
-       * The given location could not be used (e.g. because it cannot be expressed in the
-       * desired version of XCM).
-       **/
-      BadLocation: AugmentedError<ApiType>;
-      /**
-       * The version of the `Versioned` value used is not able to be interpreted.
-       **/
-      BadVersion: AugmentedError<ApiType>;
-      /**
-       * Could not re-anchor the assets to declare the fees for the destination chain.
-       **/
-      CannotReanchor: AugmentedError<ApiType>;
-      /**
-       * The destination `MultiLocation` provided cannot be inverted.
-       **/
-      DestinationNotInvertible: AugmentedError<ApiType>;
-      /**
-       * The assets to be sent are empty.
-       **/
-      Empty: AugmentedError<ApiType>;
-      /**
-       * The operation required fees to be paid which the initiator could not meet.
-       **/
-      FeesNotMet: AugmentedError<ApiType>;
-      /**
-       * The message execution fails the filter.
-       **/
-      Filtered: AugmentedError<ApiType>;
-      /**
-       * The unlock operation cannot succeed because there are still consumers of the lock.
-       **/
-      InUse: AugmentedError<ApiType>;
-      /**
-       * Invalid asset for the operation.
-       **/
-      InvalidAsset: AugmentedError<ApiType>;
-      /**
-       * Origin is invalid for sending.
-       **/
-      InvalidOrigin: AugmentedError<ApiType>;
-      /**
-       * A remote lock with the corresponding data could not be found.
-       **/
-      LockNotFound: AugmentedError<ApiType>;
-      /**
-       * The owner does not own (all) of the asset that they wish to do the operation on.
-       **/
-      LowBalance: AugmentedError<ApiType>;
-      /**
-       * The referenced subscription could not be found.
-       **/
-      NoSubscription: AugmentedError<ApiType>;
-      /**
-       * There was some other issue (i.e. not to do with routing) in sending the message.
-       * Perhaps a lack of space for buffering the message.
-       **/
-      SendFailure: AugmentedError<ApiType>;
-      /**
-       * Too many assets have been attempted for transfer.
-       **/
-      TooManyAssets: AugmentedError<ApiType>;
-      /**
-       * The asset owner has too many locks on the asset.
-       **/
-      TooManyLocks: AugmentedError<ApiType>;
-      /**
-       * The desired destination was unreachable, generally because there is a no way of routing
-       * to it.
-       **/
-      Unreachable: AugmentedError<ApiType>;
-      /**
-       * The message's weight could not be determined.
-       **/
-      UnweighableMessage: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
@@ -995,24 +858,6 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
-    unknownTokens: {
-      /**
-       * The operation will cause balance to overflow.
-       **/
-      BalanceOverflow: AugmentedError<ApiType>;
-      /**
-       * The balance is too low.
-       **/
-      BalanceTooLow: AugmentedError<ApiType>;
-      /**
-       * Unhandled asset.
-       **/
-      UnhandledAsset: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
     utility: {
       /**
        * Too many calls batched.
@@ -1062,121 +907,6 @@ declare module '@polkadot/api-base/types/errors' {
        * Sudo is not allowed to unlock tokens
        **/
       SudoUnlockIsDisallowed: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
-    xcmpQueue: {
-      /**
-       * Bad overweight index.
-       **/
-      BadOverweightIndex: AugmentedError<ApiType>;
-      /**
-       * Bad XCM data.
-       **/
-      BadXcm: AugmentedError<ApiType>;
-      /**
-       * Bad XCM origin.
-       **/
-      BadXcmOrigin: AugmentedError<ApiType>;
-      /**
-       * Failed to send XCM message.
-       **/
-      FailedToSend: AugmentedError<ApiType>;
-      /**
-       * Provided weight is possibly not enough to execute the message.
-       **/
-      WeightOverLimit: AugmentedError<ApiType>;
-      /**
-       * Xcm message processing is blocked by maintenance mode
-       **/
-      XcmMsgProcessingBlockedByMaintenanceMode: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
-    xTokens: {
-      /**
-       * Asset has no reserve location.
-       **/
-      AssetHasNoReserve: AugmentedError<ApiType>;
-      /**
-       * The specified index does not exist in a MultiAssets struct.
-       **/
-      AssetIndexNonExistent: AugmentedError<ApiType>;
-      /**
-       * The version of the `Versioned` value used is not able to be
-       * interpreted.
-       **/
-      BadVersion: AugmentedError<ApiType>;
-      /**
-       * Could not re-anchor the assets to declare the fees for the
-       * destination chain.
-       **/
-      CannotReanchor: AugmentedError<ApiType>;
-      /**
-       * The destination `MultiLocation` provided cannot be inverted.
-       **/
-      DestinationNotInvertible: AugmentedError<ApiType>;
-      /**
-       * We tried sending distinct asset and fee but they have different
-       * reserve chains.
-       **/
-      DistinctReserveForAssetAndFee: AugmentedError<ApiType>;
-      /**
-       * Fee is not enough.
-       **/
-      FeeNotEnough: AugmentedError<ApiType>;
-      /**
-       * Could not get ancestry of asset reserve location.
-       **/
-      InvalidAncestry: AugmentedError<ApiType>;
-      /**
-       * The MultiAsset is invalid.
-       **/
-      InvalidAsset: AugmentedError<ApiType>;
-      /**
-       * Invalid transfer destination.
-       **/
-      InvalidDest: AugmentedError<ApiType>;
-      /**
-       * MinXcmFee not registered for certain reserve location
-       **/
-      MinXcmFeeNotDefined: AugmentedError<ApiType>;
-      /**
-       * Not cross-chain transfer.
-       **/
-      NotCrossChainTransfer: AugmentedError<ApiType>;
-      /**
-       * Currency is not cross-chain transferable.
-       **/
-      NotCrossChainTransferableCurrency: AugmentedError<ApiType>;
-      /**
-       * Not supported MultiLocation
-       **/
-      NotSupportedMultiLocation: AugmentedError<ApiType>;
-      /**
-       * The number of assets to be sent is over the maximum.
-       **/
-      TooManyAssetsBeingSent: AugmentedError<ApiType>;
-      /**
-       * The message's weight could not be determined.
-       **/
-      UnweighableMessage: AugmentedError<ApiType>;
-      /**
-       * XCM execution failed.
-       **/
-      XcmExecutionFailed: AugmentedError<ApiType>;
-      /**
-       * The transfering asset amount is zero.
-       **/
-      ZeroAmount: AugmentedError<ApiType>;
-      /**
-       * The fee is zero.
-       **/
-      ZeroFee: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
