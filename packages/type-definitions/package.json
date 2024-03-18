@@ -7,7 +7,7 @@
     "url": "https://github.com/mangata-finance/mangata-dev-kit"
   },
   "peerDependencies": {
-    "@polkadot/types": "^10.9.1"
+    "@polkadot/types": "^10.12.2"
   },
   "keywords": [
     "mangata",
