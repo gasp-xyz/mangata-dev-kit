@@ -1,6 +1,6 @@
 {
   "name": "@mangata-finance/sdk",
-  "version": "2.2.1-eth-rollup-develop.11",
+  "version": "2.2.1-ci-fix-fungible-envs-deployments-MGX-944.0",
   "description": "Mangata SDK",
   "type": "module",
   "module": "./index.js",
@@ -23,11 +23,11 @@
     "@polkadot/api": "10.12.2"
   },
   "devDependencies": {
-    "@mangata-finance/types": "2.2.3-eth-rollup-develop.18"
+    "@mangata-finance/types": "2.2.3-ci-fix-fungible-envs-deployments-MGX-944.0"
   },
   "dependencies": {
     "@metamask/sdk": "0.16.0",
-    "@mangata-finance/type-definitions": "2.1.3-eth-rollup-develop.12",
+    "@mangata-finance/type-definitions": "2.1.3-ci-fix-fungible-envs-deployments-MGX-944.0",
     "big.js": "6.2.1",
     "tslog": "4.8.2",
     "tslib": "^2.3.0"
