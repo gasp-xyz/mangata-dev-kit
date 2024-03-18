@@ -29,6 +29,43 @@ export const mTypes = {
     symbol: "Vec<u8>"
   },
   TokenId: "u32",
+  L1Update: {
+    pendingDeposits: "Vec<Deposit>",
+    pendingCancelResultions: "Vec<CancelResolution>",
+    pendingWithdrawalResolutions: "Vec<WithdrawalResolution>",
+    pendingL2UpdatesToRemove: "Vec<L2UpdatesToRemove>",
+  },
+  Deposit: {
+    requestId: "RequestId",
+    depositRecipient: "[u8; 20]",
+    tokenAddress: "[u8; 20]",
+    amount: "U256",
+    blockHash: "H256"
+  },
+  RequestId: {
+    origin: "Origin",
+    id: "u128"
+  },
+  Origin: {
+    _enum: ['L1', 'L2']
+  },
+  CancelResolution: {
+    requestId: "RequestId",
+    l2RequestId: "u128",
+    cancelJustified: "bool",
+    blockHash: "H256"
+  },
+  WithdrawalResolution: {
+    requestId: "RequestId",
+    l2RequestId: "u128",
+    status: "bool",
+    blockHash: "H256"
+  },
+  L2UpdatesToRemove: {
+    requestId: "RequestId",
+    l2UpdatesToRemove: "Vec<u128>",
+    blockHash: "H256"
+  }
 };
 
 export const mRpc = {
@@ -310,6 +347,21 @@ export const mRpc = {
         }
       ],
       type: "bool"
+    },
+    update_eth_raw: {
+      description: "",
+      params: [
+        {
+          name: "payload",
+          type: "Vec<u8>"
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
+        }
+      ],
+      type: "Option<L1Update>"
     }
   },
   metamask: {

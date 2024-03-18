@@ -5,14 +5,14 @@
 // this is required to allow for ambient/previous definitions
 import '@polkadot/rpc-core/types/jsonrpc';
 
-import type { RpcAssetMetadata, TokenId } from '@mangata-finance/types/interfaces/default';
+import type { L1Update, RpcAssetMetadata, TokenId } from '@mangata-finance/types/interfaces/default';
 import type { AugmentedRpc } from '@polkadot/rpc-core/types';
 import type { Metadata, StorageKey } from '@polkadot/types';
 import type { Bytes, HashMap, Json, Null, Option, Text, U256, U64, Vec, bool, f64, u128, u32, u64 } from '@polkadot/types-codec';
 import type { AnyNumber, Codec, ITuple } from '@polkadot/types-codec/types';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
 import type { EpochAuthorship } from '@polkadot/types/interfaces/babe';
-import type { BeefySignedCommitment } from '@polkadot/types/interfaces/beefy';
+import type { BeefyVersionedFinalityProof } from '@polkadot/types/interfaces/beefy';
 import type { BlockHash } from '@polkadot/types/interfaces/chain';
 import type { PrefixedStorageKey } from '@polkadot/types/interfaces/childstate';
 import type { AuthorityId } from '@polkadot/types/interfaces/consensus';
@@ -81,9 +81,9 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        **/
       getFinalizedHead: AugmentedRpc<() => Observable<H256>>;
       /**
-       * Returns the block most recently finalized by BEEFY, alongside side its justification.
+       * Returns the block most recently finalized by BEEFY, alongside its justification.
        **/
-      subscribeJustifications: AugmentedRpc<() => Observable<BeefySignedCommitment>>;
+      subscribeJustifications: AugmentedRpc<() => Observable<BeefyVersionedFinalityProof>>;
     };
     chain: {
       /**
@@ -455,6 +455,10 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        * 
        **/
       pending_updates_hash: AugmentedRpc<(at?: Hash | string | Uint8Array) => Observable<H256>>;
+      /**
+       * 
+       **/
+      update_eth_raw: AugmentedRpc<(payload: Bytes | string | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Option<L1Update>>>;
       /**
        * 
        **/

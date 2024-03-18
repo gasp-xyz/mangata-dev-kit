@@ -41,6 +41,21 @@ export default {
         }
       ],
       type: "bool"
+    },
+    update_eth_raw: {
+      description: "",
+      params: [
+        {
+          name: "payload",
+          type: "Vec<u8>"
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
+        }
+      ],
+      type: "Option<L1Update>"
     }
   }
 }
