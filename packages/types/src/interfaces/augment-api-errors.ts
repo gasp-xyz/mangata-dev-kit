@@ -693,6 +693,7 @@ declare module '@polkadot/api-base/types/errors' {
       L1AssetCreationFailed: AugmentedError<ApiType>;
       L1AssetNotFound: AugmentedError<ApiType>;
       MathOverflow: AugmentedError<ApiType>;
+      MultipleUpdatesInSingleBlock: AugmentedError<ApiType>;
       NotEnoughAssets: AugmentedError<ApiType>;
       OperationFailed: AugmentedError<ApiType>;
       ReadRightsExhausted: AugmentedError<ApiType>;
