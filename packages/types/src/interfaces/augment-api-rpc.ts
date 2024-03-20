@@ -450,15 +450,15 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
       /**
        * 
        **/
+      get_native_l1_update: AugmentedRpc<(hex_payload: Text | string, at?: Hash | string | Uint8Array) => Observable<Option<L1Update>>>;
+      /**
+       * 
+       **/
       pending_updates: AugmentedRpc<(at?: Hash | string | Uint8Array) => Observable<Bytes>>;
       /**
        * 
        **/
       pending_updates_hash: AugmentedRpc<(at?: Hash | string | Uint8Array) => Observable<H256>>;
-      /**
-       * 
-       **/
-      update_eth_raw: AugmentedRpc<(payload: Bytes | string | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Option<L1Update>>>;
       /**
        * 
        **/
