@@ -348,12 +348,12 @@ export const mRpc = {
       ],
       type: "bool"
     },
-    update_eth_raw: {
+    get_native_l1_update: {
       description: "",
       params: [
         {
-          name: "payload",
-          type: "Vec<u8>"
+          name: "hex_payload",
+          type: "String"
         },
         {
           name: 'at',
