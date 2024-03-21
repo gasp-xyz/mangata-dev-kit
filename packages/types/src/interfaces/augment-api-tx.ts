@@ -548,13 +548,25 @@ declare module '@polkadot/api-base/types/submittable' {
     };
     sequencerStaking: {
       /**
+       * See [`Pallet::leave_active_sequencers`].
+       **/
+      leaveActiveSequencers: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
+      /**
        * See [`Pallet::provide_sequencer_stake`].
        **/
       provideSequencerStake: AugmentedSubmittable<(stakeAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128]>;
       /**
+       * See [`Pallet::rejoin_active_sequencers`].
+       **/
+      rejoinActiveSequencers: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
+      /**
        * See [`Pallet::set_sequencer_configuration`].
        **/
       setSequencerConfiguration: AugmentedSubmittable<(minimalStakeAmount: u128 | AnyNumber | Uint8Array, slashFineAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128, u128]>;
+      /**
+       * See [`Pallet::unstake`].
+       **/
+      unstake: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
       /**
        * Generic tx
        **/
