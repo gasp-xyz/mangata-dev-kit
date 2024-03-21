@@ -5,7 +5,7 @@
 // this is required to allow for ambient/previous definitions
 import '@polkadot/rpc-core/types/jsonrpc';
 
-import type { RpcAssetMetadata, TokenId } from '@mangata-finance/types/interfaces/default';
+import type { L1Update, RpcAssetMetadata, TokenId } from '@mangata-finance/types/interfaces/default';
 import type { AugmentedRpc } from '@polkadot/rpc-core/types';
 import type { Metadata, StorageKey } from '@polkadot/types';
 import type { Bytes, HashMap, Json, Null, Option, Text, U256, U64, Vec, bool, f64, u128, u32, u64 } from '@polkadot/types-codec';
@@ -447,6 +447,10 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
       calculate_native_rewards_amount: AugmentedRpc<(account: AccountId | string | Uint8Array, liquidity_token: TokenId | AnyNumber | Uint8Array) => Observable<Balance>>;
     };
     rolldown: {
+      /**
+       * 
+       **/
+      get_native_l1_update: AugmentedRpc<(hex_payload: Text | string, at?: Hash | string | Uint8Array) => Observable<Option<L1Update>>>;
       /**
        * 
        **/
