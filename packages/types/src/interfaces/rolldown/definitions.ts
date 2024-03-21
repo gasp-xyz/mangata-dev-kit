@@ -41,6 +41,21 @@ export default {
         }
       ],
       type: "bool"
+    },
+    get_native_l1_update: {
+      description: "",
+      params: [
+        {
+          name: "hex_payload",
+          type: "String"
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
+        }
+      ],
+      type: "Option<L1Update>"
     }
   }
 }
