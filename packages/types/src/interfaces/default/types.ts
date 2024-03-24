@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 import type { Bytes, Compact, Enum, Struct, U256, U8aFixed, Vec, bool, u128, u32 } from '@polkadot/types-codec';
-import type { EcdsaSignature, Ed25519Signature, Sr25519Signature } from '@polkadot/types/interfaces/extrinsics';
+import type { EcdsaSignature } from '@polkadot/types/interfaces/extrinsics';
 import type { BlockNumber, Digest, H256, H512, Hash } from '@polkadot/types/interfaces/runtime';
 
 /** @name CancelResolution */
@@ -21,6 +21,9 @@ export interface Deposit extends Struct {
   readonly amount: U256;
   readonly blockHash: H256;
 }
+
+/** @name EthereumSignature */
+export interface EthereumSignature extends EcdsaSignature {}
 
 /** @name Header */
 export interface Header extends Struct {
@@ -46,19 +49,6 @@ export interface L2UpdatesToRemove extends Struct {
   readonly requestId: RequestId;
   readonly l2UpdatesToRemove: Vec<u128>;
   readonly blockHash: H256;
-}
-
-/** @name MultiSignature */
-export interface MultiSignature extends Enum {
-  readonly isEd25519: boolean;
-  readonly asEd25519: Ed25519Signature;
-  readonly isSr25519: boolean;
-  readonly asSr25519: Sr25519Signature;
-  readonly isEcdsa: boolean;
-  readonly asEcdsa: EcdsaSignature;
-  readonly isEth: boolean;
-  readonly asEth: EcdsaSignature;
-  readonly type: 'Ed25519' | 'Sr25519' | 'Ecdsa' | 'Eth';
 }
 
 /** @name Origin */
