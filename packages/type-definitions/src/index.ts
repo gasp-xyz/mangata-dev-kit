@@ -5,14 +5,7 @@ export const mTypes = {
     seed: "H256",
     proof: "H512"
   },
-  MultiSignature: {
-    _enum: {
-      Ed25519: 'Ed25519Signature',
-      Sr25519: 'Sr25519Signature',
-      Ecdsa: 'EcdsaSignature',
-      Eth: 'EcdsaSignature',
-    }
-  },
+  EthereumSignature: "EcdsaSignature",
   Header: {
     parentHash: "Hash",
     number: "Compact<BlockNumber>",
