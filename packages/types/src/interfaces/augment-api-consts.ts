@@ -8,8 +8,8 @@ import '@polkadot/api-base/types/consts';
 import type { ApiTypes, AugmentedConst } from '@polkadot/api-base/types';
 import type { Bytes, Option, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { Codec } from '@polkadot/types-codec/types';
-import type { AccountId32, Perbill, Percent, Permill } from '@polkadot/types/interfaces/runtime';
-import type { FrameSupportPalletId, FrameSystemLimitsBlockLength, FrameSystemLimitsBlockWeights, SpVersionRuntimeVersion, SpWeightsRuntimeDbWeight, SpWeightsWeightV2Weight } from '@polkadot/types/lookup';
+import type { Perbill, Percent, Permill } from '@polkadot/types/interfaces/runtime';
+import type { FrameSupportPalletId, FrameSystemLimitsBlockLength, FrameSystemLimitsBlockWeights, SpRuntimeAccountAccountId20, SpVersionRuntimeVersion, SpWeightsRuntimeDbWeight, SpWeightsWeightV2Weight } from '@polkadot/types/lookup';
 
 export type __AugmentedConst<ApiType extends ApiTypes> = AugmentedConst<ApiType>;
 
@@ -158,7 +158,7 @@ declare module '@polkadot/api-base/types/consts' {
       /**
        * The account id that holds the liquidity mining issuance
        **/
-      liquidityMiningIssuanceVault: AccountId32 & AugmentedConst<ApiType>;
+      liquidityMiningIssuanceVault: SpRuntimeAccountAccountId20 & AugmentedConst<ApiType>;
       /**
        * The split of issuance for liquidity mining rewards
        **/
@@ -166,7 +166,7 @@ declare module '@polkadot/api-base/types/consts' {
       /**
        * The account id that holds the staking issuance
        **/
-      stakingIssuanceVault: AccountId32 & AugmentedConst<ApiType>;
+      stakingIssuanceVault: SpRuntimeAccountAccountId20 & AugmentedConst<ApiType>;
       /**
        * The split of issuance for staking rewards
        **/
@@ -261,7 +261,7 @@ declare module '@polkadot/api-base/types/consts' {
       /**
        * The account id that holds the liquidity mining issuance
        **/
-      stakingIssuanceVault: AccountId32 & AugmentedConst<ApiType>;
+      stakingIssuanceVault: SpRuntimeAccountAccountId20 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
@@ -271,7 +271,7 @@ declare module '@polkadot/api-base/types/consts' {
       /**
        * The account id that holds the liquidity mining issuance
        **/
-      liquidityMiningIssuanceVault: AccountId32 & AugmentedConst<ApiType>;
+      liquidityMiningIssuanceVault: SpRuntimeAccountAccountId20 & AugmentedConst<ApiType>;
       rewardsDistributionPeriod: u32 & AugmentedConst<ApiType>;
       /**
        * Generic const
