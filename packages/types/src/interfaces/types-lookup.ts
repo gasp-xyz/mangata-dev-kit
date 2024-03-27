@@ -1444,7 +1444,7 @@ declare module '@polkadot/types/lookup' {
     readonly depositRecipient: U8aFixed;
     readonly tokenAddress: U8aFixed;
     readonly amount: U256;
-    readonly blockHash: H256;
+    readonly timeStamp: U256;
   }
 
   /** @name PalletRolldownMessagesRequestId (144) */
@@ -1465,7 +1465,7 @@ declare module '@polkadot/types/lookup' {
     readonly requestId: PalletRolldownMessagesRequestId;
     readonly l2RequestId: u128;
     readonly cancelJustified: bool;
-    readonly blockHash: H256;
+    readonly timeStamp: U256;
   }
 
   /** @name PalletRolldownMessagesWithdrawalResolution (151) */
@@ -1473,14 +1473,14 @@ declare module '@polkadot/types/lookup' {
     readonly requestId: PalletRolldownMessagesRequestId;
     readonly l2RequestId: u128;
     readonly status: bool;
-    readonly blockHash: H256;
+    readonly timeStamp: U256;
   }
 
   /** @name PalletRolldownMessagesL2UpdatesToRemove (153) */
   interface PalletRolldownMessagesL2UpdatesToRemove extends Struct {
     readonly requestId: PalletRolldownMessagesRequestId;
     readonly l2UpdatesToRemove: Vec<u128>;
-    readonly blockHash: H256;
+    readonly timeStamp: U256;
   }
 
   /** @name OrmlTokensModuleCall (155) */
