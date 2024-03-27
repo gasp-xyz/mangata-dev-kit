@@ -11,7 +11,6 @@ export * from "./utils/isBuyAssetTransactionSuccessful"
 export * from "./utils/isSellAssetTransactionSuccessful"
 export { setLoggerOptions } from "./utils/mangataLogger";
 
-export * from "./types/xTokens";
 export * from "./types/common";
 export * from "./types/query";
 export * from "./types/tokens";

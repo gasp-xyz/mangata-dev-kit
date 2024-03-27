@@ -5,6 +5,14 @@ export const mTypes = {
     seed: "H256",
     proof: "H512"
   },
+  MultiSignature: {
+    _enum: {
+      Ed25519: 'Ed25519Signature',
+      Sr25519: 'Sr25519Signature',
+      Ecdsa: 'EcdsaSignature',
+      Eth: 'EcdsaSignature',
+    }
+  },
   Header: {
     parentHash: "Hash",
     number: "Compact<BlockNumber>",
@@ -21,6 +29,43 @@ export const mTypes = {
     symbol: "Vec<u8>"
   },
   TokenId: "u32",
+  L1Update: {
+    pendingDeposits: "Vec<Deposit>",
+    pendingCancelResultions: "Vec<CancelResolution>",
+    pendingWithdrawalResolutions: "Vec<WithdrawalResolution>",
+    pendingL2UpdatesToRemove: "Vec<L2UpdatesToRemove>",
+  },
+  Deposit: {
+    requestId: "RequestId",
+    depositRecipient: "[u8; 20]",
+    tokenAddress: "[u8; 20]",
+    amount: "U256",
+    blockHash: "H256"
+  },
+  RequestId: {
+    origin: "Origin",
+    id: "u128"
+  },
+  Origin: {
+    _enum: ['L1', 'L2']
+  },
+  CancelResolution: {
+    requestId: "RequestId",
+    l2RequestId: "u128",
+    cancelJustified: "bool",
+    blockHash: "H256"
+  },
+  WithdrawalResolution: {
+    requestId: "RequestId",
+    l2RequestId: "u128",
+    status: "bool",
+    blockHash: "H256"
+  },
+  L2UpdatesToRemove: {
+    requestId: "RequestId",
+    l2UpdatesToRemove: "Vec<u128>",
+    blockHash: "H256"
+  }
 };
 
 export const mRpc = {
@@ -259,6 +304,76 @@ export const mRpc = {
         }
       ],
       type: "Vec<(TokenId, TokenId, Balance)>"
+    }
+  },
+  rolldown: {
+    pending_updates_hash: {
+      description: "",
+      params: [
+        {
+          name: "at",
+          type: "Hash",
+          isOptional: true
+        }
+      ],
+      type: "H256"
+    },
+    pending_updates: {
+      description: "",
+      params: [
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
+        }
+      ],
+      type: "Vec<u8>"
+    },
+    verify_pending_requests: {
+      description: "",
+      params: [
+        {
+          name: "hash",
+          type: "H256"
+        },
+        {
+          name: "request_id",
+          type: "u128"
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
+        }
+      ],
+      type: "bool"
+    },
+    get_native_l1_update: {
+      description: "",
+      params: [
+        {
+          name: "hex_payload",
+          type: "String"
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
+        }
+      ],
+      type: "Option<L1Update>"
+    }
+  },
+  metamask: {
+    get_eip712_sign_data: {
+      description: "Returns eip712 compatible SignedData V4 struct",
+      params: [
+        {
+          name: "call",
+          type: "String"
+        },
+      ],
+      type: "String"
     }
   }
 };

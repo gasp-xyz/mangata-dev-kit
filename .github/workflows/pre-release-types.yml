@@ -120,7 +120,7 @@ jobs:
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
-          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')"
+          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
 
       - name: git add and commit new version
         if: ${{ github.event.inputs.branch != '' }}
@@ -146,7 +146,7 @@ jobs:
           
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
-          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g')" --access public
+          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')" --access public
 
       - name: Publish rc to NPM
         if: ${{ github.event.inputs.branch == '' }}

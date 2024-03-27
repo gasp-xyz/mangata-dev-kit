@@ -3,9 +3,10 @@ import { ApiPromise } from "@polkadot/api";
 import { KeyringPair } from "@polkadot/keyring/types";
 import { Signer } from "@polkadot/api/types";
 import type { ISubmittableResult, Codec } from "@polkadot/types/types";
-import type { Event, Phase } from "@polkadot/types/interfaces";
+import type { Event, Phase, ExtrinsicStatus } from "@polkadot/types/interfaces";
 import { SubmittableExtrinsic } from "@polkadot/api/types";
 import { ILogObj, ISettingsParam } from "tslog";
+import type { SDKProvider } from '@metamask/sdk';
 
 import {
   MainTokens,
@@ -15,18 +16,6 @@ import {
   TokenInfo,
   PoolWithShare
 } from "../types/query";
-import {
-  Deposit,
-  DepositFromKusamaFee,
-  DepositFromParachainFee,
-  DepositFromStatemineFee,
-  MoonriverWithdraw,
-  RelayDeposit,
-  RelayWithdraw,
-  Withdraw,
-  WithdrawFee,
-  WithdrawKsmFee
-} from "../types/xTokens";
 
 import {
   ActivateLiquidityFee,
@@ -63,6 +52,10 @@ export type ExtrinsicCommon = {
   account: Account;
   txOptions?: Partial<TxOptions>;
 };
+
+export interface ExtrinsicSubscriptionData extends Partial<ISubmittableResult> {
+  status: ExtrinsicStatus;
+}
 export interface Database {
   hasAddressNonce(address: string): boolean;
   setNonce(address: string, nonce: BN): void;
@@ -98,7 +91,8 @@ export type MangataGenericEvent = {
 export type TxOptions = {
   nonce: BN;
   signer: Signer;
-  statusCallback: (result: ISubmittableResult) => void;
+  metamaskProvider?: SDKProvider;
+  statusCallback: (data: ExtrinsicSubscriptionData) => void;
   extrinsicStatus: (events: MangataGenericEvent[]) => void;
 };
 
@@ -106,48 +100,6 @@ export type MangataSubmittableExtrinsic = SubmittableExtrinsic<"promise">;
 export type MangataLoggerOptions = ISettingsParam<ILogObj>;
 
 export interface MangataInstance {
-  /**
-   * xTokens methods for interacting with various token-related operations.
-   */
-  xTokens: {
-    /**
-     * Deposits tokens from a parachain to Mangata.
-     * @param The deposit parameters.
-     * @returns A promise that resolves with void.
-     */
-    depositFromParachain: (args: Deposit) => Promise<void>;
-
-    /**
-     * Deposits Kusama tokens to Mangata.
-     * @param args - The relay deposit parameters.
-     * @returns A promise that resolves with void.
-     */
-    depositFromKusama: (args: RelayDeposit) => Promise<void>;
-
-    /**
-     * Deposits Statemine tokens to Mangata.
-     * @param args - The relay deposit parameters.
-     * @returns A promise that resolves with void.
-     */
-    depositFromStatemine: (args: RelayDeposit) => Promise<void>;
-
-    /**
-     * Withdraws tokens from Mangata.
-     * @param args - The withdrawal parameters.
-     * @returns A promise that resolves with void.
-     */
-    withdraw: (args: Withdraw) => Promise<void>;
-
-    /**
-     * Withdraws Kusama tokens from Mangata.
-     * @param args - The relay withdrawal parameters.
-     * @returns A promise that resolves with void.
-     */
-    withdrawKsm: (args: RelayWithdraw) => Promise<void>;
-
-    withdrawToMoonriver: (args: MoonriverWithdraw) => Promise<void>;
-  };
-
   /**
    * xyk methods for interacting with XYK (Automated Market Maker) operations.
    */
@@ -523,33 +475,6 @@ export interface MangataInstance {
    * Represents a collection of fee calculation functions for different operations.
    */
   fee: {
-    /**
-     * Calculates the fee for depositing tokens from the Kusama network.
-     */
-    depositFromKusama: (args: DepositFromKusamaFee) => Promise<string>;
-
-    /**
-     * Calculates the fee for depositing tokens from the Statemine network.
-     */
-    depositFromStatemine: (args: DepositFromStatemineFee) => Promise<string>;
-
-    /**
-     * Calculates the fee for depositing tokens from a parachain.
-     */
-    depositFromParachain: (args: DepositFromParachainFee) => Promise<string>;
-
-    /**
-     * Calculates the fee for withdrawing tokens.
-     */
-    withdraw: (args: WithdrawFee) => Promise<string>;
-
-    /**
-     * Calculates the fee for withdrawing KSM (Kusama) tokens.
-     */
-    withdrawKsm: (args: WithdrawKsmFee) => Promise<string>;
-
-    withdrawFromMoonriver: (args: MoonriverWithdraw) => Promise<string>;
-
     /**
      * Calculates the fee for activating liquidity in a pool.
      */
