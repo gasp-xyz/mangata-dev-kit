@@ -695,12 +695,9 @@ declare module '@polkadot/api-base/types/errors' {
       MathOverflow: AugmentedError<ApiType>;
       MultipleUpdatesInSingleBlock: AugmentedError<ApiType>;
       NotEnoughAssets: AugmentedError<ApiType>;
-      OnlySelectedSequencerisAllowedToUpdate: AugmentedError<ApiType>;
       OperationFailed: AugmentedError<ApiType>;
       ReadRightsExhausted: AugmentedError<ApiType>;
       RequestDoesNotExist: AugmentedError<ApiType>;
-      SequencerAwaitingCancelResolution: AugmentedError<ApiType>;
-      SequencerLastUpdateStillInDisputePeriod: AugmentedError<ApiType>;
       TooManyRequests: AugmentedError<ApiType>;
       WrongRequestId: AugmentedError<ApiType>;
       /**
@@ -709,14 +706,8 @@ declare module '@polkadot/api-base/types/errors' {
       [key: string]: AugmentedError<ApiType>;
     };
     sequencerStaking: {
-      CantUnstakeWhileInActiveSet: AugmentedError<ApiType>;
       MathOverflow: AugmentedError<ApiType>;
-      MaxSequencersLimitReached: AugmentedError<ApiType>;
-      NotEligibleToBeSequencer: AugmentedError<ApiType>;
-      NotEnoughSequencerStake: AugmentedError<ApiType>;
       OperationFailed: AugmentedError<ApiType>;
-      SequencerAlreadyInActiveSet: AugmentedError<ApiType>;
-      SequencerIsNotInActiveSet: AugmentedError<ApiType>;
       /**
        * Generic error
        **/

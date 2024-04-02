@@ -330,11 +330,7 @@ declare module '@polkadot/api-base/types/consts' {
       [key: string]: Codec;
     };
     sequencerStaking: {
-      blocksForSequencerUpdate: u32 & AugmentedConst<ApiType>;
-      cancellerRewardPercentage: Permill & AugmentedConst<ApiType>;
-      maxSequencers: u32 & AugmentedConst<ApiType>;
       minimumSequencers: u32 & AugmentedConst<ApiType>;
-      noOfPastSessionsForEligibility: u32 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
