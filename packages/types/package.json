@@ -1,6 +1,6 @@
 {
   "name": "@mangata-finance/types",
-  "version": "2.2.3-eth-rollup-develop.24",
+  "version": "2.2.3-feature-fix-single-sequencer.0",
   "description": "Polkadot.js type definitions for Mangata Network",
   "author": "Mangata Finance <solutions@mangata.finance>",
   "repository": {
