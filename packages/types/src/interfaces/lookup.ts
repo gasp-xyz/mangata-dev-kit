@@ -1299,7 +1299,7 @@ export default {
     depositRecipient: '[u8;20]',
     tokenAddress: '[u8;20]',
     amount: 'U256',
-    blockHash: 'H256'
+    timeStamp: 'U256'
   },
   /**
    * Lookup144: pallet_rolldown::messages::RequestId
@@ -1321,7 +1321,7 @@ export default {
     requestId: 'PalletRolldownMessagesRequestId',
     l2RequestId: 'u128',
     cancelJustified: 'bool',
-    blockHash: 'H256'
+    timeStamp: 'U256'
   },
   /**
    * Lookup151: pallet_rolldown::messages::WithdrawalResolution
@@ -1330,7 +1330,7 @@ export default {
     requestId: 'PalletRolldownMessagesRequestId',
     l2RequestId: 'u128',
     status: 'bool',
-    blockHash: 'H256'
+    timeStamp: 'U256'
   },
   /**
    * Lookup153: pallet_rolldown::messages::L2UpdatesToRemove
@@ -1338,7 +1338,7 @@ export default {
   PalletRolldownMessagesL2UpdatesToRemove: {
     requestId: 'PalletRolldownMessagesRequestId',
     l2UpdatesToRemove: 'Vec<u128>',
-    blockHash: 'H256'
+    timeStamp: 'U256'
   },
   /**
    * Lookup155: orml_tokens::module::Call<T>
