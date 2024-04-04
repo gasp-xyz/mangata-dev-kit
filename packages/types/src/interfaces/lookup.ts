@@ -1299,7 +1299,7 @@ export default {
     depositRecipient: '[u8;20]',
     tokenAddress: '[u8;20]',
     amount: 'U256',
-    blockHash: 'H256'
+    timeStamp: 'U256'
   },
   /**
    * Lookup144: pallet_rolldown::messages::RequestId
@@ -1321,7 +1321,7 @@ export default {
     requestId: 'PalletRolldownMessagesRequestId',
     l2RequestId: 'u128',
     cancelJustified: 'bool',
-    blockHash: 'H256'
+    timeStamp: 'U256'
   },
   /**
    * Lookup151: pallet_rolldown::messages::WithdrawalResolution
@@ -1330,7 +1330,7 @@ export default {
     requestId: 'PalletRolldownMessagesRequestId',
     l2RequestId: 'u128',
     status: 'bool',
-    blockHash: 'H256'
+    timeStamp: 'U256'
   },
   /**
    * Lookup153: pallet_rolldown::messages::L2UpdatesToRemove
@@ -1338,7 +1338,7 @@ export default {
   PalletRolldownMessagesL2UpdatesToRemove: {
     requestId: 'PalletRolldownMessagesRequestId',
     l2UpdatesToRemove: 'Vec<u128>',
-    blockHash: 'H256'
+    timeStamp: 'U256'
   },
   /**
    * Lookup155: orml_tokens::module::Call<T>
@@ -1836,6 +1836,9 @@ export default {
       provide_sequencer_stake: {
         stakeAmount: 'u128',
       },
+      leave_active_sequencers: 'Null',
+      rejoin_active_sequencers: 'Null',
+      unstake: 'Null',
       set_sequencer_configuration: {
         minimalStakeAmount: 'u128',
         slashFineAmount: 'u128'
@@ -2390,20 +2393,20 @@ export default {
     amount: 'U256'
   },
   /**
-   * Lookup285: pallet_rolldown::pallet::Error<T>
+   * Lookup286: pallet_rolldown::pallet::Error<T>
    **/
   PalletRolldownError: {
-    _enum: ['OperationFailed', 'ReadRightsExhausted', 'EmptyUpdate', 'AddressDeserializationFailure', 'RequestDoesNotExist', 'NotEnoughAssets', 'BalanceOverflow', 'L1AssetCreationFailed', 'MathOverflow', 'TooManyRequests', 'InvalidUpdate', 'L1AssetNotFound', 'WrongRequestId', 'MultipleUpdatesInSingleBlock']
+    _enum: ['OperationFailed', 'ReadRightsExhausted', 'EmptyUpdate', 'AddressDeserializationFailure', 'RequestDoesNotExist', 'NotEnoughAssets', 'BalanceOverflow', 'L1AssetCreationFailed', 'MathOverflow', 'TooManyRequests', 'InvalidUpdate', 'L1AssetNotFound', 'WrongRequestId', 'OnlySelectedSequencerisAllowedToUpdate', 'SequencerLastUpdateStillInDisputePeriod', 'SequencerAwaitingCancelResolution', 'MultipleUpdatesInSingleBlock']
   },
   /**
-   * Lookup288: orml_tokens::BalanceLock<Balance>
+   * Lookup289: orml_tokens::BalanceLock<Balance>
    **/
   OrmlTokensBalanceLock: {
     id: '[u8;8]',
     amount: 'u128'
   },
   /**
-   * Lookup290: orml_tokens::AccountData<Balance>
+   * Lookup291: orml_tokens::AccountData<Balance>
    **/
   OrmlTokensAccountData: {
     free: 'u128',
@@ -2411,32 +2414,32 @@ export default {
     frozen: 'u128'
   },
   /**
-   * Lookup292: orml_tokens::ReserveData<ReserveIdentifier, Balance>
+   * Lookup293: orml_tokens::ReserveData<ReserveIdentifier, Balance>
    **/
   OrmlTokensReserveData: {
     id: '[u8;8]',
     amount: 'u128'
   },
   /**
-   * Lookup294: orml_tokens::module::Error<T>
+   * Lookup295: orml_tokens::module::Error<T>
    **/
   OrmlTokensModuleError: {
     _enum: ['BalanceTooLow', 'AmountIntoBalanceFailed', 'LiquidityRestrictions', 'MaxLocksExceeded', 'KeepAlive', 'ExistentialDeposit', 'DeadAccount', 'TokenIdNotExists', 'TooManyReserves']
   },
   /**
-   * Lookup296: pallet_transaction_payment_mangata::Releases
+   * Lookup297: pallet_transaction_payment_mangata::Releases
    **/
   PalletTransactionPaymentMangataReleases: {
     _enum: ['V1Ancient', 'V2']
   },
   /**
-   * Lookup298: pallet_xyk::pallet::Error<T>
+   * Lookup299: pallet_xyk::pallet::Error<T>
    **/
   PalletXykError: {
     _enum: ['PoolAlreadyExists', 'NotEnoughAssets', 'NoSuchPool', 'NoSuchLiquidityAsset', 'NotEnoughReserve', 'ZeroAmount', 'InsufficientInputAmount', 'InsufficientOutputAmount', 'SameAsset', 'AssetAlreadyExists', 'AssetDoesNotExists', 'DivisionByZero', 'UnexpectedFailure', 'NotMangataLiquidityAsset', 'SecondAssetAmountExceededExpectations', 'MathOverflow', 'LiquidityTokenCreationFailed', 'NotEnoughRewardsEarned', 'NotAPromotedPool', 'PastTimeCalculation', 'PoolAlreadyPromoted', 'SoldAmountTooLow', 'FunctionNotAvailableForThisToken', 'DisallowedPool', 'LiquidityCheckpointMathError', 'CalculateRewardsMathError', 'CalculateCumulativeWorkMaxRatioMathError', 'CalculateRewardsAllMathError', 'NoRights', 'MultiswapShouldBeAtleastTwoHops', 'MultiBuyAssetCantHaveSamePoolAtomicSwaps', 'MultiSwapCantHaveSameTokenConsequetively', 'TradingBlockedByMaintenanceMode', 'PoolIsEmpty']
   },
   /**
-   * Lookup299: pallet_proof_of_stake::reward_info::RewardInfo<Balance>
+   * Lookup300: pallet_proof_of_stake::reward_info::RewardInfo<Balance>
    **/
   PalletProofOfStakeRewardInfo: {
     activatedAmount: 'u128',
@@ -2447,14 +2450,14 @@ export default {
     missingAtLastCheckpoint: 'U256'
   },
   /**
-   * Lookup301: pallet_proof_of_stake::pallet::PromotedPools
+   * Lookup302: pallet_proof_of_stake::pallet::PromotedPools
    **/
   PalletProofOfStakePromotedPools: {
     weight: 'u8',
     rewards: 'U256'
   },
   /**
-   * Lookup305: pallet_proof_of_stake::schedule_rewards_calculator::ScheduleRewards<Balance>
+   * Lookup306: pallet_proof_of_stake::schedule_rewards_calculator::ScheduleRewards<Balance>
    **/
   PalletProofOfStakeScheduleRewardsCalculatorScheduleRewards: {
     pending: 'u128',
@@ -2462,7 +2465,7 @@ export default {
     total: 'u128'
   },
   /**
-   * Lookup312: pallet_proof_of_stake::SchedulesList
+   * Lookup313: pallet_proof_of_stake::SchedulesList
    **/
   PalletProofOfStakeSchedulesList: {
     head: 'Option<u64>',
@@ -2471,7 +2474,7 @@ export default {
     count: 'u64'
   },
   /**
-   * Lookup315: pallet_proof_of_stake::Schedule<T>
+   * Lookup316: pallet_proof_of_stake::Schedule<T>
    **/
   PalletProofOfStakeSchedule: {
     scheduledAt: 'u32',
@@ -2481,7 +2484,7 @@ export default {
     amountPerSession: 'u128'
   },
   /**
-   * Lookup316: pallet_proof_of_stake::schedule_rewards_calculator::ActivatedLiquidityPerSchedule<Balance>
+   * Lookup317: pallet_proof_of_stake::schedule_rewards_calculator::ActivatedLiquidityPerSchedule<Balance>
    **/
   PalletProofOfStakeScheduleRewardsCalculatorActivatedLiquidityPerSchedule: {
     pendingPositive: 'u128',
@@ -2490,13 +2493,13 @@ export default {
     total: 'u128'
   },
   /**
-   * Lookup318: pallet_proof_of_stake::pallet::Error<T>
+   * Lookup319: pallet_proof_of_stake::pallet::Error<T>
    **/
   PalletProofOfStakeError: {
     _enum: ['NotEnoughAssets', 'MathOverflow', 'NotEnoughRewardsEarned', 'NotAPromotedPool', 'PastTimeCalculation', 'LiquidityCheckpointMathError', 'CalculateRewardsMathError', 'MathError', 'CalculateRewardsAllMathError', 'MissingRewardsInfoError', 'DeprecatedExtrinsic', 'CannotScheduleRewardsInPast', 'PoolDoesNotExist', 'TooManySchedules', 'TooLittleRewards', 'TooSmallVolume', 'LiquidityLockedIn3rdpartyRewards', 'NoThirdPartyPartyRewardsToClaim', 'SoloTokenPromotionForbiddenError']
   },
   /**
-   * Lookup319: pallet_fee_lock::pallet::FeeLockMetadataInfo<T>
+   * Lookup320: pallet_fee_lock::pallet::FeeLockMetadataInfo<T>
    **/
   PalletFeeLockFeeLockMetadataInfo: {
     periodLength: 'u32',
@@ -2505,32 +2508,32 @@ export default {
     whitelistedTokens: 'BTreeSet<u32>'
   },
   /**
-   * Lookup322: pallet_fee_lock::pallet::AccountFeeLockDataInfo<BlockNumber, Balance>
+   * Lookup323: pallet_fee_lock::pallet::AccountFeeLockDataInfo<BlockNumber, Balance>
    **/
   PalletFeeLockAccountFeeLockDataInfo: {
     totalFeeLockAmount: 'u128',
     lastFeeLockBlock: 'u32'
   },
   /**
-   * Lookup323: pallet_fee_lock::pallet::Error<T>
+   * Lookup324: pallet_fee_lock::pallet::Error<T>
    **/
   PalletFeeLockError: {
     _enum: ['FeeLocksIncorrectlyInitialzed', 'InvalidFeeLockMetadata', 'FeeLocksNotInitialized', 'NotFeeLocked', 'CantUnlockFeeYet', 'MaxCuratedTokensLimitExceeded', 'UnexpectedFailure']
   },
   /**
-   * Lookup326: pallet_vesting_mangata::Releases
+   * Lookup327: pallet_vesting_mangata::Releases
    **/
   PalletVestingMangataReleases: {
     _enum: ['V0', 'V1']
   },
   /**
-   * Lookup327: pallet_vesting_mangata::pallet::Error<T>
+   * Lookup328: pallet_vesting_mangata::pallet::Error<T>
    **/
   PalletVestingMangataError: {
     _enum: ['NotVesting', 'AtMaxVestingSchedules', 'AmountLow', 'ScheduleIndexOutOfBounds', 'InvalidScheduleParams', 'NoSuitableScheduleFound', 'SudoUnlockIsDisallowed', 'InvalidVestingIndex', 'MathError']
   },
   /**
-   * Lookup329: pallet_crowdloan_rewards::pallet::RewardInfo<T>
+   * Lookup330: pallet_crowdloan_rewards::pallet::RewardInfo<T>
    **/
   PalletCrowdloanRewardsRewardInfo: {
     totalReward: 'u128',
@@ -2538,19 +2541,19 @@ export default {
     contributedRelayAddresses: 'Vec<AccountId32>'
   },
   /**
-   * Lookup332: pallet_crowdloan_rewards::pallet::Error<T>
+   * Lookup333: pallet_crowdloan_rewards::pallet::Error<T>
    **/
   PalletCrowdloanRewardsError: {
     _enum: ['AlreadyAssociated', 'BatchBeyondFundPot', 'FirstClaimAlreadyDone', 'RewardNotHighEnough', 'InvalidClaimSignature', 'InvalidFreeClaimSignature', 'NoAssociatedClaim', 'RewardsAlreadyClaimed', 'RewardVecAlreadyInitialized', 'RewardVecNotFullyInitializedYet', 'RewardsDoNotMatchFund', 'TooManyContributors', 'VestingPeriodNonValid', 'NonContributedAddressProvided', 'InsufficientNumberOfValidProofs', 'ClaimingLessThanED', 'MathOverflow', 'PeriodNotSet', 'AllocationDoesNotMatch']
   },
   /**
-   * Lookup334: pallet_issuance::pallet::Error<T>
+   * Lookup335: pallet_issuance::pallet::Error<T>
    **/
   PalletIssuanceError: {
     _enum: ['IssuanceConfigAlreadyInitialized', 'IssuanceConfigNotInitialized', 'TGENotFinalized', 'TGEIsAlreadyFinalized', 'IssuanceConfigInvalid', 'MathError', 'UnknownPool']
   },
   /**
-   * Lookup335: pallet_multipurpose_liquidity::pallet::ReserveStatusInfo<Balance>
+   * Lookup336: pallet_multipurpose_liquidity::pallet::ReserveStatusInfo<Balance>
    **/
   PalletMultipurposeLiquidityReserveStatusInfo: {
     stakedUnactivatedReserves: 'u128',
@@ -2560,7 +2563,7 @@ export default {
     relockAmount: 'u128'
   },
   /**
-   * Lookup337: pallet_multipurpose_liquidity::pallet::RelockStatusInfo<Balance, BlockNumber>
+   * Lookup338: pallet_multipurpose_liquidity::pallet::RelockStatusInfo<Balance, BlockNumber>
    **/
   PalletMultipurposeLiquidityRelockStatusInfo: {
     amount: 'u128',
@@ -2568,29 +2571,29 @@ export default {
     endingBlockAsBalance: 'u128'
   },
   /**
-   * Lookup339: pallet_multipurpose_liquidity::pallet::Error<T>
+   * Lookup340: pallet_multipurpose_liquidity::pallet::Error<T>
    **/
   PalletMultipurposeLiquidityError: {
     _enum: ['NotALiquidityToken', 'RelockCountLimitExceeded', 'RelockInstanceIndexOOB', 'NotEnoughUnspentReserves', 'NotEnoughTokens', 'MathError']
   },
   /**
-   * Lookup341: pallet_bootstrap::BootstrapPhase
+   * Lookup342: pallet_bootstrap::BootstrapPhase
    **/
   PalletBootstrapBootstrapPhase: {
     _enum: ['BeforeStart', 'Whitelist', 'Public', 'Finished']
   },
   /**
-   * Lookup345: frame_support::PalletId
+   * Lookup346: frame_support::PalletId
    **/
   FrameSupportPalletId: '[u8;8]',
   /**
-   * Lookup346: pallet_bootstrap::pallet::Error<T>
+   * Lookup347: pallet_bootstrap::pallet::Error<T>
    **/
   PalletBootstrapError: {
     _enum: ['UnsupportedTokenId', 'NotEnoughAssets', 'NotEnoughVestedAssets', 'MathOverflow', 'Unauthorized', 'BootstrapStartInThePast', 'PhaseLengthCannotBeZero', 'AlreadyStarted', 'ValuationRatio', 'FirstProvisionInSecondTokenId', 'PoolAlreadyExists', 'NotFinishedYet', 'NothingToClaim', 'WrongRatio', 'BootstrapNotReadyToBeFinished', 'SameToken', 'TokenIdDoesNotExists', 'TokensActivationFailed', 'BootstrapNotSchduled', 'BootstrapFinished', 'TooLateToUpdateBootstrap', 'ProvisioningBlockedByMaintenanceMode', 'BootstrapMustBePreFinalized']
   },
   /**
-   * Lookup347: parachain_staking::pallet::RoundInfo<BlockNumber>
+   * Lookup348: parachain_staking::pallet::RoundInfo<BlockNumber>
    **/
   ParachainStakingRoundInfo: {
     current: 'u32',
@@ -2598,7 +2601,7 @@ export default {
     length: 'u32'
   },
   /**
-   * Lookup348: parachain_staking::pallet::Delegator<sp_runtime::account::AccountId20, Balance, CurrencyId>
+   * Lookup349: parachain_staking::pallet::Delegator<sp_runtime::account::AccountId20, Balance, CurrencyId>
    **/
   ParachainStakingDelegator: {
     id: 'SpRuntimeAccountAccountId20',
@@ -2607,11 +2610,11 @@ export default {
     status: 'ParachainStakingDelegatorStatus'
   },
   /**
-   * Lookup349: parachain_staking::set::OrderedSet<parachain_staking::pallet::Bond<sp_runtime::account::AccountId20, Balance, CurrencyId>>
+   * Lookup350: parachain_staking::set::OrderedSet<parachain_staking::pallet::Bond<sp_runtime::account::AccountId20, Balance, CurrencyId>>
    **/
   ParachainStakingSetOrderedSetBond: 'Vec<ParachainStakingBond>',
   /**
-   * Lookup350: parachain_staking::pallet::Bond<sp_runtime::account::AccountId20, Balance, CurrencyId>
+   * Lookup351: parachain_staking::pallet::Bond<sp_runtime::account::AccountId20, Balance, CurrencyId>
    **/
   ParachainStakingBond: {
     owner: 'SpRuntimeAccountAccountId20',
@@ -2619,13 +2622,13 @@ export default {
     liquidityToken: 'u32'
   },
   /**
-   * Lookup352: parachain_staking::pallet::PendingDelegationRequests<sp_runtime::account::AccountId20, Balance>
+   * Lookup353: parachain_staking::pallet::PendingDelegationRequests<sp_runtime::account::AccountId20, Balance>
    **/
   ParachainStakingPendingDelegationRequests: {
     requests: 'BTreeMap<SpRuntimeAccountAccountId20, ParachainStakingDelegationRequest>'
   },
   /**
-   * Lookup356: parachain_staking::pallet::DelegatorStatus
+   * Lookup357: parachain_staking::pallet::DelegatorStatus
    **/
   ParachainStakingDelegatorStatus: {
     _enum: {
@@ -2634,7 +2637,7 @@ export default {
     }
   },
   /**
-   * Lookup357: parachain_staking::pallet::CollatorCandidate<sp_runtime::account::AccountId20, Balance, CurrencyId>
+   * Lookup358: parachain_staking::pallet::CollatorCandidate<sp_runtime::account::AccountId20, Balance, CurrencyId>
    **/
   ParachainStakingCollatorCandidate: {
     id: 'SpRuntimeAccountAccountId20',
@@ -2649,11 +2652,11 @@ export default {
     state: 'ParachainStakingCollatorStatus'
   },
   /**
-   * Lookup358: parachain_staking::set::OrderedSet<sp_runtime::account::AccountId20>
+   * Lookup359: parachain_staking::set::OrderedSet<sp_runtime::account::AccountId20>
    **/
   ParachainStakingSetOrderedSetAccountId20: 'Vec<SpRuntimeAccountAccountId20>',
   /**
-   * Lookup360: parachain_staking::pallet::CollatorStatus
+   * Lookup361: parachain_staking::pallet::CollatorStatus
    **/
   ParachainStakingCollatorStatus: {
     _enum: {
@@ -2663,7 +2666,7 @@ export default {
     }
   },
   /**
-   * Lookup361: parachain_staking::pallet::CollatorSnapshot<sp_runtime::account::AccountId20, Balance, CurrencyId>
+   * Lookup362: parachain_staking::pallet::CollatorSnapshot<sp_runtime::account::AccountId20, Balance, CurrencyId>
    **/
   ParachainStakingCollatorSnapshot: {
     bond: 'u128',
@@ -2672,43 +2675,43 @@ export default {
     liquidityToken: 'u32'
   },
   /**
-   * Lookup368: parachain_staking::pallet::AggregatorMetadataType<sp_runtime::account::AccountId20, CurrencyId>
+   * Lookup369: parachain_staking::pallet::AggregatorMetadataType<sp_runtime::account::AccountId20, CurrencyId>
    **/
   ParachainStakingAggregatorMetadataType: {
     tokenCollatorMap: 'BTreeMap<u32, SpRuntimeAccountAccountId20>',
     approvedCandidates: 'BTreeSet<SpRuntimeAccountAccountId20>'
   },
   /**
-   * Lookup378: parachain_staking::pallet::RoundCollatorRewardInfoType<sp_runtime::account::AccountId20, Balance>
+   * Lookup379: parachain_staking::pallet::RoundCollatorRewardInfoType<sp_runtime::account::AccountId20, Balance>
    **/
   ParachainStakingRoundCollatorRewardInfoType: {
     collatorReward: 'u128',
     delegatorRewards: 'BTreeMap<SpRuntimeAccountAccountId20, u128>'
   },
   /**
-   * Lookup379: parachain_staking::pallet::Error<T>
+   * Lookup380: parachain_staking::pallet::Error<T>
    **/
   ParachainStakingError: {
     _enum: ['DelegatorDNE', 'DelegatorDNEinTopNorBottom', 'DelegatorDNEInDelegatorSet', 'CandidateDNE', 'DelegationDNE', 'DelegatorExists', 'CandidateExists', 'CandidateBondBelowMin', 'InsufficientBalance', 'DelegationBelowMin', 'AlreadyOffline', 'AlreadyActive', 'DelegatorAlreadyLeaving', 'DelegatorNotLeaving', 'DelegatorCannotLeaveYet', 'CannotDelegateIfLeaving', 'CandidateAlreadyLeaving', 'CandidateNotLeaving', 'CandidateCannotLeaveYet', 'CannotGoOnlineIfLeaving', 'ExceedMaxDelegationsPerDelegator', 'AlreadyDelegatedCandidate', 'InvalidSchedule', 'CannotSetBelowMin', 'NoWritingSameValue', 'TooLowCandidateCountWeightHintJoinCandidates', 'TooLowCandidateCountWeightHintCancelLeaveCandidates', 'TooLowCandidateCountToLeaveCandidates', 'TooLowDelegationCountToDelegate', 'TooLowCandidateDelegationCountToDelegate', 'TooLowDelegationCountToLeaveDelegators', 'PendingCandidateRequestsDNE', 'PendingCandidateRequestAlreadyExists', 'PendingCandidateRequestNotDueYet', 'PendingDelegationRequestDNE', 'PendingDelegationRequestAlreadyExists', 'PendingDelegationRequestNotDueYet', 'StakingLiquidityTokenNotListed', 'TooLowCurrentStakingLiquidityTokensCount', 'StakingLiquidityTokenAlreadyListed', 'ExceedMaxCollatorCandidates', 'ExceedMaxTotalDelegatorsPerCandidate', 'CandidateNotAggregating', 'CandidateNotAggregatingUnderAggregator', 'CandidateAlreadyApprovedByAggregator', 'AggregatorExists', 'CollatorRoundRewardsDNE', 'DelegatorRewardsDNE', 'AggregatorDNE', 'TargettedAggregatorSameAsCurrent', 'CandidateNotApprovedByAggregator', 'AggregatorLiquidityTokenTaken', 'IncorrectRewardDelegatorCount', 'MathError']
   },
   /**
-   * Lookup380: pallet_sequencer_staking::pallet::Error<T>
+   * Lookup383: pallet_sequencer_staking::pallet::Error<T>
    **/
   PalletSequencerStakingError: {
-    _enum: ['OperationFailed', 'MathOverflow']
+    _enum: ['OperationFailed', 'MathOverflow', 'SequencerIsNotInActiveSet', 'SequencerAlreadyInActiveSet', 'CantUnstakeWhileInActiveSet', 'NotEligibleToBeSequencer', 'NotEnoughSequencerStake', 'MaxSequencersLimitReached']
   },
   /**
-   * Lookup384: sp_core::crypto::KeyTypeId
+   * Lookup387: sp_core::crypto::KeyTypeId
    **/
   SpCoreCryptoKeyTypeId: '[u8;4]',
   /**
-   * Lookup385: pallet_session::pallet::Error<T>
+   * Lookup388: pallet_session::pallet::Error<T>
    **/
   PalletSessionError: {
     _enum: ['InvalidProof', 'NoAssociatedValidatorId', 'DuplicatedKey', 'NoKeys', 'NoAccount']
   },
   /**
-   * Lookup389: pallet_grandpa::StoredState<N>
+   * Lookup392: pallet_grandpa::StoredState<N>
    **/
   PalletGrandpaStoredState: {
     _enum: {
@@ -2725,7 +2728,7 @@ export default {
     }
   },
   /**
-   * Lookup390: pallet_grandpa::StoredPendingChange<N, Limit>
+   * Lookup393: pallet_grandpa::StoredPendingChange<N, Limit>
    **/
   PalletGrandpaStoredPendingChange: {
     scheduledAt: 'u32',
@@ -2734,19 +2737,19 @@ export default {
     forced: 'Option<u32>'
   },
   /**
-   * Lookup392: pallet_grandpa::pallet::Error<T>
+   * Lookup395: pallet_grandpa::pallet::Error<T>
    **/
   PalletGrandpaError: {
     _enum: ['PauseFailed', 'ResumeFailed', 'ChangePending', 'TooSoon', 'InvalidKeyOwnershipProof', 'InvalidEquivocationProof', 'DuplicateOffenceReport']
   },
   /**
-   * Lookup393: orml_asset_registry::module::Error<T>
+   * Lookup396: orml_asset_registry::module::Error<T>
    **/
   OrmlAssetRegistryModuleError: {
     _enum: ['AssetNotFound', 'BadVersion', 'InvalidAssetId', 'ConflictingLocation', 'ConflictingAssetId', 'InvalidAssetString', 'ConflictingL1Asset']
   },
   /**
-   * Lookup394: pallet_treasury::Proposal<sp_runtime::account::AccountId20, Balance>
+   * Lookup397: pallet_treasury::Proposal<sp_runtime::account::AccountId20, Balance>
    **/
   PalletTreasuryProposal: {
     proposer: 'SpRuntimeAccountAccountId20',
@@ -2755,23 +2758,23 @@ export default {
     bond: 'u128'
   },
   /**
-   * Lookup396: pallet_treasury::pallet::Error<T, I>
+   * Lookup399: pallet_treasury::pallet::Error<T, I>
    **/
   PalletTreasuryError: {
     _enum: ['InsufficientProposersBalance', 'InvalidIndex', 'TooManyApprovals', 'InsufficientPermission', 'ProposalNotApproved']
   },
   /**
-   * Lookup397: pallet_sudo_mangata::pallet::Error<T>
+   * Lookup400: pallet_sudo_mangata::pallet::Error<T>
    **/
   PalletSudoMangataError: {
     _enum: ['RequireSudo']
   },
   /**
-   * Lookup398: pallet_sudo_origin::pallet::Error<T>
+   * Lookup401: pallet_sudo_origin::pallet::Error<T>
    **/
   PalletSudoOriginError: 'Null',
   /**
-   * Lookup400: pallet_collective_mangata::Votes<sp_runtime::account::AccountId20, BlockNumber>
+   * Lookup403: pallet_collective_mangata::Votes<sp_runtime::account::AccountId20, BlockNumber>
    **/
   PalletCollectiveMangataVotes: {
     index: 'u32',
@@ -2781,13 +2784,13 @@ export default {
     end: 'u32'
   },
   /**
-   * Lookup401: pallet_collective_mangata::pallet::Error<T, I>
+   * Lookup404: pallet_collective_mangata::pallet::Error<T, I>
    **/
   PalletCollectiveMangataError: {
     _enum: ['NotMember', 'DuplicateProposal', 'ProposalMissing', 'WrongIndex', 'DuplicateVote', 'AlreadyInitialized', 'TooEarly', 'TooEarlyToCloseByNonFoundationAccount', 'TooManyProposals', 'WrongProposalWeight', 'WrongProposalLength', 'PrimeAccountNotMember', 'NotFoundationAccountOrRoot']
   },
   /**
-   * Lookup402: pallet_identity::types::Registration<Balance, MaxJudgements, MaxAdditionalFields>
+   * Lookup405: pallet_identity::types::Registration<Balance, MaxJudgements, MaxAdditionalFields>
    **/
   PalletIdentityRegistration: {
     judgements: 'Vec<(u32,PalletIdentityJudgement)>',
@@ -2795,7 +2798,7 @@ export default {
     info: 'PalletIdentityIdentityInfo'
   },
   /**
-   * Lookup410: pallet_identity::types::RegistrarInfo<Balance, sp_runtime::account::AccountId20>
+   * Lookup413: pallet_identity::types::RegistrarInfo<Balance, sp_runtime::account::AccountId20>
    **/
   PalletIdentityRegistrarInfo: {
     account: 'SpRuntimeAccountAccountId20',
@@ -2803,45 +2806,45 @@ export default {
     fields: 'PalletIdentityBitFlags'
   },
   /**
-   * Lookup412: pallet_identity::pallet::Error<T>
+   * Lookup415: pallet_identity::pallet::Error<T>
    **/
   PalletIdentityError: {
     _enum: ['TooManySubAccounts', 'NotFound', 'NotNamed', 'EmptyIndex', 'FeeChanged', 'NoIdentity', 'StickyJudgement', 'JudgementGiven', 'InvalidJudgement', 'InvalidIndex', 'InvalidTarget', 'TooManyFields', 'TooManyRegistrars', 'AlreadyClaimed', 'NotSub', 'NotOwned', 'JudgementForDifferentIdentity', 'JudgementPaymentFailed']
   },
   /**
-   * Lookup414: sp_runtime::account::EthereumSignature
+   * Lookup417: sp_runtime::account::EthereumSignature
    **/
   SpRuntimeAccountEthereumSignature: 'SpCoreEcdsaSignature',
   /**
-   * Lookup416: frame_system::extensions::check_spec_version::CheckSpecVersion<T>
+   * Lookup419: frame_system::extensions::check_spec_version::CheckSpecVersion<T>
    **/
   FrameSystemExtensionsCheckSpecVersion: 'Null',
   /**
-   * Lookup417: frame_system::extensions::check_tx_version::CheckTxVersion<T>
+   * Lookup420: frame_system::extensions::check_tx_version::CheckTxVersion<T>
    **/
   FrameSystemExtensionsCheckTxVersion: 'Null',
   /**
-   * Lookup418: frame_system::extensions::check_genesis::CheckGenesis<T>
+   * Lookup421: frame_system::extensions::check_genesis::CheckGenesis<T>
    **/
   FrameSystemExtensionsCheckGenesis: 'Null',
   /**
-   * Lookup421: frame_system::extensions::check_nonce::CheckNonce<T>
+   * Lookup424: frame_system::extensions::check_nonce::CheckNonce<T>
    **/
   FrameSystemExtensionsCheckNonce: 'Compact<u32>',
   /**
-   * Lookup422: frame_system::extensions::check_weight::CheckWeight<T>
+   * Lookup425: frame_system::extensions::check_weight::CheckWeight<T>
    **/
   FrameSystemExtensionsCheckWeight: 'Null',
   /**
-   * Lookup423: pallet_transaction_payment_mangata::ChargeTransactionPayment<T>
+   * Lookup426: pallet_transaction_payment_mangata::ChargeTransactionPayment<T>
    **/
   PalletTransactionPaymentMangataChargeTransactionPayment: 'Compact<u128>',
   /**
-   * Lookup424: frame_system::extensions::check_non_zero_sender::CheckNonZeroSender<T>
+   * Lookup427: frame_system::extensions::check_non_zero_sender::CheckNonZeroSender<T>
    **/
   FrameSystemExtensionsCheckNonZeroSender: 'Null',
   /**
-   * Lookup425: rollup_runtime::Runtime
+   * Lookup428: rollup_runtime::Runtime
    **/
   RollupRuntimeRuntime: 'Null'
 };
