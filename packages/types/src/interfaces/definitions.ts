@@ -39,7 +39,7 @@ export default {
       depositRecipient: "[u8; 20]",
       tokenAddress: "[u8; 20]",
       amount: "U256",
-      blockHash: "H256"
+      timeStamp: "U256"
     },
     RequestId: {
       origin: "Origin",
@@ -52,18 +52,18 @@ export default {
       requestId: "RequestId",
       l2RequestId: "u128",
       cancelJustified: "bool",
-      blockHash: "H256"
+      timeStamp: "U256"
     },
     WithdrawalResolution: {
       requestId: "RequestId",
       l2RequestId: "u128",
       status: "bool",
-      blockHash: "H256"
+      timeStamp: "U256"
     },
     L2UpdatesToRemove: {
       requestId: "RequestId",
       l2UpdatesToRemove: "Vec<u128>",
-      blockHash: "H256"
+      timeStamp: "U256"
     }
   }
 }
