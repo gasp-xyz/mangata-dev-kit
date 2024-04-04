@@ -10,7 +10,7 @@ export interface CancelResolution extends Struct {
   readonly requestId: RequestId;
   readonly l2RequestId: u128;
   readonly cancelJustified: bool;
-  readonly blockHash: H256;
+  readonly timeStamp: U256;
 }
 
 /** @name Deposit */
@@ -19,7 +19,7 @@ export interface Deposit extends Struct {
   readonly depositRecipient: U8aFixed;
   readonly tokenAddress: U8aFixed;
   readonly amount: U256;
-  readonly blockHash: H256;
+  readonly timeStamp: U256;
 }
 
 /** @name Header */
@@ -45,7 +45,7 @@ export interface L1Update extends Struct {
 export interface L2UpdatesToRemove extends Struct {
   readonly requestId: RequestId;
   readonly l2UpdatesToRemove: Vec<u128>;
-  readonly blockHash: H256;
+  readonly timeStamp: U256;
 }
 
 /** @name MultiSignature */
@@ -96,7 +96,7 @@ export interface WithdrawalResolution extends Struct {
   readonly requestId: RequestId;
   readonly l2RequestId: u128;
   readonly status: bool;
-  readonly blockHash: H256;
+  readonly timeStamp: U256;
 }
 
 export type PHANTOM_DEFAULT = 'default';
