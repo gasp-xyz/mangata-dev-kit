@@ -1,6 +1,6 @@
 {
   "name": "@mangata-finance/types",
-  "version": "2.2.3-eth-rollup-develop.27",
+  "version": "2.2.3-rollup-feature-stabilize-seq-rotation.0",
   "description": "Polkadot.js type definitions for Mangata Network",
   "author": "Mangata Finance <solutions@mangata.finance>",
   "repository": {
