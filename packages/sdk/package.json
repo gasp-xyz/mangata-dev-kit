@@ -1,6 +1,6 @@
 {
   "name": "@mangata-finance/sdk",
-  "version": "2.2.1-eth-rollup-develop.23",
+  "version": "2.2.1-eth-rollup-develop.24",
   "description": "Mangata SDK",
   "type": "module",
   "module": "./index.js",
@@ -23,11 +23,11 @@
     "@polkadot/api": "10.12.2"
   },
   "devDependencies": {
-    "@mangata-finance/types": "2.2.3-eth-rollup-develop.30"
+    "@mangata-finance/types": "2.2.3-eth-rollup-develop.31"
   },
   "dependencies": {
     "@metamask/sdk": "0.16.0",
-    "@mangata-finance/type-definitions": "2.1.3-eth-rollup-develop.24",
+    "@mangata-finance/type-definitions": "2.1.3-eth-rollup-develop.25",
     "big.js": "6.2.1",
     "tslog": "4.8.2",
     "tslib": "^2.3.0"
