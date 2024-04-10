@@ -64,8 +64,8 @@ function makeSignOptions(api: ApiPromise, partialOptions: Partial<SignatureOptio
   );
 }
 
-export async function signTypedData_v4(api: ApiPromise, tx: SubmittableExtrinsic<"promise">, provider: SDKProvider): Promise<SignTypedData_v4> {
-  const ethAddress = provider.selectedAddress;
+export async function signTypedData_v4(api: ApiPromise, tx: SubmittableExtrinsic<"promise">, provider: SDKProvider, selectedEthAddress?: string): Promise<SignTypedData_v4> {
+  const ethAddress = selectedEthAddress || provider.selectedAddress;
   const dotAddress = encodeAddress(blake2AsU8a(hexToU8a(ethAddress)), 42);
   const options: Partial<SignatureOptions> = {};
 

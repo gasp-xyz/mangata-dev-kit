@@ -174,7 +174,8 @@ export const signTx = async (
         const signRes = await signTypedData_v4(
           api,
           tx,
-          txOptions?.metamaskProvider
+          txOptions?.metamaskProvider,
+          txOptions?.ethAddress
         );
 
         if (!signRes) {
