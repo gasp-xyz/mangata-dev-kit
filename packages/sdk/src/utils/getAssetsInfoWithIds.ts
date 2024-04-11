@@ -10,7 +10,6 @@ export const getAssetsInfoWithIds = async (api: ApiPromise) => {
   // then we need to display symbol for liquidity token
   return Object.values(completeAssetsInfo)
     .filter((asset) => asset.name || asset.symbol)
-    .filter((assetsInfo) => !["1", "3"].includes(assetsInfo.id))
     .reduce((obj, item) => {
       const asset = {
         ...item,
