@@ -1,6 +1,6 @@
 {
   "name": "@mangata-finance/type-definitions",
-  "version": "2.1.3-feature-isolated-testing-crowdloan.0",
+  "version": "2.1.3-feature-isolated-testing-crowdloan.1",
   "description": "Type definitions for Mangata Finance",
   "repository": {
     "type": "git",
