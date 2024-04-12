@@ -1,6 +1,6 @@
 {
   "name": "@mangata-finance/types",
-  "version": "2.2.3-eth-rollup-develop.33",
+  "version": "2.2.3-feature-isolated-testing-crowdloan.0",
   "description": "Polkadot.js type definitions for Mangata Network",
   "author": "Mangata Finance <solutions@mangata.finance>",
   "repository": {
