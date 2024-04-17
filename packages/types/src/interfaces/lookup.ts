@@ -1287,7 +1287,7 @@ export default {
    **/
   PalletRolldownMessagesL1Update: {
     pendingDeposits: 'Vec<PalletRolldownMessagesDeposit>',
-    pendingCancelResultions: 'Vec<PalletRolldownMessagesCancelResolution>',
+    pendingCancelResolutions: 'Vec<PalletRolldownMessagesCancelResolution>',
     pendingWithdrawalResolutions: 'Vec<PalletRolldownMessagesWithdrawalResolution>',
     pendingL2UpdatesToRemove: 'Vec<PalletRolldownMessagesL2UpdatesToRemove>'
   },
