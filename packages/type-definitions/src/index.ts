@@ -31,7 +31,7 @@ export const mTypes = {
   TokenId: "u32",
   L1Update: {
     pendingDeposits: "Vec<Deposit>",
-    pendingCancelResultions: "Vec<CancelResolution>",
+    pendingCancelResolutions: "Vec<CancelResolution>",
     pendingWithdrawalResolutions: "Vec<WithdrawalResolution>",
     pendingL2UpdatesToRemove: "Vec<L2UpdatesToRemove>",
   },
