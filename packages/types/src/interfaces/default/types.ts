@@ -36,7 +36,7 @@ export interface Header extends Struct {
 /** @name L1Update */
 export interface L1Update extends Struct {
   readonly pendingDeposits: Vec<Deposit>;
-  readonly pendingCancelResultions: Vec<CancelResolution>;
+  readonly pendingCancelResolutions: Vec<CancelResolution>;
   readonly pendingWithdrawalResolutions: Vec<WithdrawalResolution>;
   readonly pendingL2UpdatesToRemove: Vec<L2UpdatesToRemove>;
 }
