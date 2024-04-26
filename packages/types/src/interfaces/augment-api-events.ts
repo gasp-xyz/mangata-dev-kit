@@ -8,7 +8,7 @@ import '@polkadot/api-base/types/events';
 import type { ApiTypes, AugmentedEvent } from '@polkadot/api-base/types';
 import type { Null, Option, Result, Struct, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
-import type { AccountId32, H256, Perbill } from '@polkadot/types/interfaces/runtime';
+import type { H256, Perbill } from '@polkadot/types/interfaces/runtime';
 import type { FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, ParachainStakingCandidateBondRequest, ParachainStakingDelegationRequest, ParachainStakingDelegatorAdded, ParachainStakingPayoutRounds, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, SpConsensusGrandpaAppPublic, SpRuntimeAccountAccountId20, SpRuntimeDispatchError, SpRuntimeModuleError } from '@polkadot/types/lookup';
 
 export type __AugmentedEvent<ApiType extends ApiTypes> = AugmentedEvent<ApiType>;
@@ -109,11 +109,11 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * When initializing the reward vec an already initialized account was found
        **/
-      InitializedAccountWithNotEnoughContribution: AugmentedEvent<ApiType, [AccountId32, Option<SpRuntimeAccountAccountId20>, u128]>;
+      InitializedAccountWithNotEnoughContribution: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, Option<SpRuntimeAccountAccountId20>, u128]>;
       /**
        * When initializing the reward vec an already initialized account was found
        **/
-      InitializedAlreadyInitializedAccount: AugmentedEvent<ApiType, [AccountId32, Option<SpRuntimeAccountAccountId20>, u128]>;
+      InitializedAlreadyInitializedAccount: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, Option<SpRuntimeAccountAccountId20>, u128]>;
       /**
        * The initial payment of InitializationPayment % was paid
        **/
@@ -122,7 +122,7 @@ declare module '@polkadot/api-base/types/events' {
        * Someone has proven they made a contribution and associated a native identity with it.
        * Data is the relay account,  native account and the total amount of _rewards_ that will be paid
        **/
-      NativeIdentityAssociated: AugmentedEvent<ApiType, [AccountId32, SpRuntimeAccountAccountId20, u128]>;
+      NativeIdentityAssociated: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, u128]>;
       /**
        * A contributor has updated the reward address.
        **/

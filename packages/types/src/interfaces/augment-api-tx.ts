@@ -9,8 +9,8 @@ import type { ApiTypes, AugmentedSubmittable, SubmittableExtrinsic, SubmittableE
 import type { Data } from '@polkadot/types';
 import type { Bytes, Compact, Option, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { AnyNumber, IMethod, ITuple } from '@polkadot/types-codec/types';
-import type { AccountId32, Call, H256, Perbill, Permill } from '@polkadot/types/interfaces/runtime';
-import type { MangataTypesAssetsCustomMetadata, MangataTypesAssetsL1Asset, MangataTypesMultipurposeLiquidityActivateKind, MangataTypesMultipurposeLiquidityBondKind, OrmlTraitsAssetRegistryAssetMetadata, PalletIdentityBitFlags, PalletIdentityIdentityInfo, PalletIdentityJudgement, PalletIssuanceTgeInfo, PalletProofOfStakeThirdPartyActivationKind, PalletRolldownMessagesL1Update, PalletVestingMangataVestingInfo, ParachainStakingMetadataUpdateAction, ParachainStakingPairedOrLiquidityToken, RollupRuntimeOriginCaller, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, RollupRuntimeSessionKeys, SpConsensusGrandpaEquivocationProof, SpCoreVoid, SpRuntimeAccountAccountId20, SpRuntimeMultiSignature, SpWeightsWeightV2Weight, StagingXcmVersionedMultiLocation } from '@polkadot/types/lookup';
+import type { Call, H256, Perbill, Permill } from '@polkadot/types/interfaces/runtime';
+import type { MangataTypesAssetsCustomMetadata, MangataTypesAssetsL1Asset, MangataTypesMultipurposeLiquidityActivateKind, MangataTypesMultipurposeLiquidityBondKind, OrmlTraitsAssetRegistryAssetMetadata, PalletIdentityBitFlags, PalletIdentityIdentityInfo, PalletIdentityJudgement, PalletIssuanceTgeInfo, PalletProofOfStakeThirdPartyActivationKind, PalletRolldownMessagesL1Update, PalletVestingMangataVestingInfo, ParachainStakingMetadataUpdateAction, ParachainStakingPairedOrLiquidityToken, RollupRuntimeOriginCaller, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, RollupRuntimeSessionKeys, SpConsensusGrandpaEquivocationProof, SpCoreVoid, SpRuntimeAccountAccountId20, SpRuntimeAccountEthereumSignature, SpWeightsWeightV2Weight, StagingXcmVersionedMultiLocation } from '@polkadot/types/lookup';
 
 export type __AugmentedSubmittable = AugmentedSubmittable<() => unknown>;
 export type __SubmittableExtrinsic<ApiType extends ApiTypes> = SubmittableExtrinsic<ApiType>;
@@ -120,11 +120,11 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::associate_native_identity`].
        **/
-      associateNativeIdentity: AugmentedSubmittable<(rewardAccount: SpRuntimeAccountAccountId20 | string | Uint8Array, relayAccount: AccountId32 | string | Uint8Array, proof: SpRuntimeMultiSignature | { Ed25519: any } | { Sr25519: any } | { Ecdsa: any } | { Eth: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, AccountId32, SpRuntimeMultiSignature]>;
+      associateNativeIdentity: AugmentedSubmittable<(rewardAccount: SpRuntimeAccountAccountId20 | string | Uint8Array, relayAccount: SpRuntimeAccountAccountId20 | string | Uint8Array, proof: SpRuntimeAccountEthereumSignature | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, SpRuntimeAccountEthereumSignature]>;
       /**
        * See [`Pallet::change_association_with_relay_keys`].
        **/
-      changeAssociationWithRelayKeys: AugmentedSubmittable<(rewardAccount: SpRuntimeAccountAccountId20 | string | Uint8Array, previousAccount: SpRuntimeAccountAccountId20 | string | Uint8Array, proofs: Vec<ITuple<[AccountId32, SpRuntimeMultiSignature]>> | ([AccountId32 | string | Uint8Array, SpRuntimeMultiSignature | { Ed25519: any } | { Sr25519: any } | { Ecdsa: any } | { Eth: any } | string | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, Vec<ITuple<[AccountId32, SpRuntimeMultiSignature]>>]>;
+      changeAssociationWithRelayKeys: AugmentedSubmittable<(rewardAccount: SpRuntimeAccountAccountId20 | string | Uint8Array, previousAccount: SpRuntimeAccountAccountId20 | string | Uint8Array, proofs: Vec<ITuple<[SpRuntimeAccountAccountId20, SpRuntimeAccountEthereumSignature]>> | ([SpRuntimeAccountAccountId20 | string | Uint8Array, SpRuntimeAccountEthereumSignature | string | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, Vec<ITuple<[SpRuntimeAccountAccountId20, SpRuntimeAccountEthereumSignature]>>]>;
       /**
        * See [`Pallet::claim`].
        **/
@@ -136,7 +136,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::initialize_reward_vec`].
        **/
-      initializeRewardVec: AugmentedSubmittable<(rewards: Vec<ITuple<[AccountId32, Option<SpRuntimeAccountAccountId20>, u128]>> | ([AccountId32 | string | Uint8Array, Option<SpRuntimeAccountAccountId20> | null | Uint8Array | SpRuntimeAccountAccountId20 | string, u128 | AnyNumber | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [Vec<ITuple<[AccountId32, Option<SpRuntimeAccountAccountId20>, u128]>>]>;
+      initializeRewardVec: AugmentedSubmittable<(rewards: Vec<ITuple<[SpRuntimeAccountAccountId20, Option<SpRuntimeAccountAccountId20>, u128]>> | ([SpRuntimeAccountAccountId20 | string | Uint8Array, Option<SpRuntimeAccountAccountId20> | null | Uint8Array | SpRuntimeAccountAccountId20 | string, u128 | AnyNumber | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [Vec<ITuple<[SpRuntimeAccountAccountId20, Option<SpRuntimeAccountAccountId20>, u128]>>]>;
       /**
        * See [`Pallet::set_crowdloan_allocation`].
        **/
