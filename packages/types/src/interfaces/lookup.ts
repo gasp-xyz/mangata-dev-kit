@@ -2396,7 +2396,7 @@ export default {
    * Lookup286: pallet_rolldown::pallet::Error<T>
    **/
   PalletRolldownError: {
-    _enum: ['OperationFailed', 'ReadRightsExhausted', 'EmptyUpdate', 'AddressDeserializationFailure', 'RequestDoesNotExist', 'NotEnoughAssets', 'BalanceOverflow', 'L1AssetCreationFailed', 'MathOverflow', 'TooManyRequests', 'InvalidUpdate', 'L1AssetNotFound', 'WrongRequestId', 'OnlySelectedSequencerisAllowedToUpdate', 'SequencerLastUpdateStillInDisputePeriod', 'SequencerAwaitingCancelResolution', 'MultipleUpdatesInSingleBlock']
+    _enum: ['OperationFailed', 'ReadRightsExhausted', 'EmptyUpdate', 'AddressDeserializationFailure', 'RequestDoesNotExist', 'NotEnoughAssets', 'BalanceOverflow', 'L1AssetCreationFailed', 'MathOverflow', 'TooManyRequests', 'InvalidUpdate', 'L1AssetNotFound', 'WrongRequestId', 'OnlySelectedSequencerisAllowedToUpdate', 'SequencerLastUpdateStillInDisputePeriod', 'SequencerAwaitingCancelResolution', 'MultipleUpdatesInSingleBlock', 'BlockedByMaintenanceMode']
   },
   /**
    * Lookup289: orml_tokens::BalanceLock<Balance>
@@ -2698,7 +2698,7 @@ export default {
    * Lookup383: pallet_sequencer_staking::pallet::Error<T>
    **/
   PalletSequencerStakingError: {
-    _enum: ['OperationFailed', 'MathOverflow', 'SequencerIsNotInActiveSet', 'SequencerAlreadyInActiveSet', 'CantUnstakeWhileInActiveSet', 'NotEligibleToBeSequencer', 'NotEnoughSequencerStake', 'MaxSequencersLimitReached']
+    _enum: ['OperationFailed', 'MathOverflow', 'SequencerIsNotInActiveSet', 'SequencerAlreadyInActiveSet', 'CantUnstakeWhileInActiveSet', 'NotEligibleToBeSequencer', 'NotEnoughSequencerStake', 'MaxSequencersLimitReached', 'TestUnstakingError']
   },
   /**
    * Lookup387: sp_core::crypto::KeyTypeId

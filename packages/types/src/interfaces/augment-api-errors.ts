@@ -688,6 +688,7 @@ declare module '@polkadot/api-base/types/errors' {
     rolldown: {
       AddressDeserializationFailure: AugmentedError<ApiType>;
       BalanceOverflow: AugmentedError<ApiType>;
+      BlockedByMaintenanceMode: AugmentedError<ApiType>;
       EmptyUpdate: AugmentedError<ApiType>;
       InvalidUpdate: AugmentedError<ApiType>;
       L1AssetCreationFailed: AugmentedError<ApiType>;
@@ -717,6 +718,7 @@ declare module '@polkadot/api-base/types/errors' {
       OperationFailed: AugmentedError<ApiType>;
       SequencerAlreadyInActiveSet: AugmentedError<ApiType>;
       SequencerIsNotInActiveSet: AugmentedError<ApiType>;
+      TestUnstakingError: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
