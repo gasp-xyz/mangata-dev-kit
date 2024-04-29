@@ -1,6 +1,6 @@
 {
   "name": "@mangata-finance/types",
-  "version": "2.2.3-feature-configurable-chain-id.1",
+  "version": "2.2.3-feature-configurable-chain-id.2",
   "description": "Polkadot.js type definitions for Mangata Network",
   "author": "Mangata Finance <solutions@mangata.finance>",
   "repository": {
