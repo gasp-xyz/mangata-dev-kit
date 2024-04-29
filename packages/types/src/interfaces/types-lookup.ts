@@ -2557,7 +2557,8 @@ declare module '@polkadot/types/lookup' {
     readonly isSequencerLastUpdateStillInDisputePeriod: boolean;
     readonly isSequencerAwaitingCancelResolution: boolean;
     readonly isMultipleUpdatesInSingleBlock: boolean;
-    readonly type: 'OperationFailed' | 'ReadRightsExhausted' | 'EmptyUpdate' | 'AddressDeserializationFailure' | 'RequestDoesNotExist' | 'NotEnoughAssets' | 'BalanceOverflow' | 'L1AssetCreationFailed' | 'MathOverflow' | 'TooManyRequests' | 'InvalidUpdate' | 'L1AssetNotFound' | 'WrongRequestId' | 'OnlySelectedSequencerisAllowedToUpdate' | 'SequencerLastUpdateStillInDisputePeriod' | 'SequencerAwaitingCancelResolution' | 'MultipleUpdatesInSingleBlock';
+    readonly isBlockedByMaintenanceMode: boolean;
+    readonly type: 'OperationFailed' | 'ReadRightsExhausted' | 'EmptyUpdate' | 'AddressDeserializationFailure' | 'RequestDoesNotExist' | 'NotEnoughAssets' | 'BalanceOverflow' | 'L1AssetCreationFailed' | 'MathOverflow' | 'TooManyRequests' | 'InvalidUpdate' | 'L1AssetNotFound' | 'WrongRequestId' | 'OnlySelectedSequencerisAllowedToUpdate' | 'SequencerLastUpdateStillInDisputePeriod' | 'SequencerAwaitingCancelResolution' | 'MultipleUpdatesInSingleBlock' | 'BlockedByMaintenanceMode';
   }
 
   /** @name OrmlTokensBalanceLock (289) */
@@ -3021,7 +3022,8 @@ declare module '@polkadot/types/lookup' {
     readonly isNotEligibleToBeSequencer: boolean;
     readonly isNotEnoughSequencerStake: boolean;
     readonly isMaxSequencersLimitReached: boolean;
-    readonly type: 'OperationFailed' | 'MathOverflow' | 'SequencerIsNotInActiveSet' | 'SequencerAlreadyInActiveSet' | 'CantUnstakeWhileInActiveSet' | 'NotEligibleToBeSequencer' | 'NotEnoughSequencerStake' | 'MaxSequencersLimitReached';
+    readonly isTestUnstakingError: boolean;
+    readonly type: 'OperationFailed' | 'MathOverflow' | 'SequencerIsNotInActiveSet' | 'SequencerAlreadyInActiveSet' | 'CantUnstakeWhileInActiveSet' | 'NotEligibleToBeSequencer' | 'NotEnoughSequencerStake' | 'MaxSequencersLimitReached' | 'TestUnstakingError';
   }
 
   /** @name SpCoreCryptoKeyTypeId (387) */
