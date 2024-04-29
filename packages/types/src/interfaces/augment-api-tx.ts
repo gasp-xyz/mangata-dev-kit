@@ -288,6 +288,16 @@ declare module '@polkadot/api-base/types/submittable' {
        **/
       [key: string]: SubmittableExtrinsicFunction<ApiType>;
     };
+    metamask: {
+      /**
+       * See [`Pallet::update`].
+       **/
+      update: AugmentedSubmittable<(name: Option<Bytes> | null | Uint8Array | Bytes | string, version: Option<Bytes> | null | Uint8Array | Bytes | string, chainId: Option<u64> | null | Uint8Array | u64 | AnyNumber) => SubmittableExtrinsic<ApiType>, [Option<Bytes>, Option<Bytes>, Option<u64>]>;
+      /**
+       * Generic tx
+       **/
+      [key: string]: SubmittableExtrinsicFunction<ApiType>;
+    };
     multiPurposeLiquidity: {
       /**
        * See [`Pallet::reserve_vesting_liquidity_tokens`].
