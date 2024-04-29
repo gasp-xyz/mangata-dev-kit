@@ -699,6 +699,7 @@ declare module '@polkadot/api-base/types/errors' {
       AddressDeserializationFailure: AugmentedError<ApiType>;
       BalanceOverflow: AugmentedError<ApiType>;
       BlockedByMaintenanceMode: AugmentedError<ApiType>;
+      CancelRightsExhausted: AugmentedError<ApiType>;
       EmptyUpdate: AugmentedError<ApiType>;
       InvalidUpdate: AugmentedError<ApiType>;
       L1AssetCreationFailed: AugmentedError<ApiType>;

@@ -2564,6 +2564,7 @@ declare module '@polkadot/types/lookup' {
   interface PalletRolldownError extends Enum {
     readonly isOperationFailed: boolean;
     readonly isReadRightsExhausted: boolean;
+    readonly isCancelRightsExhausted: boolean;
     readonly isEmptyUpdate: boolean;
     readonly isAddressDeserializationFailure: boolean;
     readonly isRequestDoesNotExist: boolean;
@@ -2580,7 +2581,7 @@ declare module '@polkadot/types/lookup' {
     readonly isSequencerAwaitingCancelResolution: boolean;
     readonly isMultipleUpdatesInSingleBlock: boolean;
     readonly isBlockedByMaintenanceMode: boolean;
-    readonly type: 'OperationFailed' | 'ReadRightsExhausted' | 'EmptyUpdate' | 'AddressDeserializationFailure' | 'RequestDoesNotExist' | 'NotEnoughAssets' | 'BalanceOverflow' | 'L1AssetCreationFailed' | 'MathOverflow' | 'TooManyRequests' | 'InvalidUpdate' | 'L1AssetNotFound' | 'WrongRequestId' | 'OnlySelectedSequencerisAllowedToUpdate' | 'SequencerLastUpdateStillInDisputePeriod' | 'SequencerAwaitingCancelResolution' | 'MultipleUpdatesInSingleBlock' | 'BlockedByMaintenanceMode';
+    readonly type: 'OperationFailed' | 'ReadRightsExhausted' | 'CancelRightsExhausted' | 'EmptyUpdate' | 'AddressDeserializationFailure' | 'RequestDoesNotExist' | 'NotEnoughAssets' | 'BalanceOverflow' | 'L1AssetCreationFailed' | 'MathOverflow' | 'TooManyRequests' | 'InvalidUpdate' | 'L1AssetNotFound' | 'WrongRequestId' | 'OnlySelectedSequencerisAllowedToUpdate' | 'SequencerLastUpdateStillInDisputePeriod' | 'SequencerAwaitingCancelResolution' | 'MultipleUpdatesInSingleBlock' | 'BlockedByMaintenanceMode';
   }
 
   /** @name PalletMetamaskSignatureError (292) */
