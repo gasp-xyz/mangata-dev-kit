@@ -502,6 +502,16 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
+    metamask: {
+      /**
+       * there should be some updates
+       **/
+      NothingToUpdate: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     multiPurposeLiquidity: {
       /**
        * Math error
