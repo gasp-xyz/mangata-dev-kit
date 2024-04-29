@@ -3049,7 +3049,8 @@ declare module '@polkadot/types/lookup' {
     readonly isNotEligibleToBeSequencer: boolean;
     readonly isNotEnoughSequencerStake: boolean;
     readonly isMaxSequencersLimitReached: boolean;
-    readonly type: 'OperationFailed' | 'MathOverflow' | 'SequencerIsNotInActiveSet' | 'SequencerAlreadyInActiveSet' | 'CantUnstakeWhileInActiveSet' | 'NotEligibleToBeSequencer' | 'NotEnoughSequencerStake' | 'MaxSequencersLimitReached';
+    readonly isTestUnstakingError: boolean;
+    readonly type: 'OperationFailed' | 'MathOverflow' | 'SequencerIsNotInActiveSet' | 'SequencerAlreadyInActiveSet' | 'CantUnstakeWhileInActiveSet' | 'NotEligibleToBeSequencer' | 'NotEnoughSequencerStake' | 'MaxSequencersLimitReached' | 'TestUnstakingError';
   }
 
   /** @name SpCoreCryptoKeyTypeId (392) */
