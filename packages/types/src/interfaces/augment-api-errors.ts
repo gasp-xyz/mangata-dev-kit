@@ -717,6 +717,7 @@ declare module '@polkadot/api-base/types/errors' {
       OperationFailed: AugmentedError<ApiType>;
       SequencerAlreadyInActiveSet: AugmentedError<ApiType>;
       SequencerIsNotInActiveSet: AugmentedError<ApiType>;
+      TestUnstakingError: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
