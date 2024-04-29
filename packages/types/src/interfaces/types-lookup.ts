@@ -1433,7 +1433,7 @@ declare module '@polkadot/types/lookup' {
   /** @name PalletRolldownMessagesL1Update (141) */
   interface PalletRolldownMessagesL1Update extends Struct {
     readonly pendingDeposits: Vec<PalletRolldownMessagesDeposit>;
-    readonly pendingCancelResultions: Vec<PalletRolldownMessagesCancelResolution>;
+    readonly pendingCancelResolutions: Vec<PalletRolldownMessagesCancelResolution>;
     readonly pendingWithdrawalResolutions: Vec<PalletRolldownMessagesWithdrawalResolution>;
     readonly pendingL2UpdatesToRemove: Vec<PalletRolldownMessagesL2UpdatesToRemove>;
   }
@@ -3021,7 +3021,8 @@ declare module '@polkadot/types/lookup' {
     readonly isNotEligibleToBeSequencer: boolean;
     readonly isNotEnoughSequencerStake: boolean;
     readonly isMaxSequencersLimitReached: boolean;
-    readonly type: 'OperationFailed' | 'MathOverflow' | 'SequencerIsNotInActiveSet' | 'SequencerAlreadyInActiveSet' | 'CantUnstakeWhileInActiveSet' | 'NotEligibleToBeSequencer' | 'NotEnoughSequencerStake' | 'MaxSequencersLimitReached';
+    readonly isTestUnstakingError: boolean;
+    readonly type: 'OperationFailed' | 'MathOverflow' | 'SequencerIsNotInActiveSet' | 'SequencerAlreadyInActiveSet' | 'CantUnstakeWhileInActiveSet' | 'NotEligibleToBeSequencer' | 'NotEnoughSequencerStake' | 'MaxSequencersLimitReached' | 'TestUnstakingError';
   }
 
   /** @name SpCoreCryptoKeyTypeId (387) */

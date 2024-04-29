@@ -532,11 +532,11 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::force_update_l2_from_l1`].
        **/
-      forceUpdateL2FromL1: AugmentedSubmittable<(update: PalletRolldownMessagesL1Update | { pendingDeposits?: any; pendingCancelResultions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
+      forceUpdateL2FromL1: AugmentedSubmittable<(update: PalletRolldownMessagesL1Update | { pendingDeposits?: any; pendingCancelResolutions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
       /**
        * See [`Pallet::update_l2_from_l1`].
        **/
-      updateL2FromL1: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { pendingDeposits?: any; pendingCancelResultions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
+      updateL2FromL1: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { pendingDeposits?: any; pendingCancelResolutions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
       /**
        * See [`Pallet::withdraw`].
        **/
