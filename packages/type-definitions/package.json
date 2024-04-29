@@ -1,6 +1,6 @@
 {
   "name": "@mangata-finance/type-definitions",
-  "version": "2.1.3-feature-remove-dummy-tokens.1",
+  "version": "2.1.3-feature-remove-dummy-tokens.2",
   "description": "Type definitions for Mangata Finance",
   "repository": {
     "type": "git",
