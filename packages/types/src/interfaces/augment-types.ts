@@ -5,7 +5,6 @@
 // this is required to allow for ambient/previous definitions
 import '@polkadot/types/types/registry';
 
-import type { CancelResolution, Deposit, L1Update, L2UpdatesToRemove, RequestId, RpcAssetMetadata, ShufflingSeed, TokenId, WithdrawalResolution } from '@mangata-finance/types/interfaces/default';
 import type { Data, StorageKey } from '@polkadot/types';
 import type { BitVec, Bool, Bytes, F32, F64, I128, I16, I256, I32, I64, I8, ISize, Json, Null, OptionBool, Raw, Text, Type, U128, U16, U256, U32, U64, U8, USize, bool, f32, f64, i128, i16, i256, i32, i64, i8, isize, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types-codec';
 import type { TAssetConversion } from '@polkadot/types/interfaces/assetConversion';
@@ -211,7 +210,6 @@ declare module '@polkadot/types/types/registry' {
     CallHashOf: CallHashOf;
     CallIndex: CallIndex;
     CallOrigin: CallOrigin;
-    CancelResolution: CancelResolution;
     CandidateCommitments: CandidateCommitments;
     CandidateDescriptor: CandidateDescriptor;
     CandidateEvent: CandidateEvent;
@@ -342,7 +340,6 @@ declare module '@polkadot/types/types/registry' {
     Delegations: Delegations;
     DeletedContract: DeletedContract;
     DeliveredMessages: DeliveredMessages;
-    Deposit: Deposit;
     DepositBalance: DepositBalance;
     DepositBalanceOf: DepositBalanceOf;
     DestroyWitness: DestroyWitness;
@@ -634,8 +631,6 @@ declare module '@polkadot/types/types/registry' {
     KeyValue: KeyValue;
     KeyValueOption: KeyValueOption;
     Kind: Kind;
-    L1Update: L1Update;
-    L2UpdatesToRemove: L2UpdatesToRemove;
     LaneId: LaneId;
     LastContribution: LastContribution;
     LastRuntimeUpgradeInfo: LastRuntimeUpgradeInfo;
@@ -903,7 +898,6 @@ declare module '@polkadot/types/types/registry' {
     ReportedRoundStates: ReportedRoundStates;
     Reporter: Reporter;
     ReportIdOf: ReportIdOf;
-    RequestId: RequestId;
     ReserveData: ReserveData;
     ReserveIdentifier: ReserveIdentifier;
     Response: Response;
@@ -917,7 +911,6 @@ declare module '@polkadot/types/types/registry' {
     RewardPoint: RewardPoint;
     RoundSnapshot: RoundSnapshot;
     RoundState: RoundState;
-    RpcAssetMetadata: RpcAssetMetadata;
     RpcMethods: RpcMethods;
     RuntimeApiMetadataLatest: RuntimeApiMetadataLatest;
     RuntimeApiMetadataV15: RuntimeApiMetadataV15;
@@ -970,7 +963,6 @@ declare module '@polkadot/types/types/registry' {
     SessionKeys9B: SessionKeys9B;
     SetId: SetId;
     SetIndex: SetIndex;
-    ShufflingSeed: ShufflingSeed;
     Si0Field: Si0Field;
     Si0LookupTypeId: Si0LookupTypeId;
     Si0Path: Si0Path;
@@ -1110,7 +1102,6 @@ declare module '@polkadot/types/types/registry' {
     Text: Text;
     Timepoint: Timepoint;
     TokenError: TokenError;
-    TokenId: TokenId;
     TombstoneContractInfo: TombstoneContractInfo;
     TraceBlockResponse: TraceBlockResponse;
     TraceError: TraceError;
@@ -1224,7 +1215,6 @@ declare module '@polkadot/types/types/registry' {
     WinningData: WinningData;
     WinningData10: WinningData10;
     WinningDataEntry: WinningDataEntry;
-    WithdrawalResolution: WithdrawalResolution;
     WithdrawReasons: WithdrawReasons;
     Xcm: Xcm;
     XcmAssetId: XcmAssetId;
