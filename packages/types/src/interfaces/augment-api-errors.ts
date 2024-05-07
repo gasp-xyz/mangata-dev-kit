@@ -502,6 +502,16 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
+    metamask: {
+      /**
+       * there should be some updates
+       **/
+      NothingToUpdate: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     multiPurposeLiquidity: {
       /**
        * Math error
@@ -689,6 +699,7 @@ declare module '@polkadot/api-base/types/errors' {
       AddressDeserializationFailure: AugmentedError<ApiType>;
       BalanceOverflow: AugmentedError<ApiType>;
       BlockedByMaintenanceMode: AugmentedError<ApiType>;
+      CancelRightsExhausted: AugmentedError<ApiType>;
       EmptyUpdate: AugmentedError<ApiType>;
       InvalidUpdate: AugmentedError<ApiType>;
       L1AssetCreationFailed: AugmentedError<ApiType>;
