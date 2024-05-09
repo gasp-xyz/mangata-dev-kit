@@ -18,7 +18,7 @@ interface SigningResult {
 }
 
 export interface SignTypedData_v4 {
-  dotAddress: string;
+  address: string;
   payload: GenericExtrinsicPayloadV4;
   signature: HexString | null;
 }
@@ -64,12 +64,15 @@ function makeSignOptions(api: ApiPromise, partialOptions: Partial<SignatureOptio
   );
 }
 
-export async function signTypedData_v4(api: ApiPromise, tx: SubmittableExtrinsic<"promise">, provider: SDKProvider, selectedEthAddress?: string): Promise<SignTypedData_v4> {
-  const ethAddress = selectedEthAddress || provider.selectedAddress;
-  const dotAddress = encodeAddress(blake2AsU8a(hexToU8a(ethAddress)), 42);
+export async function signTypedData_v4(api: ApiPromise, tx: SubmittableExtrinsic<"promise">, provider: SDKProvider, selectedAddress?: string): Promise<SignTypedData_v4> {
+  const address = selectedAddress || provider.selectedAddress;
   const options: Partial<SignatureOptions> = {};
+ 
+  if (!address) {
+    throw new Error('No address found');
+  }
 
-  const signingInfo = await api.derive.tx.signingInfo(dotAddress, options.nonce, options.era);
+  const signingInfo = await api.derive.tx.signingInfo(address, options.nonce, options.era);
   const eraOptions = makeEraOptions(api, api.registry, options, signingInfo);
   const payload = tx.inner.signature.createPayload(tx.method as Call, eraOptions);
   const raw_payload = payload.toU8a({ method: true });
@@ -80,11 +83,11 @@ export async function signTypedData_v4(api: ApiPromise, tx: SubmittableExtrinsic
 
   const signature = await provider.request<HexString>({
     method: 'eth_signTypedData_v4',
-    params: [ethAddress, JSON.stringify(data)],
+    params: [address, JSON.stringify(data)],
   });
 
   return {
-    dotAddress,
+    address,
     payload,
     signature: signature || null
   }

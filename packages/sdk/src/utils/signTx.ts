@@ -183,14 +183,13 @@ export const signTx = async (
           return;
         }
 
-        const { dotAddress, payload, signature } = signRes;
-        const created_signature = api.createType('MultiSignature', {
-          Eth: hexToU8a(signature),
-        });
+        const { payload, signature, address } = signRes;
 
+        const created_signature = api.createType('EthereumSignature', hexToU8a(signature));
+        
         metamaskTx.addSignature(
-          dotAddress,
-          created_signature.toHex(),
+          address,
+          created_signature,
           payload.toHex()
         );
 
