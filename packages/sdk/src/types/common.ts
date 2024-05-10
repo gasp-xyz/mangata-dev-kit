@@ -92,7 +92,6 @@ export type TxOptions = {
   nonce: BN;
   signer: Signer;
   metamaskProvider?: SDKProvider;
-  ethAddress?: string;
   statusCallback: (data: ExtrinsicSubscriptionData) => void;
   extrinsicStatus: (events: MangataGenericEvent[]) => void;
 };

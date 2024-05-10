@@ -175,7 +175,7 @@ export const signTx = async (
           api,
           tx,
           txOptions?.metamaskProvider,
-          txOptions?.ethAddress
+          extractedAccount
         );
 
         if (!signRes) {
