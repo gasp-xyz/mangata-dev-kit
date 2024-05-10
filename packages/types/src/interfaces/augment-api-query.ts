@@ -9,7 +9,7 @@ import type { ApiTypes, AugmentedQuery, QueryableStorageEntry } from '@polkadot/
 import type { Data } from '@polkadot/types';
 import type { BTreeMap, BTreeSet, Bytes, Null, Option, U256, U8aFixed, Vec, bool, u128, u32, u64 } from '@polkadot/types-codec';
 import type { AnyNumber, ITuple } from '@polkadot/types-codec/types';
-import type { Call, H256, Perbill } from '@polkadot/types/interfaces/runtime';
+import type { AccountId32, Call, H256, Perbill } from '@polkadot/types/interfaces/runtime';
 import type { FrameSupportDispatchPerDispatchClassWeight, FrameSystemAccountInfo, FrameSystemEventRecord, FrameSystemLastRuntimeUpgradeInfo, FrameSystemPhase, MangataTypesAssetsL1Asset, OrmlTokensAccountData, OrmlTokensBalanceLock, OrmlTokensReserveData, OrmlTraitsAssetRegistryAssetMetadata, PalletBootstrapBootstrapPhase, PalletCollectiveMangataVotes, PalletCrowdloanRewardsRewardInfo, PalletFeeLockAccountFeeLockDataInfo, PalletFeeLockFeeLockMetadataInfo, PalletGrandpaStoredPendingChange, PalletGrandpaStoredState, PalletIdentityRegistrarInfo, PalletIdentityRegistration, PalletIssuanceIssuanceInfo, PalletMaintenanceMaintenanceStatusInfo, PalletMultipurposeLiquidityRelockStatusInfo, PalletMultipurposeLiquidityReserveStatusInfo, PalletProofOfStakePromotedPools, PalletProofOfStakeRewardInfo, PalletProofOfStakeSchedule, PalletProofOfStakeScheduleRewardsCalculatorActivatedLiquidityPerSchedule, PalletProofOfStakeScheduleRewardsCalculatorScheduleRewards, PalletProofOfStakeSchedulesList, PalletProxyAnnouncement, PalletProxyProxyDefinition, PalletRolldownMessagesL1, PalletRolldownMessagesL1Update, PalletRolldownMessagesRequestId, PalletRolldownPendingUpdate, PalletRolldownSequencerRights, PalletTransactionPaymentMangataReleases, PalletTreasuryProposal, PalletVestingMangataReleases, PalletVestingMangataVestingInfo, ParachainStakingAggregatorMetadataType, ParachainStakingBond, ParachainStakingCollatorCandidate, ParachainStakingCollatorSnapshot, ParachainStakingDelegator, ParachainStakingRoundCollatorRewardInfoType, ParachainStakingRoundInfo, ParachainStakingSetOrderedSetBond, RollupRuntimeSessionKeys, SpConsensusAuraSr25519AppSr25519Public, SpCoreCryptoKeyTypeId, SpRuntimeAccountAccountId20, SpRuntimeDigest, StagingXcmV3MultiLocation } from '@polkadot/types/lookup';
 import type { Observable } from '@polkadot/types/types';
 
@@ -151,7 +151,7 @@ declare module '@polkadot/api-base/types/storage' {
     };
     crowdloan: {
       accountsPayable: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<Option<PalletCrowdloanRewardsRewardInfo>>, [u32, SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [u32, SpRuntimeAccountAccountId20]>;
-      claimedRelayChainIds: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<Option<Null>>, [u32, SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [u32, SpRuntimeAccountAccountId20]>;
+      claimedRelayChainIds: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: AccountId32 | string | Uint8Array) => Observable<Option<Null>>, [u32, AccountId32]> & QueryableStorageEntry<ApiType, [u32, AccountId32]>;
       crowdloanAllocation: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<u128>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
       /**
        * Id of current crowdloan rewards distribution, automatically incremented by
@@ -169,7 +169,7 @@ declare module '@polkadot/api-base/types/storage' {
        * Total number of contributors to aid hinting benchmarking
        **/
       totalContributors: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<u32>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
-      unassociatedContributions: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<Option<PalletCrowdloanRewardsRewardInfo>>, [u32, SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [u32, SpRuntimeAccountAccountId20]>;
+      unassociatedContributions: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: AccountId32 | string | Uint8Array) => Observable<Option<PalletCrowdloanRewardsRewardInfo>>, [u32, AccountId32]> & QueryableStorageEntry<ApiType, [u32, AccountId32]>;
       /**
        * Generic query
        **/
@@ -441,7 +441,6 @@ declare module '@polkadot/api-base/types/storage' {
       l2OriginRequestId: AugmentedQuery<ApiType, (arg: PalletRolldownMessagesL1 | 'Ethereum' | number | Uint8Array) => Observable<u128>, [PalletRolldownMessagesL1]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesL1]>;
       lastProcessedRequestOnL2: AugmentedQuery<ApiType, (arg: PalletRolldownMessagesL1 | 'Ethereum' | number | Uint8Array) => Observable<u128>, [PalletRolldownMessagesL1]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesL1]>;
       lastUpdateBySequencer: AugmentedQuery<ApiType, (arg: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<u128>, [SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [SpRuntimeAccountAccountId20]>;
-      maxAcceptedRequestIdOnl2: AugmentedQuery<ApiType, (arg: PalletRolldownMessagesL1 | 'Ethereum' | number | Uint8Array) => Observable<u128>, [PalletRolldownMessagesL1]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesL1]>;
       pendingRequests: AugmentedQuery<ApiType, (arg1: u128 | AnyNumber | Uint8Array, arg2: PalletRolldownMessagesL1 | 'Ethereum' | number | Uint8Array) => Observable<Option<ITuple<[SpRuntimeAccountAccountId20, PalletRolldownMessagesL1Update]>>>, [u128, PalletRolldownMessagesL1]> & QueryableStorageEntry<ApiType, [u128, PalletRolldownMessagesL1]>;
       pendingUpdates: AugmentedQuery<ApiType, (arg1: PalletRolldownMessagesL1 | 'Ethereum' | number | Uint8Array, arg2: PalletRolldownMessagesRequestId | { origin?: any; id?: any } | string | Uint8Array) => Observable<Option<PalletRolldownPendingUpdate>>, [PalletRolldownMessagesL1, PalletRolldownMessagesRequestId]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesL1, PalletRolldownMessagesRequestId]>;
       requestToExecute: AugmentedQuery<ApiType, (arg: u128 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[PalletRolldownMessagesL1, PalletRolldownMessagesL1Update]>>>, [u128]> & QueryableStorageEntry<ApiType, [u128]>;
@@ -449,8 +448,6 @@ declare module '@polkadot/api-base/types/storage' {
       requestToExecuteLast: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
       sequencerCount: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
       sequencerRights: AugmentedQuery<ApiType, (arg: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<Option<PalletRolldownSequencerRights>>, [SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [SpRuntimeAccountAccountId20]>;
-      totalNumberOfDeposits: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
-      totalNumberOfWithdrawals: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
        **/
@@ -737,7 +734,6 @@ declare module '@polkadot/api-base/types/storage' {
       liquidityAssets: AugmentedQuery<ApiType, (arg: ITuple<[u32, u32]> | [u32 | AnyNumber | Uint8Array, u32 | AnyNumber | Uint8Array]) => Observable<Option<u32>>, [ITuple<[u32, u32]>]> & QueryableStorageEntry<ApiType, [ITuple<[u32, u32]>]>;
       liquidityPools: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[u32, u32]>>>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
       pools: AugmentedQuery<ApiType, (arg: ITuple<[u32, u32]> | [u32 | AnyNumber | Uint8Array, u32 | AnyNumber | Uint8Array]) => Observable<ITuple<[u128, u128]>>, [ITuple<[u32, u32]>]> & QueryableStorageEntry<ApiType, [ITuple<[u32, u32]>]>;
-      totalNumberOfSwaps: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
        **/
