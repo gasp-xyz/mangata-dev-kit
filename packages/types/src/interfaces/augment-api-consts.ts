@@ -190,6 +190,7 @@ declare module '@polkadot/api-base/types/consts' {
     };
     metamask: {
       stringLimit: u32 & AugmentedConst<ApiType>;
+      urlStringLimit: u32 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
