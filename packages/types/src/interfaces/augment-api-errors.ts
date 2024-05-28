@@ -502,6 +502,16 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
+    metamask: {
+      /**
+       * there should be some updates
+       **/
+      NothingToUpdate: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     multiPurposeLiquidity: {
       /**
        * Math error
@@ -688,6 +698,8 @@ declare module '@polkadot/api-base/types/errors' {
     rolldown: {
       AddressDeserializationFailure: AugmentedError<ApiType>;
       BalanceOverflow: AugmentedError<ApiType>;
+      BlockedByMaintenanceMode: AugmentedError<ApiType>;
+      CancelRightsExhausted: AugmentedError<ApiType>;
       EmptyUpdate: AugmentedError<ApiType>;
       InvalidUpdate: AugmentedError<ApiType>;
       L1AssetCreationFailed: AugmentedError<ApiType>;
@@ -695,10 +707,14 @@ declare module '@polkadot/api-base/types/errors' {
       MathOverflow: AugmentedError<ApiType>;
       MultipleUpdatesInSingleBlock: AugmentedError<ApiType>;
       NotEnoughAssets: AugmentedError<ApiType>;
+      OnlySelectedSequencerisAllowedToUpdate: AugmentedError<ApiType>;
       OperationFailed: AugmentedError<ApiType>;
       ReadRightsExhausted: AugmentedError<ApiType>;
       RequestDoesNotExist: AugmentedError<ApiType>;
+      SequencerAwaitingCancelResolution: AugmentedError<ApiType>;
+      SequencerLastUpdateStillInDisputePeriod: AugmentedError<ApiType>;
       TooManyRequests: AugmentedError<ApiType>;
+      UnsupportedAsset: AugmentedError<ApiType>;
       WrongRequestId: AugmentedError<ApiType>;
       /**
        * Generic error
@@ -706,8 +722,16 @@ declare module '@polkadot/api-base/types/errors' {
       [key: string]: AugmentedError<ApiType>;
     };
     sequencerStaking: {
+      CantUnstakeWhileInActiveSet: AugmentedError<ApiType>;
       MathOverflow: AugmentedError<ApiType>;
+      MaxSequencersLimitReached: AugmentedError<ApiType>;
+      NotEligibleToBeSequencer: AugmentedError<ApiType>;
+      NotEnoughSequencerStake: AugmentedError<ApiType>;
       OperationFailed: AugmentedError<ApiType>;
+      SequencerAlreadyInActiveSet: AugmentedError<ApiType>;
+      SequencerIsNotInActiveSet: AugmentedError<ApiType>;
+      TestUnstakingError: AugmentedError<ApiType>;
+      UnknownChainId: AugmentedError<ApiType>;
       /**
        * Generic error
        **/

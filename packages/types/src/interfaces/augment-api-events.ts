@@ -6,10 +6,10 @@
 import '@polkadot/api-base/types/events';
 
 import type { ApiTypes, AugmentedEvent } from '@polkadot/api-base/types';
-import type { Null, Option, Result, Struct, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
+import type { Bytes, Null, Option, Result, Struct, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
-import type { AccountId32, H256, Perbill } from '@polkadot/types/interfaces/runtime';
-import type { FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, ParachainStakingCandidateBondRequest, ParachainStakingDelegationRequest, ParachainStakingDelegatorAdded, ParachainStakingPayoutRounds, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, SpConsensusGrandpaAppPublic, SpRuntimeDispatchError, SpRuntimeModuleError } from '@polkadot/types/lookup';
+import type { H256, Perbill } from '@polkadot/types/interfaces/runtime';
+import type { FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, PalletRolldownMessagesChain, ParachainStakingCandidateBondRequest, ParachainStakingDelegationRequest, ParachainStakingDelegatorAdded, ParachainStakingPayoutRounds, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, SpConsensusGrandpaAppPublic, SpRuntimeAccountAccountId20, SpRuntimeDispatchError, SpRuntimeModuleError } from '@polkadot/types/lookup';
 
 export type __AugmentedEvent<ApiType extends ApiTypes> = AugmentedEvent<ApiType>;
 
@@ -51,7 +51,7 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * The activation of the rewards liquidity tokens failed
        **/
-      RewardsLiquidityAcitvationFailed: AugmentedEvent<ApiType, [AccountId32, u32, u128]>;
+      RewardsLiquidityAcitvationFailed: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u128]>;
       /**
        * Funds provisioned using vested tokens
        **/
@@ -85,21 +85,21 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * The members have been changed
        **/
-      MembersChanged: AugmentedEvent<ApiType, [newMembers: Vec<AccountId32>], { newMembers: Vec<AccountId32> }>;
+      MembersChanged: AugmentedEvent<ApiType, [newMembers: Vec<SpRuntimeAccountAccountId20>], { newMembers: Vec<SpRuntimeAccountAccountId20> }>;
       /**
        * The Prime member has been set
        **/
-      PrimeSet: AugmentedEvent<ApiType, [newPrime: Option<AccountId32>], { newPrime: Option<AccountId32> }>;
+      PrimeSet: AugmentedEvent<ApiType, [newPrime: Option<SpRuntimeAccountAccountId20>], { newPrime: Option<SpRuntimeAccountAccountId20> }>;
       /**
        * A motion (given hash) has been proposed (by given account) with a threshold (given
        * `MemberCount`).
        **/
-      Proposed: AugmentedEvent<ApiType, [account: AccountId32, proposalIndex: u32, proposalHash: H256, threshold: u32], { account: AccountId32, proposalIndex: u32, proposalHash: H256, threshold: u32 }>;
+      Proposed: AugmentedEvent<ApiType, [account: SpRuntimeAccountAccountId20, proposalIndex: u32, proposalHash: H256, threshold: u32], { account: SpRuntimeAccountAccountId20, proposalIndex: u32, proposalHash: H256, threshold: u32 }>;
       /**
        * A motion (given hash) has been voted on by given account, leaving
        * a tally (yes votes and no votes given respectively as `MemberCount`).
        **/
-      Voted: AugmentedEvent<ApiType, [account: AccountId32, proposalHash: H256, voted: bool, yes: u32, no: u32], { account: AccountId32, proposalHash: H256, voted: bool, yes: u32, no: u32 }>;
+      Voted: AugmentedEvent<ApiType, [account: SpRuntimeAccountAccountId20, proposalHash: H256, voted: bool, yes: u32, no: u32], { account: SpRuntimeAccountAccountId20, proposalHash: H256, voted: bool, yes: u32, no: u32 }>;
       /**
        * Generic event
        **/
@@ -109,38 +109,38 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * When initializing the reward vec an already initialized account was found
        **/
-      InitializedAccountWithNotEnoughContribution: AugmentedEvent<ApiType, [AccountId32, Option<AccountId32>, u128]>;
+      InitializedAccountWithNotEnoughContribution: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, Option<SpRuntimeAccountAccountId20>, u128]>;
       /**
        * When initializing the reward vec an already initialized account was found
        **/
-      InitializedAlreadyInitializedAccount: AugmentedEvent<ApiType, [AccountId32, Option<AccountId32>, u128]>;
+      InitializedAlreadyInitializedAccount: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, Option<SpRuntimeAccountAccountId20>, u128]>;
       /**
        * The initial payment of InitializationPayment % was paid
        **/
-      InitialPaymentMade: AugmentedEvent<ApiType, [AccountId32, u128]>;
+      InitialPaymentMade: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u128]>;
       /**
        * Someone has proven they made a contribution and associated a native identity with it.
        * Data is the relay account,  native account and the total amount of _rewards_ that will be paid
        **/
-      NativeIdentityAssociated: AugmentedEvent<ApiType, [AccountId32, AccountId32, u128]>;
+      NativeIdentityAssociated: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, u128]>;
       /**
        * A contributor has updated the reward address.
        **/
-      RewardAddressUpdated: AugmentedEvent<ApiType, [AccountId32, AccountId32]>;
+      RewardAddressUpdated: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20]>;
       /**
        * A contributor has claimed some rewards.
        * Data is the account getting paid and the amount of rewards paid.
        **/
-      RewardsPaid: AugmentedEvent<ApiType, [AccountId32, u128]>;
+      RewardsPaid: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u128]>;
       /**
        * Generic event
        **/
       [key: string]: AugmentedEvent<ApiType>;
     };
     feeLock: {
-      FeeLocked: AugmentedEvent<ApiType, [who: AccountId32, lockAmount: u128, totalLocked: u128], { who: AccountId32, lockAmount: u128, totalLocked: u128 }>;
+      FeeLocked: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, lockAmount: u128, totalLocked: u128], { who: SpRuntimeAccountAccountId20, lockAmount: u128, totalLocked: u128 }>;
       FeeLockMetadataUpdated: AugmentedEvent<ApiType, []>;
-      FeeLockUnlocked: AugmentedEvent<ApiType, [AccountId32, u128]>;
+      FeeLockUnlocked: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u128]>;
       /**
        * Generic event
        **/
@@ -168,27 +168,27 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * A name was cleared, and the given balance returned.
        **/
-      IdentityCleared: AugmentedEvent<ApiType, [who: AccountId32, deposit: u128], { who: AccountId32, deposit: u128 }>;
+      IdentityCleared: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, deposit: u128], { who: SpRuntimeAccountAccountId20, deposit: u128 }>;
       /**
        * A name was removed and the given balance slashed.
        **/
-      IdentityKilled: AugmentedEvent<ApiType, [who: AccountId32, deposit: u128], { who: AccountId32, deposit: u128 }>;
+      IdentityKilled: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, deposit: u128], { who: SpRuntimeAccountAccountId20, deposit: u128 }>;
       /**
        * A name was set or reset (which will remove all judgements).
        **/
-      IdentitySet: AugmentedEvent<ApiType, [who: AccountId32], { who: AccountId32 }>;
+      IdentitySet: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20], { who: SpRuntimeAccountAccountId20 }>;
       /**
        * A judgement was given by a registrar.
        **/
-      JudgementGiven: AugmentedEvent<ApiType, [target: AccountId32, registrarIndex: u32], { target: AccountId32, registrarIndex: u32 }>;
+      JudgementGiven: AugmentedEvent<ApiType, [target: SpRuntimeAccountAccountId20, registrarIndex: u32], { target: SpRuntimeAccountAccountId20, registrarIndex: u32 }>;
       /**
        * A judgement was asked from a registrar.
        **/
-      JudgementRequested: AugmentedEvent<ApiType, [who: AccountId32, registrarIndex: u32], { who: AccountId32, registrarIndex: u32 }>;
+      JudgementRequested: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, registrarIndex: u32], { who: SpRuntimeAccountAccountId20, registrarIndex: u32 }>;
       /**
        * A judgement request was retracted.
        **/
-      JudgementUnrequested: AugmentedEvent<ApiType, [who: AccountId32, registrarIndex: u32], { who: AccountId32, registrarIndex: u32 }>;
+      JudgementUnrequested: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, registrarIndex: u32], { who: SpRuntimeAccountAccountId20, registrarIndex: u32 }>;
       /**
        * A registrar was added.
        **/
@@ -196,16 +196,16 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * A sub-identity was added to an identity and the deposit paid.
        **/
-      SubIdentityAdded: AugmentedEvent<ApiType, [sub: AccountId32, main: AccountId32, deposit: u128], { sub: AccountId32, main: AccountId32, deposit: u128 }>;
+      SubIdentityAdded: AugmentedEvent<ApiType, [sub: SpRuntimeAccountAccountId20, main: SpRuntimeAccountAccountId20, deposit: u128], { sub: SpRuntimeAccountAccountId20, main: SpRuntimeAccountAccountId20, deposit: u128 }>;
       /**
        * A sub-identity was removed from an identity and the deposit freed.
        **/
-      SubIdentityRemoved: AugmentedEvent<ApiType, [sub: AccountId32, main: AccountId32, deposit: u128], { sub: AccountId32, main: AccountId32, deposit: u128 }>;
+      SubIdentityRemoved: AugmentedEvent<ApiType, [sub: SpRuntimeAccountAccountId20, main: SpRuntimeAccountAccountId20, deposit: u128], { sub: SpRuntimeAccountAccountId20, main: SpRuntimeAccountAccountId20, deposit: u128 }>;
       /**
        * A sub-identity was cleared, and the given deposit repatriated from the
        * main identity account to the sub-identity account.
        **/
-      SubIdentityRevoked: AugmentedEvent<ApiType, [sub: AccountId32, main: AccountId32, deposit: u128], { sub: AccountId32, main: AccountId32, deposit: u128 }>;
+      SubIdentityRevoked: AugmentedEvent<ApiType, [sub: SpRuntimeAccountAccountId20, main: SpRuntimeAccountAccountId20, deposit: u128], { sub: SpRuntimeAccountAccountId20, main: SpRuntimeAccountAccountId20, deposit: u128 }>;
       /**
        * Generic event
        **/
@@ -245,27 +245,34 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * Maintenance mode has been switched off
        **/
-      MaintenanceModeSwitchedOff: AugmentedEvent<ApiType, [AccountId32]>;
+      MaintenanceModeSwitchedOff: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20]>;
       /**
        * Maintenance mode has been switched on
        **/
-      MaintenanceModeSwitchedOn: AugmentedEvent<ApiType, [AccountId32]>;
+      MaintenanceModeSwitchedOn: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20]>;
       /**
        * Upgradablilty in maintenance mode has been switched off
        **/
-      UpgradabilityInMaintenanceModeSwitchedOff: AugmentedEvent<ApiType, [AccountId32]>;
+      UpgradabilityInMaintenanceModeSwitchedOff: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20]>;
       /**
        * Upgradablilty in maintenance mode has been switched on
        **/
-      UpgradabilityInMaintenanceModeSwitchedOn: AugmentedEvent<ApiType, [AccountId32]>;
+      UpgradabilityInMaintenanceModeSwitchedOn: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20]>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
+    metamask: {
+      MetadataUpdated: AugmentedEvent<ApiType, [name: Option<Bytes>, version: Option<Bytes>, chainId: Option<u64>, decodeUrl: Option<Bytes>], { name: Option<Bytes>, version: Option<Bytes>, chainId: Option<u64>, decodeUrl: Option<Bytes> }>;
       /**
        * Generic event
        **/
       [key: string]: AugmentedEvent<ApiType>;
     };
     multiPurposeLiquidity: {
-      TokensRelockedFromReserve: AugmentedEvent<ApiType, [AccountId32, u32, u128, u128]>;
-      VestingTokensReserved: AugmentedEvent<ApiType, [AccountId32, u32, u128]>;
+      TokensRelockedFromReserve: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u128, u128]>;
+      VestingTokensReserved: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u128]>;
       /**
        * Generic event
        **/
@@ -275,59 +282,59 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * An agggregator's metadata has been updated
        **/
-      AggregatorMetadataUpdated: AugmentedEvent<ApiType, [AccountId32]>;
+      AggregatorMetadataUpdated: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20]>;
       /**
        * Candidate, Cancelled Request
        **/
-      CancelledCandidateBondChange: AugmentedEvent<ApiType, [AccountId32, ParachainStakingCandidateBondRequest]>;
+      CancelledCandidateBondChange: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, ParachainStakingCandidateBondRequest]>;
       /**
        * Candidate
        **/
-      CancelledCandidateExit: AugmentedEvent<ApiType, [AccountId32]>;
+      CancelledCandidateExit: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20]>;
       /**
        * Delegator, Cancelled Request
        **/
-      CancelledDelegationRequest: AugmentedEvent<ApiType, [AccountId32, ParachainStakingDelegationRequest]>;
+      CancelledDelegationRequest: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, ParachainStakingDelegationRequest]>;
       /**
        * A candidate updated aggregator
        **/
-      CandidateAggregatorUpdated: AugmentedEvent<ApiType, [AccountId32, Option<AccountId32>]>;
+      CandidateAggregatorUpdated: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, Option<SpRuntimeAccountAccountId20>]>;
       /**
        * Round Online, Candidate
        **/
-      CandidateBackOnline: AugmentedEvent<ApiType, [u32, AccountId32]>;
+      CandidateBackOnline: AugmentedEvent<ApiType, [u32, SpRuntimeAccountAccountId20]>;
       /**
        * Candidate, Amount, New Bond
        **/
-      CandidateBondedLess: AugmentedEvent<ApiType, [AccountId32, u128, u128]>;
+      CandidateBondedLess: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u128, u128]>;
       /**
        * Candidate, Amount, New Bond Total
        **/
-      CandidateBondedMore: AugmentedEvent<ApiType, [AccountId32, u128, u128]>;
+      CandidateBondedMore: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u128, u128]>;
       /**
        * Candidate, Amount To Decrease, Round at which request can be executed by caller
        **/
-      CandidateBondLessRequested: AugmentedEvent<ApiType, [AccountId32, u128, u32]>;
+      CandidateBondLessRequested: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u128, u32]>;
       /**
        * Candidate, Amount To Increase, Round at which request can be executed by caller
        **/
-      CandidateBondMoreRequested: AugmentedEvent<ApiType, [AccountId32, u128, u32]>;
+      CandidateBondMoreRequested: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u128, u32]>;
       /**
        * Ex-Candidate, Amount Unlocked, New Total Amt Locked
        **/
-      CandidateLeft: AugmentedEvent<ApiType, [AccountId32, u128, u128]>;
+      CandidateLeft: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u128, u128]>;
       /**
        * Round At Which Exit Is Allowed, Candidate, Scheduled Exit
        **/
-      CandidateScheduledExit: AugmentedEvent<ApiType, [u32, AccountId32, u32]>;
+      CandidateScheduledExit: AugmentedEvent<ApiType, [u32, SpRuntimeAccountAccountId20, u32]>;
       /**
        * Round Offline, Candidate
        **/
-      CandidateWentOffline: AugmentedEvent<ApiType, [u32, AccountId32]>;
+      CandidateWentOffline: AugmentedEvent<ApiType, [u32, SpRuntimeAccountAccountId20]>;
       /**
        * Round, Collator Account, Total Exposed Amount (includes all delegations)
        **/
-      CollatorChosen: AugmentedEvent<ApiType, [u32, AccountId32, u128]>;
+      CollatorChosen: AugmentedEvent<ApiType, [u32, SpRuntimeAccountAccountId20, u128]>;
       /**
        * Set collator commission to this value [old, new]
        **/
@@ -335,53 +342,53 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * Notify about reward periods that has been paid (collator, payout rounds, any rewards left)
        **/
-      CollatorRewardsDistributed: AugmentedEvent<ApiType, [AccountId32, ParachainStakingPayoutRounds]>;
+      CollatorRewardsDistributed: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, ParachainStakingPayoutRounds]>;
       /**
        * Delegator, Amount Locked, Candidate, Delegator Position with New Total Counted if in Top
        **/
-      Delegation: AugmentedEvent<ApiType, [AccountId32, u128, AccountId32, ParachainStakingDelegatorAdded]>;
-      DelegationDecreased: AugmentedEvent<ApiType, [AccountId32, AccountId32, u128, bool]>;
+      Delegation: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u128, SpRuntimeAccountAccountId20, ParachainStakingDelegatorAdded]>;
+      DelegationDecreased: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, u128, bool]>;
       /**
        * Delegator, Candidate, Amount to be decreased, Round at which can be executed
        **/
-      DelegationDecreaseScheduled: AugmentedEvent<ApiType, [AccountId32, AccountId32, u128, u32]>;
-      DelegationIncreased: AugmentedEvent<ApiType, [AccountId32, AccountId32, u128, bool]>;
+      DelegationDecreaseScheduled: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, u128, u32]>;
+      DelegationIncreased: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, u128, bool]>;
       /**
        * Delegator, Candidate, Amount to be increased, Round at which can be executed
        **/
-      DelegationIncreaseScheduled: AugmentedEvent<ApiType, [AccountId32, AccountId32, u128, u32]>;
+      DelegationIncreaseScheduled: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, u128, u32]>;
       /**
        * Round, Delegator, Candidate, Scheduled Exit
        **/
-      DelegationRevocationScheduled: AugmentedEvent<ApiType, [u32, AccountId32, AccountId32, u32]>;
+      DelegationRevocationScheduled: AugmentedEvent<ApiType, [u32, SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, u32]>;
       /**
        * Delegator, Candidate, Amount Unstaked
        **/
-      DelegationRevoked: AugmentedEvent<ApiType, [AccountId32, AccountId32, u128]>;
+      DelegationRevoked: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, u128]>;
       /**
        * Session index, Delegator, Collator, Due reward (as per counted delegation for collator)
        **/
-      DelegatorDueReward: AugmentedEvent<ApiType, [u32, AccountId32, AccountId32, u128]>;
+      DelegatorDueReward: AugmentedEvent<ApiType, [u32, SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, u128]>;
       /**
        * Delegator
        **/
-      DelegatorExitCancelled: AugmentedEvent<ApiType, [AccountId32]>;
+      DelegatorExitCancelled: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20]>;
       /**
        * Round, Delegator, Scheduled Exit
        **/
-      DelegatorExitScheduled: AugmentedEvent<ApiType, [u32, AccountId32, u32]>;
+      DelegatorExitScheduled: AugmentedEvent<ApiType, [u32, SpRuntimeAccountAccountId20, u32]>;
       /**
        * Delegator, Amount Unstaked
        **/
-      DelegatorLeft: AugmentedEvent<ApiType, [AccountId32, u128]>;
+      DelegatorLeft: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u128]>;
       /**
        * Delegator, Candidate, Amount Unstaked, New Total Amt Staked for Candidate
        **/
-      DelegatorLeftCandidate: AugmentedEvent<ApiType, [AccountId32, AccountId32, u128, u128]>;
+      DelegatorLeftCandidate: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, u128, u128]>;
       /**
        * Account, Amount Locked, New Total Amt Locked
        **/
-      JoinedCollatorCandidates: AugmentedEvent<ApiType, [AccountId32, u128, u128]>;
+      JoinedCollatorCandidates: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u128, u128]>;
       /**
        * Starting Block, Round, Number of Collators Selected, Total Balance
        **/
@@ -389,7 +396,7 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * Paid the account (delegator or collator) the balance as liquid rewards
        **/
-      Rewarded: AugmentedEvent<ApiType, [u32, AccountId32, u128]>;
+      Rewarded: AugmentedEvent<ApiType, [u32, SpRuntimeAccountAccountId20, u128]>;
       /**
        * Staking expectations set
        **/
@@ -404,14 +411,14 @@ declare module '@polkadot/api-base/types/events' {
       [key: string]: AugmentedEvent<ApiType>;
     };
     proofOfStake: {
-      LiquidityActivated: AugmentedEvent<ApiType, [AccountId32, u32, u128]>;
-      LiquidityDeactivated: AugmentedEvent<ApiType, [AccountId32, u32, u128]>;
+      LiquidityActivated: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u128]>;
+      LiquidityDeactivated: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u128]>;
       PoolPromotionUpdated: AugmentedEvent<ApiType, [u32, Option<u8>]>;
-      RewardsClaimed: AugmentedEvent<ApiType, [AccountId32, u32, u128]>;
-      ThirdPartyLiquidityActivated: AugmentedEvent<ApiType, [AccountId32, u32, u32, u128]>;
-      ThirdPartyLiquidityDeactivated: AugmentedEvent<ApiType, [AccountId32, u32, u32, u128]>;
-      ThirdPartyRewardsClaimed: AugmentedEvent<ApiType, [AccountId32, u32, u32, u128]>;
-      ThirdPartySuccessfulPoolPromotion: AugmentedEvent<ApiType, [AccountId32, u32, u32, u128]>;
+      RewardsClaimed: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u128]>;
+      ThirdPartyLiquidityActivated: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u32, u128]>;
+      ThirdPartyLiquidityDeactivated: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u32, u128]>;
+      ThirdPartyRewardsClaimed: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u32, u128]>;
+      ThirdPartySuccessfulPoolPromotion: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u32, u128]>;
       /**
        * Generic event
        **/
@@ -421,11 +428,11 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * An announcement was placed to make a call in the future.
        **/
-      Announced: AugmentedEvent<ApiType, [real: AccountId32, proxy: AccountId32, callHash: H256], { real: AccountId32, proxy: AccountId32, callHash: H256 }>;
+      Announced: AugmentedEvent<ApiType, [real: SpRuntimeAccountAccountId20, proxy: SpRuntimeAccountAccountId20, callHash: H256], { real: SpRuntimeAccountAccountId20, proxy: SpRuntimeAccountAccountId20, callHash: H256 }>;
       /**
        * A proxy was added.
        **/
-      ProxyAdded: AugmentedEvent<ApiType, [delegator: AccountId32, delegatee: AccountId32, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, delay: u32], { delegator: AccountId32, delegatee: AccountId32, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, delay: u32 }>;
+      ProxyAdded: AugmentedEvent<ApiType, [delegator: SpRuntimeAccountAccountId20, delegatee: SpRuntimeAccountAccountId20, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, delay: u32], { delegator: SpRuntimeAccountAccountId20, delegatee: SpRuntimeAccountAccountId20, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, delay: u32 }>;
       /**
        * A proxy was executed correctly, with the given.
        **/
@@ -433,22 +440,23 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * A proxy was removed.
        **/
-      ProxyRemoved: AugmentedEvent<ApiType, [delegator: AccountId32, delegatee: AccountId32, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, delay: u32], { delegator: AccountId32, delegatee: AccountId32, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, delay: u32 }>;
+      ProxyRemoved: AugmentedEvent<ApiType, [delegator: SpRuntimeAccountAccountId20, delegatee: SpRuntimeAccountAccountId20, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, delay: u32], { delegator: SpRuntimeAccountAccountId20, delegatee: SpRuntimeAccountAccountId20, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, delay: u32 }>;
       /**
        * A pure account has been created by new proxy with given
        * disambiguation index and proxy type.
        **/
-      PureCreated: AugmentedEvent<ApiType, [pure: AccountId32, who: AccountId32, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, disambiguationIndex: u16], { pure: AccountId32, who: AccountId32, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, disambiguationIndex: u16 }>;
+      PureCreated: AugmentedEvent<ApiType, [pure: SpRuntimeAccountAccountId20, who: SpRuntimeAccountAccountId20, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, disambiguationIndex: u16], { pure: SpRuntimeAccountAccountId20, who: SpRuntimeAccountAccountId20, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, disambiguationIndex: u16 }>;
       /**
        * Generic event
        **/
       [key: string]: AugmentedEvent<ApiType>;
     };
     rolldown: {
-      L1ReadStored: AugmentedEvent<ApiType, [ITuple<[AccountId32, u128, {
+      L1ReadStored: AugmentedEvent<ApiType, [ITuple<[SpRuntimeAccountAccountId20, u128, {
     readonly start: u128;
     readonly end: u128;
   } & Struct, H256]>]>;
+      RequestProcessedOnL2: AugmentedEvent<ApiType, [PalletRolldownMessagesChain, u128]>;
       /**
        * Generic event
        **/
@@ -475,7 +483,7 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * The \[sudoer\] just switched identity; the old key is supplied if one existed.
        **/
-      KeyChanged: AugmentedEvent<ApiType, [oldSudoer: Option<AccountId32>], { oldSudoer: Option<AccountId32> }>;
+      KeyChanged: AugmentedEvent<ApiType, [oldSudoer: Option<SpRuntimeAccountAccountId20>], { oldSudoer: Option<SpRuntimeAccountAccountId20> }>;
       /**
        * A sudo just took place. \[result\]
        **/
@@ -519,15 +527,15 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * An account was reaped.
        **/
-      KilledAccount: AugmentedEvent<ApiType, [account: AccountId32], { account: AccountId32 }>;
+      KilledAccount: AugmentedEvent<ApiType, [account: SpRuntimeAccountAccountId20], { account: SpRuntimeAccountAccountId20 }>;
       /**
        * A new account was created.
        **/
-      NewAccount: AugmentedEvent<ApiType, [account: AccountId32], { account: AccountId32 }>;
+      NewAccount: AugmentedEvent<ApiType, [account: SpRuntimeAccountAccountId20], { account: SpRuntimeAccountAccountId20 }>;
       /**
        * On on-chain remark happened.
        **/
-      Remarked: AugmentedEvent<ApiType, [sender: AccountId32, hash_: H256], { sender: AccountId32, hash_: H256 }>;
+      Remarked: AugmentedEvent<ApiType, [sender: SpRuntimeAccountAccountId20, hash_: H256], { sender: SpRuntimeAccountAccountId20, hash_: H256 }>;
       /**
        * On stored txs
        **/
@@ -541,55 +549,55 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * A balance was set by root.
        **/
-      BalanceSet: AugmentedEvent<ApiType, [currencyId: u32, who: AccountId32, free: u128, reserved: u128], { currencyId: u32, who: AccountId32, free: u128, reserved: u128 }>;
+      BalanceSet: AugmentedEvent<ApiType, [currencyId: u32, who: SpRuntimeAccountAccountId20, free: u128, reserved: u128], { currencyId: u32, who: SpRuntimeAccountAccountId20, free: u128, reserved: u128 }>;
       /**
        * A token was issued.
        **/
-      Created: AugmentedEvent<ApiType, [u32, AccountId32, u128]>;
+      Created: AugmentedEvent<ApiType, [u32, SpRuntimeAccountAccountId20, u128]>;
       /**
        * Deposited some balance into an account
        **/
-      Deposited: AugmentedEvent<ApiType, [currencyId: u32, who: AccountId32, amount: u128], { currencyId: u32, who: AccountId32, amount: u128 }>;
+      Deposited: AugmentedEvent<ApiType, [currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128], { currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128 }>;
       /**
        * An account was removed whose balance was non-zero but below
        * ExistentialDeposit, resulting in an outright loss.
        **/
-      DustLost: AugmentedEvent<ApiType, [currencyId: u32, who: AccountId32, amount: u128], { currencyId: u32, who: AccountId32, amount: u128 }>;
+      DustLost: AugmentedEvent<ApiType, [currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128], { currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128 }>;
       /**
        * An account was created with some free balance.
        **/
-      Endowed: AugmentedEvent<ApiType, [currencyId: u32, who: AccountId32, amount: u128], { currencyId: u32, who: AccountId32, amount: u128 }>;
+      Endowed: AugmentedEvent<ApiType, [currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128], { currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128 }>;
       Issued: AugmentedEvent<ApiType, [currencyId: u32, amount: u128], { currencyId: u32, amount: u128 }>;
       /**
        * Some free balance was locked.
        **/
-      Locked: AugmentedEvent<ApiType, [currencyId: u32, who: AccountId32, amount: u128], { currencyId: u32, who: AccountId32, amount: u128 }>;
+      Locked: AugmentedEvent<ApiType, [currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128], { currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128 }>;
       /**
        * Some locked funds were unlocked
        **/
-      LockRemoved: AugmentedEvent<ApiType, [lockId: U8aFixed, currencyId: u32, who: AccountId32], { lockId: U8aFixed, currencyId: u32, who: AccountId32 }>;
+      LockRemoved: AugmentedEvent<ApiType, [lockId: U8aFixed, currencyId: u32, who: SpRuntimeAccountAccountId20], { lockId: U8aFixed, currencyId: u32, who: SpRuntimeAccountAccountId20 }>;
       /**
        * Some funds are locked
        **/
-      LockSet: AugmentedEvent<ApiType, [lockId: U8aFixed, currencyId: u32, who: AccountId32, amount: u128], { lockId: U8aFixed, currencyId: u32, who: AccountId32, amount: u128 }>;
+      LockSet: AugmentedEvent<ApiType, [lockId: U8aFixed, currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128], { lockId: U8aFixed, currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128 }>;
       /**
        * A token was minted.
        **/
-      Minted: AugmentedEvent<ApiType, [u32, AccountId32, u128]>;
+      Minted: AugmentedEvent<ApiType, [u32, SpRuntimeAccountAccountId20, u128]>;
       Rescinded: AugmentedEvent<ApiType, [currencyId: u32, amount: u128], { currencyId: u32, amount: u128 }>;
       /**
        * Some balance was reserved (moved from free to reserved).
        **/
-      Reserved: AugmentedEvent<ApiType, [currencyId: u32, who: AccountId32, amount: u128], { currencyId: u32, who: AccountId32, amount: u128 }>;
+      Reserved: AugmentedEvent<ApiType, [currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128], { currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128 }>;
       /**
        * Some reserved balance was repatriated (moved from reserved to
        * another account).
        **/
-      ReserveRepatriated: AugmentedEvent<ApiType, [currencyId: u32, from: AccountId32, to: AccountId32, amount: u128, status: FrameSupportTokensMiscBalanceStatus], { currencyId: u32, from: AccountId32, to: AccountId32, amount: u128, status: FrameSupportTokensMiscBalanceStatus }>;
+      ReserveRepatriated: AugmentedEvent<ApiType, [currencyId: u32, from: SpRuntimeAccountAccountId20, to: SpRuntimeAccountAccountId20, amount: u128, status: FrameSupportTokensMiscBalanceStatus], { currencyId: u32, from: SpRuntimeAccountAccountId20, to: SpRuntimeAccountAccountId20, amount: u128, status: FrameSupportTokensMiscBalanceStatus }>;
       /**
        * Some balances were slashed (e.g. due to mis-behavior)
        **/
-      Slashed: AugmentedEvent<ApiType, [currencyId: u32, who: AccountId32, freeAmount: u128, reservedAmount: u128], { currencyId: u32, who: AccountId32, freeAmount: u128, reservedAmount: u128 }>;
+      Slashed: AugmentedEvent<ApiType, [currencyId: u32, who: SpRuntimeAccountAccountId20, freeAmount: u128, reservedAmount: u128], { currencyId: u32, who: SpRuntimeAccountAccountId20, freeAmount: u128, reservedAmount: u128 }>;
       /**
        * The total issuance of an currency has been set
        **/
@@ -597,19 +605,19 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * Transfer succeeded.
        **/
-      Transfer: AugmentedEvent<ApiType, [currencyId: u32, from: AccountId32, to: AccountId32, amount: u128], { currencyId: u32, from: AccountId32, to: AccountId32, amount: u128 }>;
+      Transfer: AugmentedEvent<ApiType, [currencyId: u32, from: SpRuntimeAccountAccountId20, to: SpRuntimeAccountAccountId20, amount: u128], { currencyId: u32, from: SpRuntimeAccountAccountId20, to: SpRuntimeAccountAccountId20, amount: u128 }>;
       /**
        * Some locked balance was freed.
        **/
-      Unlocked: AugmentedEvent<ApiType, [currencyId: u32, who: AccountId32, amount: u128], { currencyId: u32, who: AccountId32, amount: u128 }>;
+      Unlocked: AugmentedEvent<ApiType, [currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128], { currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128 }>;
       /**
        * Some balance was unreserved (moved from reserved to free).
        **/
-      Unreserved: AugmentedEvent<ApiType, [currencyId: u32, who: AccountId32, amount: u128], { currencyId: u32, who: AccountId32, amount: u128 }>;
+      Unreserved: AugmentedEvent<ApiType, [currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128], { currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128 }>;
       /**
        * Some balances were withdrawn (e.g. pay for transaction fee)
        **/
-      Withdrawn: AugmentedEvent<ApiType, [currencyId: u32, who: AccountId32, amount: u128], { currencyId: u32, who: AccountId32, amount: u128 }>;
+      Withdrawn: AugmentedEvent<ApiType, [currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128], { currencyId: u32, who: SpRuntimeAccountAccountId20, amount: u128 }>;
       /**
        * Generic event
        **/
@@ -620,7 +628,7 @@ declare module '@polkadot/api-base/types/events' {
        * A transaction fee `actual_fee`, of which `tip` was added to the minimum inclusion fee,
        * has been paid by `who`.
        **/
-      TransactionFeePaid: AugmentedEvent<ApiType, [who: AccountId32, actualFee: u128, tip: u128], { who: AccountId32, actualFee: u128, tip: u128 }>;
+      TransactionFeePaid: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, actualFee: u128, tip: u128], { who: SpRuntimeAccountAccountId20, actualFee: u128, tip: u128 }>;
       /**
        * Generic event
        **/
@@ -630,7 +638,7 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * Some funds have been allocated.
        **/
-      Awarded: AugmentedEvent<ApiType, [proposalIndex: u32, award: u128, account: AccountId32], { proposalIndex: u32, award: u128, account: AccountId32 }>;
+      Awarded: AugmentedEvent<ApiType, [proposalIndex: u32, award: u128, account: SpRuntimeAccountAccountId20], { proposalIndex: u32, award: u128, account: SpRuntimeAccountAccountId20 }>;
       /**
        * Some of our funds have been burnt.
        **/
@@ -654,7 +662,7 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * A new spend proposal has been approved.
        **/
-      SpendApproved: AugmentedEvent<ApiType, [proposalIndex: u32, amount: u128, beneficiary: AccountId32], { proposalIndex: u32, amount: u128, beneficiary: AccountId32 }>;
+      SpendApproved: AugmentedEvent<ApiType, [proposalIndex: u32, amount: u128, beneficiary: SpRuntimeAccountAccountId20], { proposalIndex: u32, amount: u128, beneficiary: SpRuntimeAccountAccountId20 }>;
       /**
        * We have ended a spend period and will now allocate funds.
        **/
@@ -703,29 +711,29 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * An \[account\] has become fully vested.
        **/
-      VestingCompleted: AugmentedEvent<ApiType, [account: AccountId32, tokenId: u32], { account: AccountId32, tokenId: u32 }>;
+      VestingCompleted: AugmentedEvent<ApiType, [account: SpRuntimeAccountAccountId20, tokenId: u32], { account: SpRuntimeAccountAccountId20, tokenId: u32 }>;
       /**
        * The amount vested has been updated. This could indicate a change in funds available.
        * The balance given is the amount which is left unvested (and thus locked).
        **/
-      VestingUpdated: AugmentedEvent<ApiType, [account: AccountId32, tokenId: u32, unvested: u128], { account: AccountId32, tokenId: u32, unvested: u128 }>;
+      VestingUpdated: AugmentedEvent<ApiType, [account: SpRuntimeAccountAccountId20, tokenId: u32, unvested: u128], { account: SpRuntimeAccountAccountId20, tokenId: u32, unvested: u128 }>;
       /**
        * Generic event
        **/
       [key: string]: AugmentedEvent<ApiType>;
     };
     xyk: {
-      AssetsSwapped: AugmentedEvent<ApiType, [AccountId32, Vec<u32>, u128, u128]>;
-      BuyAssetFailedDueToSlippage: AugmentedEvent<ApiType, [AccountId32, u32, u128, u32, u128, u128]>;
-      LiquidityActivated: AugmentedEvent<ApiType, [AccountId32, u32, u128]>;
-      LiquidityBurned: AugmentedEvent<ApiType, [AccountId32, u32, u128, u32, u128, u32, u128]>;
-      LiquidityDeactivated: AugmentedEvent<ApiType, [AccountId32, u32, u128]>;
-      LiquidityMinted: AugmentedEvent<ApiType, [AccountId32, u32, u128, u32, u128, u32, u128]>;
-      MultiSwapAssetFailedOnAtomicSwap: AugmentedEvent<ApiType, [AccountId32, Vec<u32>, u128, SpRuntimeModuleError]>;
-      PoolCreated: AugmentedEvent<ApiType, [AccountId32, u32, u128, u32, u128]>;
+      AssetsSwapped: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, Vec<u32>, u128, u128]>;
+      BuyAssetFailedDueToSlippage: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u128, u32, u128, u128]>;
+      LiquidityActivated: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u128]>;
+      LiquidityBurned: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u128, u32, u128, u32, u128]>;
+      LiquidityDeactivated: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u128]>;
+      LiquidityMinted: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u128, u32, u128, u32, u128]>;
+      MultiSwapAssetFailedOnAtomicSwap: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, Vec<u32>, u128, SpRuntimeModuleError]>;
+      PoolCreated: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u128, u32, u128]>;
       PoolPromotionUpdated: AugmentedEvent<ApiType, [u32, Option<u8>]>;
-      RewardsClaimed: AugmentedEvent<ApiType, [AccountId32, u32, u128]>;
-      SellAssetFailedDueToSlippage: AugmentedEvent<ApiType, [AccountId32, u32, u128, u32, u128, u128]>;
+      RewardsClaimed: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u128]>;
+      SellAssetFailedDueToSlippage: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u32, u128, u32, u128, u128]>;
       /**
        * Generic event
        **/

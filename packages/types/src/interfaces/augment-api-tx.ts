@@ -9,8 +9,8 @@ import type { ApiTypes, AugmentedSubmittable, SubmittableExtrinsic, SubmittableE
 import type { Data } from '@polkadot/types';
 import type { Bytes, Compact, Option, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { AnyNumber, IMethod, ITuple } from '@polkadot/types-codec/types';
-import type { AccountId32, Call, H256, MultiAddress, Perbill, Permill } from '@polkadot/types/interfaces/runtime';
-import type { MangataTypesAssetsCustomMetadata, MangataTypesAssetsL1Asset, MangataTypesMultipurposeLiquidityActivateKind, MangataTypesMultipurposeLiquidityBondKind, OrmlTraitsAssetRegistryAssetMetadata, PalletIdentityBitFlags, PalletIdentityIdentityInfo, PalletIdentityJudgement, PalletIssuanceTgeInfo, PalletProofOfStakeThirdPartyActivationKind, PalletRolldownMessagesL1Update, PalletVestingMangataVestingInfo, ParachainStakingMetadataUpdateAction, ParachainStakingPairedOrLiquidityToken, RollupRuntimeOriginCaller, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, RollupRuntimeSessionKeys, SpConsensusGrandpaEquivocationProof, SpCoreVoid, SpRuntimeMultiSignature, SpWeightsWeightV2Weight, StagingXcmVersionedMultiLocation } from '@polkadot/types/lookup';
+import type { Call, H256, Perbill, Permill } from '@polkadot/types/interfaces/runtime';
+import type { MangataTypesAssetsCustomMetadata, MangataTypesAssetsL1Asset, MangataTypesMultipurposeLiquidityActivateKind, MangataTypesMultipurposeLiquidityBondKind, OrmlTraitsAssetRegistryAssetMetadata, PalletIdentityBitFlags, PalletIdentityIdentityInfo, PalletIdentityJudgement, PalletIssuanceTgeInfo, PalletProofOfStakeThirdPartyActivationKind, PalletRolldownMessagesChain, PalletRolldownMessagesL1Update, PalletVestingMangataVestingInfo, ParachainStakingMetadataUpdateAction, ParachainStakingPairedOrLiquidityToken, RollupRuntimeOriginCaller, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, RollupRuntimeSessionKeys, SpConsensusGrandpaEquivocationProof, SpCoreVoid, SpRuntimeAccountAccountId20, SpRuntimeAccountEthereumSignature, SpWeightsWeightV2Weight, StagingXcmVersionedMultiLocation } from '@polkadot/types/lookup';
 
 export type __AugmentedSubmittable = AugmentedSubmittable<() => unknown>;
 export type __SubmittableExtrinsic<ApiType extends ApiTypes> = SubmittableExtrinsic<ApiType>;
@@ -26,7 +26,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::register_l1_asset`].
        **/
-      registerL1Asset: AugmentedSubmittable<(metadata: OrmlTraitsAssetRegistryAssetMetadata | { decimals?: any; name?: any; symbol?: any; existentialDeposit?: any; location?: any; additional?: any } | string | Uint8Array, assetId: Option<u32> | null | Uint8Array | u32 | AnyNumber, l1Asset: MangataTypesAssetsL1Asset | { Ethereum: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [OrmlTraitsAssetRegistryAssetMetadata, Option<u32>, MangataTypesAssetsL1Asset]>;
+      registerL1Asset: AugmentedSubmittable<(metadata: OrmlTraitsAssetRegistryAssetMetadata | { decimals?: any; name?: any; symbol?: any; existentialDeposit?: any; location?: any; additional?: any } | string | Uint8Array, assetId: Option<u32> | null | Uint8Array | u32 | AnyNumber, l1Asset: MangataTypesAssetsL1Asset | { Ethereum: any } | { Arbitrum: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [OrmlTraitsAssetRegistryAssetMetadata, Option<u32>, MangataTypesAssetsL1Asset]>;
       /**
        * See [`Pallet::update_asset`].
        **/
@@ -34,7 +34,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::update_l1_asset_data`].
        **/
-      updateL1AssetData: AugmentedSubmittable<(assetId: u32 | AnyNumber | Uint8Array, l1Asset: Option<MangataTypesAssetsL1Asset> | null | Uint8Array | MangataTypesAssetsL1Asset | { Ethereum: any } | string) => SubmittableExtrinsic<ApiType>, [u32, Option<MangataTypesAssetsL1Asset>]>;
+      updateL1AssetData: AugmentedSubmittable<(assetId: u32 | AnyNumber | Uint8Array, l1Asset: Option<MangataTypesAssetsL1Asset> | null | Uint8Array | MangataTypesAssetsL1Asset | { Ethereum: any } | { Arbitrum: any } | string) => SubmittableExtrinsic<ApiType>, [u32, Option<MangataTypesAssetsL1Asset>]>;
       /**
        * Generic tx
        **/
@@ -56,7 +56,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::claim_liquidity_tokens_for_account`].
        **/
-      claimLiquidityTokensForAccount: AugmentedSubmittable<(account: AccountId32 | string | Uint8Array, activateRewards: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId32, bool]>;
+      claimLiquidityTokensForAccount: AugmentedSubmittable<(account: SpRuntimeAccountAccountId20 | string | Uint8Array, activateRewards: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, bool]>;
       /**
        * See [`Pallet::finalize`].
        **/
@@ -80,7 +80,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::whitelist_accounts`].
        **/
-      whitelistAccounts: AugmentedSubmittable<(accounts: Vec<AccountId32> | (AccountId32 | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [Vec<AccountId32>]>;
+      whitelistAccounts: AugmentedSubmittable<(accounts: Vec<SpRuntimeAccountAccountId20> | (SpRuntimeAccountAccountId20 | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [Vec<SpRuntimeAccountAccountId20>]>;
       /**
        * Generic tx
        **/
@@ -106,7 +106,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::set_members`].
        **/
-      setMembers: AugmentedSubmittable<(newMembers: Vec<AccountId32> | (AccountId32 | string | Uint8Array)[], prime: Option<AccountId32> | null | Uint8Array | AccountId32 | string, oldCount: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<AccountId32>, Option<AccountId32>, u32]>;
+      setMembers: AugmentedSubmittable<(newMembers: Vec<SpRuntimeAccountAccountId20> | (SpRuntimeAccountAccountId20 | string | Uint8Array)[], prime: Option<SpRuntimeAccountAccountId20> | null | Uint8Array | SpRuntimeAccountAccountId20 | string, oldCount: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<SpRuntimeAccountAccountId20>, Option<SpRuntimeAccountAccountId20>, u32]>;
       /**
        * See [`Pallet::vote`].
        **/
@@ -120,11 +120,11 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::associate_native_identity`].
        **/
-      associateNativeIdentity: AugmentedSubmittable<(rewardAccount: AccountId32 | string | Uint8Array, relayAccount: AccountId32 | string | Uint8Array, proof: SpRuntimeMultiSignature | { Ed25519: any } | { Sr25519: any } | { Ecdsa: any } | { Eth: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId32, AccountId32, SpRuntimeMultiSignature]>;
+      associateNativeIdentity: AugmentedSubmittable<(rewardAccount: SpRuntimeAccountAccountId20 | string | Uint8Array, relayAccount: SpRuntimeAccountAccountId20 | string | Uint8Array, proof: SpRuntimeAccountEthereumSignature | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, SpRuntimeAccountEthereumSignature]>;
       /**
        * See [`Pallet::change_association_with_relay_keys`].
        **/
-      changeAssociationWithRelayKeys: AugmentedSubmittable<(rewardAccount: AccountId32 | string | Uint8Array, previousAccount: AccountId32 | string | Uint8Array, proofs: Vec<ITuple<[AccountId32, SpRuntimeMultiSignature]>> | ([AccountId32 | string | Uint8Array, SpRuntimeMultiSignature | { Ed25519: any } | { Sr25519: any } | { Ecdsa: any } | { Eth: any } | string | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [AccountId32, AccountId32, Vec<ITuple<[AccountId32, SpRuntimeMultiSignature]>>]>;
+      changeAssociationWithRelayKeys: AugmentedSubmittable<(rewardAccount: SpRuntimeAccountAccountId20 | string | Uint8Array, previousAccount: SpRuntimeAccountAccountId20 | string | Uint8Array, proofs: Vec<ITuple<[SpRuntimeAccountAccountId20, SpRuntimeAccountEthereumSignature]>> | ([SpRuntimeAccountAccountId20 | string | Uint8Array, SpRuntimeAccountEthereumSignature | string | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, Vec<ITuple<[SpRuntimeAccountAccountId20, SpRuntimeAccountEthereumSignature]>>]>;
       /**
        * See [`Pallet::claim`].
        **/
@@ -136,7 +136,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::initialize_reward_vec`].
        **/
-      initializeRewardVec: AugmentedSubmittable<(rewards: Vec<ITuple<[AccountId32, Option<AccountId32>, u128]>> | ([AccountId32 | string | Uint8Array, Option<AccountId32> | null | Uint8Array | AccountId32 | string, u128 | AnyNumber | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [Vec<ITuple<[AccountId32, Option<AccountId32>, u128]>>]>;
+      initializeRewardVec: AugmentedSubmittable<(rewards: Vec<ITuple<[SpRuntimeAccountAccountId20, Option<SpRuntimeAccountAccountId20>, u128]>> | ([SpRuntimeAccountAccountId20 | string | Uint8Array, Option<SpRuntimeAccountAccountId20> | null | Uint8Array | SpRuntimeAccountAccountId20 | string, u128 | AnyNumber | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [Vec<ITuple<[SpRuntimeAccountAccountId20, Option<SpRuntimeAccountAccountId20>, u128]>>]>;
       /**
        * See [`Pallet::set_crowdloan_allocation`].
        **/
@@ -144,7 +144,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::update_reward_address`].
        **/
-      updateRewardAddress: AugmentedSubmittable<(newRewardAccount: AccountId32 | string | Uint8Array, crowdloanId: Option<u32> | null | Uint8Array | u32 | AnyNumber) => SubmittableExtrinsic<ApiType>, [AccountId32, Option<u32>]>;
+      updateRewardAddress: AugmentedSubmittable<(newRewardAccount: SpRuntimeAccountAccountId20 | string | Uint8Array, crowdloanId: Option<u32> | null | Uint8Array | u32 | AnyNumber) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, Option<u32>]>;
       /**
        * Generic tx
        **/
@@ -186,11 +186,11 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::add_registrar`].
        **/
-      addRegistrar: AugmentedSubmittable<(account: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress]>;
+      addRegistrar: AugmentedSubmittable<(account: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20]>;
       /**
        * See [`Pallet::add_sub`].
        **/
-      addSub: AugmentedSubmittable<(sub: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, data: Data | { None: any } | { Raw: any } | { BlakeTwo256: any } | { Sha256: any } | { Keccak256: any } | { ShaThree256: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, Data]>;
+      addSub: AugmentedSubmittable<(sub: SpRuntimeAccountAccountId20 | string | Uint8Array, data: Data | { None: any } | { Raw: any } | { BlakeTwo256: any } | { Sha256: any } | { Keccak256: any } | { ShaThree256: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, Data]>;
       /**
        * See [`Pallet::cancel_request`].
        **/
@@ -202,11 +202,11 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::kill_identity`].
        **/
-      killIdentity: AugmentedSubmittable<(target: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress]>;
+      killIdentity: AugmentedSubmittable<(target: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20]>;
       /**
        * See [`Pallet::provide_judgement`].
        **/
-      provideJudgement: AugmentedSubmittable<(regIndex: Compact<u32> | AnyNumber | Uint8Array, target: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, judgement: PalletIdentityJudgement | { Unknown: any } | { FeePaid: any } | { Reasonable: any } | { KnownGood: any } | { OutOfDate: any } | { LowQuality: any } | { Erroneous: any } | string | Uint8Array, identity: H256 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<u32>, MultiAddress, PalletIdentityJudgement, H256]>;
+      provideJudgement: AugmentedSubmittable<(regIndex: Compact<u32> | AnyNumber | Uint8Array, target: SpRuntimeAccountAccountId20 | string | Uint8Array, judgement: PalletIdentityJudgement | { Unknown: any } | { FeePaid: any } | { Reasonable: any } | { KnownGood: any } | { OutOfDate: any } | { LowQuality: any } | { Erroneous: any } | string | Uint8Array, identity: H256 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<u32>, SpRuntimeAccountAccountId20, PalletIdentityJudgement, H256]>;
       /**
        * See [`Pallet::quit_sub`].
        **/
@@ -214,11 +214,11 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::remove_sub`].
        **/
-      removeSub: AugmentedSubmittable<(sub: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress]>;
+      removeSub: AugmentedSubmittable<(sub: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20]>;
       /**
        * See [`Pallet::rename_sub`].
        **/
-      renameSub: AugmentedSubmittable<(sub: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, data: Data | { None: any } | { Raw: any } | { BlakeTwo256: any } | { Sha256: any } | { Keccak256: any } | { ShaThree256: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, Data]>;
+      renameSub: AugmentedSubmittable<(sub: SpRuntimeAccountAccountId20 | string | Uint8Array, data: Data | { None: any } | { Raw: any } | { BlakeTwo256: any } | { Sha256: any } | { Keccak256: any } | { ShaThree256: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, Data]>;
       /**
        * See [`Pallet::request_judgement`].
        **/
@@ -226,7 +226,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::set_account_id`].
        **/
-      setAccountId: AugmentedSubmittable<(index: Compact<u32> | AnyNumber | Uint8Array, updated: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<u32>, MultiAddress]>;
+      setAccountId: AugmentedSubmittable<(index: Compact<u32> | AnyNumber | Uint8Array, updated: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<u32>, SpRuntimeAccountAccountId20]>;
       /**
        * See [`Pallet::set_fee`].
        **/
@@ -242,7 +242,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::set_subs`].
        **/
-      setSubs: AugmentedSubmittable<(subs: Vec<ITuple<[AccountId32, Data]>> | ([AccountId32 | string | Uint8Array, Data | { None: any } | { Raw: any } | { BlakeTwo256: any } | { Sha256: any } | { Keccak256: any } | { ShaThree256: any } | string | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [Vec<ITuple<[AccountId32, Data]>>]>;
+      setSubs: AugmentedSubmittable<(subs: Vec<ITuple<[SpRuntimeAccountAccountId20, Data]>> | ([SpRuntimeAccountAccountId20 | string | Uint8Array, Data | { None: any } | { Raw: any } | { BlakeTwo256: any } | { Sha256: any } | { Keccak256: any } | { ShaThree256: any } | string | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [Vec<ITuple<[SpRuntimeAccountAccountId20, Data]>>]>;
       /**
        * Generic tx
        **/
@@ -288,6 +288,16 @@ declare module '@polkadot/api-base/types/submittable' {
        **/
       [key: string]: SubmittableExtrinsicFunction<ApiType>;
     };
+    metamask: {
+      /**
+       * See [`Pallet::update`].
+       **/
+      update: AugmentedSubmittable<(name: Option<Bytes> | null | Uint8Array | Bytes | string, version: Option<Bytes> | null | Uint8Array | Bytes | string, chainId: Option<u64> | null | Uint8Array | u64 | AnyNumber, decodeUrl: Option<Bytes> | null | Uint8Array | Bytes | string) => SubmittableExtrinsic<ApiType>, [Option<Bytes>, Option<Bytes>, Option<u64>, Option<Bytes>]>;
+      /**
+       * Generic tx
+       **/
+      [key: string]: SubmittableExtrinsicFunction<ApiType>;
+    };
     multiPurposeLiquidity: {
       /**
        * See [`Pallet::reserve_vesting_liquidity_tokens`].
@@ -318,7 +328,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::aggregator_update_metadata`].
        **/
-      aggregatorUpdateMetadata: AugmentedSubmittable<(collatorCandidates: Vec<AccountId32> | (AccountId32 | string | Uint8Array)[], action: ParachainStakingMetadataUpdateAction | 'ExtendApprovedCollators' | 'RemoveApprovedCollators' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<AccountId32>, ParachainStakingMetadataUpdateAction]>;
+      aggregatorUpdateMetadata: AugmentedSubmittable<(collatorCandidates: Vec<SpRuntimeAccountAccountId20> | (SpRuntimeAccountAccountId20 | string | Uint8Array)[], action: ParachainStakingMetadataUpdateAction | 'ExtendApprovedCollators' | 'RemoveApprovedCollators' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<SpRuntimeAccountAccountId20>, ParachainStakingMetadataUpdateAction]>;
       /**
        * See [`Pallet::cancel_candidate_bond_request`].
        **/
@@ -326,7 +336,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::cancel_delegation_request`].
        **/
-      cancelDelegationRequest: AugmentedSubmittable<(candidate: AccountId32 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId32]>;
+      cancelDelegationRequest: AugmentedSubmittable<(candidate: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20]>;
       /**
        * See [`Pallet::cancel_leave_candidates`].
        **/
@@ -338,23 +348,23 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::delegate`].
        **/
-      delegate: AugmentedSubmittable<(collator: AccountId32 | string | Uint8Array, amount: u128 | AnyNumber | Uint8Array, useBalanceFrom: Option<MangataTypesMultipurposeLiquidityBondKind> | null | Uint8Array | MangataTypesMultipurposeLiquidityBondKind | 'AvailableBalance' | 'ActivatedUnstakedReserves' | 'UnspentReserves' | number, candidateDelegationCount: u32 | AnyNumber | Uint8Array, delegationCount: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId32, u128, Option<MangataTypesMultipurposeLiquidityBondKind>, u32, u32]>;
+      delegate: AugmentedSubmittable<(collator: SpRuntimeAccountAccountId20 | string | Uint8Array, amount: u128 | AnyNumber | Uint8Array, useBalanceFrom: Option<MangataTypesMultipurposeLiquidityBondKind> | null | Uint8Array | MangataTypesMultipurposeLiquidityBondKind | 'AvailableBalance' | 'ActivatedUnstakedReserves' | 'UnspentReserves' | number, candidateDelegationCount: u32 | AnyNumber | Uint8Array, delegationCount: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, u128, Option<MangataTypesMultipurposeLiquidityBondKind>, u32, u32]>;
       /**
        * See [`Pallet::execute_candidate_bond_request`].
        **/
-      executeCandidateBondRequest: AugmentedSubmittable<(candidate: AccountId32 | string | Uint8Array, useBalanceFrom: Option<MangataTypesMultipurposeLiquidityBondKind> | null | Uint8Array | MangataTypesMultipurposeLiquidityBondKind | 'AvailableBalance' | 'ActivatedUnstakedReserves' | 'UnspentReserves' | number) => SubmittableExtrinsic<ApiType>, [AccountId32, Option<MangataTypesMultipurposeLiquidityBondKind>]>;
+      executeCandidateBondRequest: AugmentedSubmittable<(candidate: SpRuntimeAccountAccountId20 | string | Uint8Array, useBalanceFrom: Option<MangataTypesMultipurposeLiquidityBondKind> | null | Uint8Array | MangataTypesMultipurposeLiquidityBondKind | 'AvailableBalance' | 'ActivatedUnstakedReserves' | 'UnspentReserves' | number) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, Option<MangataTypesMultipurposeLiquidityBondKind>]>;
       /**
        * See [`Pallet::execute_delegation_request`].
        **/
-      executeDelegationRequest: AugmentedSubmittable<(delegator: AccountId32 | string | Uint8Array, candidate: AccountId32 | string | Uint8Array, useBalanceFrom: Option<MangataTypesMultipurposeLiquidityBondKind> | null | Uint8Array | MangataTypesMultipurposeLiquidityBondKind | 'AvailableBalance' | 'ActivatedUnstakedReserves' | 'UnspentReserves' | number) => SubmittableExtrinsic<ApiType>, [AccountId32, AccountId32, Option<MangataTypesMultipurposeLiquidityBondKind>]>;
+      executeDelegationRequest: AugmentedSubmittable<(delegator: SpRuntimeAccountAccountId20 | string | Uint8Array, candidate: SpRuntimeAccountAccountId20 | string | Uint8Array, useBalanceFrom: Option<MangataTypesMultipurposeLiquidityBondKind> | null | Uint8Array | MangataTypesMultipurposeLiquidityBondKind | 'AvailableBalance' | 'ActivatedUnstakedReserves' | 'UnspentReserves' | number) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, Option<MangataTypesMultipurposeLiquidityBondKind>]>;
       /**
        * See [`Pallet::execute_leave_candidates`].
        **/
-      executeLeaveCandidates: AugmentedSubmittable<(candidate: AccountId32 | string | Uint8Array, candidateDelegationCount: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId32, u32]>;
+      executeLeaveCandidates: AugmentedSubmittable<(candidate: SpRuntimeAccountAccountId20 | string | Uint8Array, candidateDelegationCount: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, u32]>;
       /**
        * See [`Pallet::execute_leave_delegators`].
        **/
-      executeLeaveDelegators: AugmentedSubmittable<(delegator: AccountId32 | string | Uint8Array, delegationCount: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId32, u32]>;
+      executeLeaveDelegators: AugmentedSubmittable<(delegator: SpRuntimeAccountAccountId20 | string | Uint8Array, delegationCount: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, u32]>;
       /**
        * See [`Pallet::go_offline`].
        **/
@@ -370,11 +380,11 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::payout_collator_rewards`].
        **/
-      payoutCollatorRewards: AugmentedSubmittable<(collator: AccountId32 | string | Uint8Array, numberOfSesisons: Option<u32> | null | Uint8Array | u32 | AnyNumber) => SubmittableExtrinsic<ApiType>, [AccountId32, Option<u32>]>;
+      payoutCollatorRewards: AugmentedSubmittable<(collator: SpRuntimeAccountAccountId20 | string | Uint8Array, numberOfSesisons: Option<u32> | null | Uint8Array | u32 | AnyNumber) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, Option<u32>]>;
       /**
        * See [`Pallet::payout_delegator_reward`].
        **/
-      payoutDelegatorReward: AugmentedSubmittable<(round: u32 | AnyNumber | Uint8Array, collator: AccountId32 | string | Uint8Array, delegator: AccountId32 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, AccountId32, AccountId32]>;
+      payoutDelegatorReward: AugmentedSubmittable<(round: u32 | AnyNumber | Uint8Array, collator: SpRuntimeAccountAccountId20 | string | Uint8Array, delegator: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20]>;
       /**
        * See [`Pallet::remove_staking_liquidity_token`].
        **/
@@ -390,11 +400,11 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::schedule_delegator_bond_less`].
        **/
-      scheduleDelegatorBondLess: AugmentedSubmittable<(candidate: AccountId32 | string | Uint8Array, less: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId32, u128]>;
+      scheduleDelegatorBondLess: AugmentedSubmittable<(candidate: SpRuntimeAccountAccountId20 | string | Uint8Array, less: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, u128]>;
       /**
        * See [`Pallet::schedule_delegator_bond_more`].
        **/
-      scheduleDelegatorBondMore: AugmentedSubmittable<(candidate: AccountId32 | string | Uint8Array, more: u128 | AnyNumber | Uint8Array, useBalanceFrom: Option<MangataTypesMultipurposeLiquidityBondKind> | null | Uint8Array | MangataTypesMultipurposeLiquidityBondKind | 'AvailableBalance' | 'ActivatedUnstakedReserves' | 'UnspentReserves' | number) => SubmittableExtrinsic<ApiType>, [AccountId32, u128, Option<MangataTypesMultipurposeLiquidityBondKind>]>;
+      scheduleDelegatorBondMore: AugmentedSubmittable<(candidate: SpRuntimeAccountAccountId20 | string | Uint8Array, more: u128 | AnyNumber | Uint8Array, useBalanceFrom: Option<MangataTypesMultipurposeLiquidityBondKind> | null | Uint8Array | MangataTypesMultipurposeLiquidityBondKind | 'AvailableBalance' | 'ActivatedUnstakedReserves' | 'UnspentReserves' | number) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, u128, Option<MangataTypesMultipurposeLiquidityBondKind>]>;
       /**
        * See [`Pallet::schedule_leave_candidates`].
        **/
@@ -406,7 +416,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::schedule_revoke_delegation`].
        **/
-      scheduleRevokeDelegation: AugmentedSubmittable<(collator: AccountId32 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId32]>;
+      scheduleRevokeDelegation: AugmentedSubmittable<(collator: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20]>;
       /**
        * See [`Pallet::set_collator_commission`].
        **/
@@ -418,7 +428,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::update_candidate_aggregator`].
        **/
-      updateCandidateAggregator: AugmentedSubmittable<(maybeAggregator: Option<AccountId32> | null | Uint8Array | AccountId32 | string) => SubmittableExtrinsic<ApiType>, [Option<AccountId32>]>;
+      updateCandidateAggregator: AugmentedSubmittable<(maybeAggregator: Option<SpRuntimeAccountAccountId20> | null | Uint8Array | SpRuntimeAccountAccountId20 | string) => SubmittableExtrinsic<ApiType>, [Option<SpRuntimeAccountAccountId20>]>;
       /**
        * Generic tx
        **/
@@ -478,11 +488,11 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::add_proxy`].
        **/
-      addProxy: AugmentedSubmittable<(delegate: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType | 'AutoCompound' | number | Uint8Array, delay: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, u32]>;
+      addProxy: AugmentedSubmittable<(delegate: SpRuntimeAccountAccountId20 | string | Uint8Array, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType | 'AutoCompound' | number | Uint8Array, delay: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, u32]>;
       /**
        * See [`Pallet::announce`].
        **/
-      announce: AugmentedSubmittable<(real: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, callHash: H256 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, H256]>;
+      announce: AugmentedSubmittable<(real: SpRuntimeAccountAccountId20 | string | Uint8Array, callHash: H256 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, H256]>;
       /**
        * See [`Pallet::create_pure`].
        **/
@@ -490,23 +500,23 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::kill_pure`].
        **/
-      killPure: AugmentedSubmittable<(spawner: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType | 'AutoCompound' | number | Uint8Array, index: u16 | AnyNumber | Uint8Array, height: Compact<u32> | AnyNumber | Uint8Array, extIndex: Compact<u32> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, u16, Compact<u32>, Compact<u32>]>;
+      killPure: AugmentedSubmittable<(spawner: SpRuntimeAccountAccountId20 | string | Uint8Array, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType | 'AutoCompound' | number | Uint8Array, index: u16 | AnyNumber | Uint8Array, height: Compact<u32> | AnyNumber | Uint8Array, extIndex: Compact<u32> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, u16, Compact<u32>, Compact<u32>]>;
       /**
        * See [`Pallet::proxy`].
        **/
-      proxy: AugmentedSubmittable<(real: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, forceProxyType: Option<RollupRuntimeRuntimeConfigConfigPalletProxyProxyType> | null | Uint8Array | RollupRuntimeRuntimeConfigConfigPalletProxyProxyType | 'AutoCompound' | number, call: Call | IMethod | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, Option<RollupRuntimeRuntimeConfigConfigPalletProxyProxyType>, Call]>;
+      proxy: AugmentedSubmittable<(real: SpRuntimeAccountAccountId20 | string | Uint8Array, forceProxyType: Option<RollupRuntimeRuntimeConfigConfigPalletProxyProxyType> | null | Uint8Array | RollupRuntimeRuntimeConfigConfigPalletProxyProxyType | 'AutoCompound' | number, call: Call | IMethod | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, Option<RollupRuntimeRuntimeConfigConfigPalletProxyProxyType>, Call]>;
       /**
        * See [`Pallet::proxy_announced`].
        **/
-      proxyAnnounced: AugmentedSubmittable<(delegate: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, real: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, forceProxyType: Option<RollupRuntimeRuntimeConfigConfigPalletProxyProxyType> | null | Uint8Array | RollupRuntimeRuntimeConfigConfigPalletProxyProxyType | 'AutoCompound' | number, call: Call | IMethod | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, MultiAddress, Option<RollupRuntimeRuntimeConfigConfigPalletProxyProxyType>, Call]>;
+      proxyAnnounced: AugmentedSubmittable<(delegate: SpRuntimeAccountAccountId20 | string | Uint8Array, real: SpRuntimeAccountAccountId20 | string | Uint8Array, forceProxyType: Option<RollupRuntimeRuntimeConfigConfigPalletProxyProxyType> | null | Uint8Array | RollupRuntimeRuntimeConfigConfigPalletProxyProxyType | 'AutoCompound' | number, call: Call | IMethod | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, Option<RollupRuntimeRuntimeConfigConfigPalletProxyProxyType>, Call]>;
       /**
        * See [`Pallet::reject_announcement`].
        **/
-      rejectAnnouncement: AugmentedSubmittable<(delegate: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, callHash: H256 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, H256]>;
+      rejectAnnouncement: AugmentedSubmittable<(delegate: SpRuntimeAccountAccountId20 | string | Uint8Array, callHash: H256 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, H256]>;
       /**
        * See [`Pallet::remove_announcement`].
        **/
-      removeAnnouncement: AugmentedSubmittable<(real: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, callHash: H256 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, H256]>;
+      removeAnnouncement: AugmentedSubmittable<(real: SpRuntimeAccountAccountId20 | string | Uint8Array, callHash: H256 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, H256]>;
       /**
        * See [`Pallet::remove_proxies`].
        **/
@@ -514,7 +524,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::remove_proxy`].
        **/
-      removeProxy: AugmentedSubmittable<(delegate: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType | 'AutoCompound' | number | Uint8Array, delay: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, u32]>;
+      removeProxy: AugmentedSubmittable<(delegate: SpRuntimeAccountAccountId20 | string | Uint8Array, proxyType: RollupRuntimeRuntimeConfigConfigPalletProxyProxyType | 'AutoCompound' | number | Uint8Array, delay: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, u32]>;
       /**
        * Generic tx
        **/
@@ -524,23 +534,23 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::cancel_requests_from_l1`].
        **/
-      cancelRequestsFromL1: AugmentedSubmittable<(requestsToCancel: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128]>;
+      cancelRequestsFromL1: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, requestsToCancel: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
       /**
        * See [`Pallet::force_cancel_requests_from_l1`].
        **/
-      forceCancelRequestsFromL1: AugmentedSubmittable<(requestsToCancel: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128]>;
+      forceCancelRequestsFromL1: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, requestsToCancel: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
       /**
        * See [`Pallet::force_update_l2_from_l1`].
        **/
-      forceUpdateL2FromL1: AugmentedSubmittable<(update: PalletRolldownMessagesL1Update | { pendingDeposits?: any; pendingCancelResultions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
+      forceUpdateL2FromL1: AugmentedSubmittable<(update: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
       /**
        * See [`Pallet::update_l2_from_l1`].
        **/
-      updateL2FromL1: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { pendingDeposits?: any; pendingCancelResultions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
+      updateL2FromL1: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
       /**
        * See [`Pallet::withdraw`].
        **/
-      withdraw: AugmentedSubmittable<(withdrawalRecipient: U8aFixed | string | Uint8Array, tokenAddress: U8aFixed | string | Uint8Array, amount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [U8aFixed, U8aFixed, u128]>;
+      withdraw: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, recipient: U8aFixed | string | Uint8Array, tokenAddress: U8aFixed | string | Uint8Array, amount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, U8aFixed, U8aFixed, u128]>;
       /**
        * Generic tx
        **/
@@ -548,13 +558,25 @@ declare module '@polkadot/api-base/types/submittable' {
     };
     sequencerStaking: {
       /**
+       * See [`Pallet::leave_active_sequencers`].
+       **/
+      leaveActiveSequencers: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain]>;
+      /**
        * See [`Pallet::provide_sequencer_stake`].
        **/
-      provideSequencerStake: AugmentedSubmittable<(stakeAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128]>;
+      provideSequencerStake: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, stakeAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
+      /**
+       * See [`Pallet::rejoin_active_sequencers`].
+       **/
+      rejoinActiveSequencers: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain]>;
       /**
        * See [`Pallet::set_sequencer_configuration`].
        **/
-      setSequencerConfiguration: AugmentedSubmittable<(minimalStakeAmount: u128 | AnyNumber | Uint8Array, slashFineAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128, u128]>;
+      setSequencerConfiguration: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, minimalStakeAmount: u128 | AnyNumber | Uint8Array, slashFineAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128, u128]>;
+      /**
+       * See [`Pallet::unstake`].
+       **/
+      unstake: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain]>;
       /**
        * Generic tx
        **/
@@ -578,7 +600,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::set_key`].
        **/
-      setKey: AugmentedSubmittable<(updated: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress]>;
+      setKey: AugmentedSubmittable<(updated: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20]>;
       /**
        * See [`Pallet::sudo`].
        **/
@@ -586,7 +608,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::sudo_as`].
        **/
-      sudoAs: AugmentedSubmittable<(who: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, call: Call | IMethod | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, Call]>;
+      sudoAs: AugmentedSubmittable<(who: SpRuntimeAccountAccountId20 | string | Uint8Array, call: Call | IMethod | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, Call]>;
       /**
        * See [`Pallet::sudo_unchecked_weight`].
        **/
@@ -604,7 +626,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::sudo_as`].
        **/
-      sudoAs: AugmentedSubmittable<(who: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, call: Call | IMethod | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, Call]>;
+      sudoAs: AugmentedSubmittable<(who: SpRuntimeAccountAccountId20 | string | Uint8Array, call: Call | IMethod | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, Call]>;
       /**
        * See [`Pallet::sudo_unchecked_weight`].
        **/
@@ -618,7 +640,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::enqueue_txs`].
        **/
-      enqueueTxs: AugmentedSubmittable<(txs: Vec<ITuple<[Option<AccountId32>, Bytes]>> | ([Option<AccountId32> | null | Uint8Array | AccountId32 | string, Bytes | string | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [Vec<ITuple<[Option<AccountId32>, Bytes]>>]>;
+      enqueueTxs: AugmentedSubmittable<(txs: Vec<ITuple<[Option<SpRuntimeAccountAccountId20>, Bytes]>> | ([Option<SpRuntimeAccountAccountId20> | null | Uint8Array | SpRuntimeAccountAccountId20 | string, Bytes | string | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [Vec<ITuple<[Option<SpRuntimeAccountAccountId20>, Bytes]>>]>;
       /**
        * See [`Pallet::kill_prefix`].
        **/
@@ -670,31 +692,31 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::create`].
        **/
-      create: AugmentedSubmittable<(who: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, Compact<u128>]>;
+      create: AugmentedSubmittable<(who: SpRuntimeAccountAccountId20 | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, Compact<u128>]>;
       /**
        * See [`Pallet::force_transfer`].
        **/
-      forceTransfer: AugmentedSubmittable<(source: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: u32 | AnyNumber | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, MultiAddress, u32, Compact<u128>]>;
+      forceTransfer: AugmentedSubmittable<(source: SpRuntimeAccountAccountId20 | string | Uint8Array, dest: SpRuntimeAccountAccountId20 | string | Uint8Array, currencyId: u32 | AnyNumber | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, u32, Compact<u128>]>;
       /**
        * See [`Pallet::mint`].
        **/
-      mint: AugmentedSubmittable<(currencyId: u32 | AnyNumber | Uint8Array, who: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, MultiAddress, Compact<u128>]>;
+      mint: AugmentedSubmittable<(currencyId: u32 | AnyNumber | Uint8Array, who: SpRuntimeAccountAccountId20 | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, SpRuntimeAccountAccountId20, Compact<u128>]>;
       /**
        * See [`Pallet::set_balance`].
        **/
-      setBalance: AugmentedSubmittable<(who: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: u32 | AnyNumber | Uint8Array, newFree: Compact<u128> | AnyNumber | Uint8Array, newReserved: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, u32, Compact<u128>, Compact<u128>]>;
+      setBalance: AugmentedSubmittable<(who: SpRuntimeAccountAccountId20 | string | Uint8Array, currencyId: u32 | AnyNumber | Uint8Array, newFree: Compact<u128> | AnyNumber | Uint8Array, newReserved: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, u32, Compact<u128>, Compact<u128>]>;
       /**
        * See [`Pallet::transfer`].
        **/
-      transfer: AugmentedSubmittable<(dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: u32 | AnyNumber | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, u32, Compact<u128>]>;
+      transfer: AugmentedSubmittable<(dest: SpRuntimeAccountAccountId20 | string | Uint8Array, currencyId: u32 | AnyNumber | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, u32, Compact<u128>]>;
       /**
        * See [`Pallet::transfer_all`].
        **/
-      transferAll: AugmentedSubmittable<(dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: u32 | AnyNumber | Uint8Array, keepAlive: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, u32, bool]>;
+      transferAll: AugmentedSubmittable<(dest: SpRuntimeAccountAccountId20 | string | Uint8Array, currencyId: u32 | AnyNumber | Uint8Array, keepAlive: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, u32, bool]>;
       /**
        * See [`Pallet::transfer_keep_alive`].
        **/
-      transferKeepAlive: AugmentedSubmittable<(dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: u32 | AnyNumber | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, u32, Compact<u128>]>;
+      transferKeepAlive: AugmentedSubmittable<(dest: SpRuntimeAccountAccountId20 | string | Uint8Array, currencyId: u32 | AnyNumber | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, u32, Compact<u128>]>;
       /**
        * Generic tx
        **/
@@ -708,7 +730,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::propose_spend`].
        **/
-      proposeSpend: AugmentedSubmittable<(value: Compact<u128> | AnyNumber | Uint8Array, beneficiary: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<u128>, MultiAddress]>;
+      proposeSpend: AugmentedSubmittable<(value: Compact<u128> | AnyNumber | Uint8Array, beneficiary: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<u128>, SpRuntimeAccountAccountId20]>;
       /**
        * See [`Pallet::reject_proposal`].
        **/
@@ -720,7 +742,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::spend`].
        **/
-      spend: AugmentedSubmittable<(amount: Compact<u128> | AnyNumber | Uint8Array, beneficiary: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<u128>, MultiAddress]>;
+      spend: AugmentedSubmittable<(amount: Compact<u128> | AnyNumber | Uint8Array, beneficiary: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<u128>, SpRuntimeAccountAccountId20]>;
       /**
        * Generic tx
        **/
@@ -760,7 +782,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::force_vested_transfer`].
        **/
-      forceVestedTransfer: AugmentedSubmittable<(tokenId: u32 | AnyNumber | Uint8Array, source: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, target: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, schedule: PalletVestingMangataVestingInfo | { locked?: any; perBlock?: any; startingBlock?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, MultiAddress, MultiAddress, PalletVestingMangataVestingInfo]>;
+      forceVestedTransfer: AugmentedSubmittable<(tokenId: u32 | AnyNumber | Uint8Array, source: SpRuntimeAccountAccountId20 | string | Uint8Array, target: SpRuntimeAccountAccountId20 | string | Uint8Array, schedule: PalletVestingMangataVestingInfo | { locked?: any; perBlock?: any; startingBlock?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20, PalletVestingMangataVestingInfo]>;
       /**
        * See [`Pallet::merge_schedules`].
        **/
@@ -768,7 +790,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::sudo_unlock_all_vesting_tokens`].
        **/
-      sudoUnlockAllVestingTokens: AugmentedSubmittable<(target: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, tokenId: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, u32]>;
+      sudoUnlockAllVestingTokens: AugmentedSubmittable<(target: SpRuntimeAccountAccountId20 | string | Uint8Array, tokenId: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, u32]>;
       /**
        * See [`Pallet::vest`].
        **/
@@ -776,7 +798,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::vest_other`].
        **/
-      vestOther: AugmentedSubmittable<(tokenId: u32 | AnyNumber | Uint8Array, target: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, MultiAddress]>;
+      vestOther: AugmentedSubmittable<(tokenId: u32 | AnyNumber | Uint8Array, target: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, SpRuntimeAccountAccountId20]>;
       /**
        * Generic tx
        **/
