@@ -1,6 +1,6 @@
 {
   "name": "@mangata-finance/sdk",
-  "version": "2.2.1-eth-rollup-develop.48",
+  "version": "2.2.1-eth-rollup-develop.50",
   "description": "Mangata SDK",
   "type": "module",
   "module": "./index.js",
