@@ -58,10 +58,6 @@ export default {
       description: "",
       params: [
         {
-          name: "chain",
-          type: "Chain",
-        },
-        {
           name: "hex_payload",
           type: "String"
         },
