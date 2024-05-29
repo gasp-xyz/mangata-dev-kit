@@ -42,6 +42,7 @@ export interface Header extends Struct {
 
 /** @name L1Update */
 export interface L1Update extends Struct {
+  readonly chain: Chain;
   readonly pendingDeposits: Vec<Deposit>;
   readonly pendingCancelResolutions: Vec<CancelResolution>;
   readonly pendingWithdrawalResolutions: Vec<WithdrawalResolution>;
