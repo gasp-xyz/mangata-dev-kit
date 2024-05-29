@@ -450,7 +450,7 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
       /**
        * 
        **/
-      get_native_sequencer_update: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, hex_payload: Text | string, at?: Hash | string | Uint8Array) => Observable<Option<L1Update>>>;
+      get_native_sequencer_update: AugmentedRpc<(hex_payload: Text | string, at?: Hash | string | Uint8Array) => Observable<Option<L1Update>>>;
       /**
        * 
        **/
