@@ -29,6 +29,7 @@ export default {
     },
     TokenId: "u32",
     L1Update: {
+      chain: "Chain",
       pendingDeposits: "Vec<Deposit>",
       pendingCancelResolutions: "Vec<CancelResolution>",
       pendingWithdrawalResolutions: "Vec<WithdrawalResolution>",

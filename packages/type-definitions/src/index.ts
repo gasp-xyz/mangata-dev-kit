@@ -344,10 +344,6 @@ export const mRpc = {
       description: "",
       params: [
         {
-          name: "chain",
-          type: "Chain",
-        },
-        {
           name: "hash",
           type: "H256"
         },
