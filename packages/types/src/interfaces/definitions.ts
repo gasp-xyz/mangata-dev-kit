@@ -28,6 +28,46 @@ export default {
       symbol: "Vec<u8>"
     },
     TokenId: "u32",
+    L1Update: {
+      pendingDeposits: "Vec<Deposit>",
+      pendingCancelResolutions: "Vec<CancelResolution>",
+      pendingWithdrawalResolutions: "Vec<WithdrawalResolution>",
+      pendingL2UpdatesToRemove: "Vec<L2UpdatesToRemove>",
+    },
+    Deposit: {
+      requestId: "RequestId",
+      depositRecipient: "[u8; 20]",
+      tokenAddress: "[u8; 20]",
+      amount: "U256",
+      timeStamp: "U256"
+    },
+    RequestId: {
+      origin: "Origin",
+      id: "u128"
+    },
+    Origin: {
+      _enum: ['L1', 'L2']
+    },
+    Chain: {
+      _enum: ['Ethereum', 'Arbitrum']
+    },
+    CancelResolution: {
+      requestId: "RequestId",
+      l2RequestId: "u128",
+      cancelJustified: "bool",
+      timeStamp: "U256"
+    },
+    WithdrawalResolution: {
+      requestId: "RequestId",
+      l2RequestId: "u128",
+      status: "bool",
+      timeStamp: "U256"
+    },
+    L2UpdatesToRemove: {
+      requestId: "RequestId",
+      l2UpdatesToRemove: "Vec<u128>",
+      timeStamp: "U256"
+    }
   }
 }
 

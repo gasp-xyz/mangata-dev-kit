@@ -29,6 +29,46 @@ export const mTypes = {
     symbol: "Vec<u8>"
   },
   TokenId: "u32",
+  L1Update: {
+    pendingDeposits: "Vec<Deposit>",
+    pendingCancelResolutions: "Vec<CancelResolution>",
+    pendingWithdrawalResolutions: "Vec<WithdrawalResolution>",
+    pendingL2UpdatesToRemove: "Vec<L2UpdatesToRemove>",
+  },
+  Deposit: {
+    requestId: "RequestId",
+    depositRecipient: "[u8; 20]",
+    tokenAddress: "[u8; 20]",
+    amount: "U256",
+    timeStamp: "U256"
+  },
+  RequestId: {
+    origin: "Origin",
+    id: "u128"
+  },
+  Origin: {
+    _enum: ['L1', 'L2']
+  },
+  Chain: {
+    _enum: ['Ethereum', 'Arbitrum']
+  },
+  CancelResolution: {
+    requestId: "RequestId",
+    l2RequestId: "u128",
+    cancelJustified: "bool",
+    timeStamp: "U256"
+  },
+  WithdrawalResolution: {
+    requestId: "RequestId",
+    l2RequestId: "u128",
+    status: "bool",
+    timeStamp: "U256"
+  },
+  L2UpdatesToRemove: {
+    requestId: "RequestId",
+    l2UpdatesToRemove: "Vec<u128>",
+    timeStamp: "U256"
+  }
 };
 
 export const mRpc = {
@@ -270,9 +310,13 @@ export const mRpc = {
     }
   },
   rolldown: {
-    pending_updates_hash: {
+    pending_l2_requests_hash: {
       description: "",
       params: [
+        {
+          name: "chain",
+          type: "Chain",
+        },
         {
           name: "at",
           type: "Hash",
@@ -281,9 +325,13 @@ export const mRpc = {
       ],
       type: "H256"
     },
-    pending_updates: {
+    pending_l2_requests: {
       description: "",
       params: [
+        {
+          name: "chain",
+          type: "Chain",
+        },
         {
           name: 'at',
           type: 'Hash',
@@ -292,9 +340,13 @@ export const mRpc = {
       ],
       type: "Vec<u8>"
     },
-    verify_pending_requests: {
+    verify_sequencer_update: {
       description: "",
       params: [
+        {
+          name: "chain",
+          type: "Chain",
+        },
         {
           name: "hash",
           type: "H256"
@@ -310,6 +362,25 @@ export const mRpc = {
         }
       ],
       type: "bool"
+    },
+    get_native_sequencer_update: {
+      description: "",
+      params: [
+        {
+          name: "chain",
+          type: "Chain",
+        },
+        {
+          name: "hex_payload",
+          type: "String"
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
+        }
+      ],
+      type: "Option<L1Update>"
     }
   },
   metamask: {
