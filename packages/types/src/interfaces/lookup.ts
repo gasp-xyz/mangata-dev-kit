@@ -235,12 +235,12 @@ export default {
    **/
   PalletRolldownEvent: {
     _enum: {
-      L1ReadStored: '(SpRuntimeAccountAccountId20,u128,{"start":"u128","end":"u128"},H256)',
+      L1ReadStored: '(PalletRolldownMessagesChain,SpRuntimeAccountAccountId20,u128,{"start":"u128","end":"u128"},H256)',
       RequestProcessedOnL2: '(PalletRolldownMessagesChain,u128)'
     }
   },
   /**
-   * Lookup47: pallet_rolldown::messages::Chain
+   * Lookup45: pallet_rolldown::messages::Chain
    **/
   PalletRolldownMessagesChain: {
     _enum: ['Ethereum', 'Arbitrum']

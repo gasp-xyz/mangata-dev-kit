@@ -255,7 +255,7 @@ declare module '@polkadot/types/lookup' {
   /** @name PalletRolldownEvent (43) */
   interface PalletRolldownEvent extends Enum {
     readonly isL1ReadStored: boolean;
-    readonly asL1ReadStored: ITuple<[SpRuntimeAccountAccountId20, u128, {
+    readonly asL1ReadStored: ITuple<[PalletRolldownMessagesChain, SpRuntimeAccountAccountId20, u128, {
       readonly start: u128;
       readonly end: u128;
     } & Struct, H256]>;
@@ -264,7 +264,7 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'L1ReadStored' | 'RequestProcessedOnL2';
   }
 
-  /** @name PalletRolldownMessagesChain (47) */
+  /** @name PalletRolldownMessagesChain (45) */
   interface PalletRolldownMessagesChain extends Enum {
     readonly isEthereum: boolean;
     readonly isArbitrum: boolean;

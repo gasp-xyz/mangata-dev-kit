@@ -452,7 +452,7 @@ declare module '@polkadot/api-base/types/events' {
       [key: string]: AugmentedEvent<ApiType>;
     };
     rolldown: {
-      L1ReadStored: AugmentedEvent<ApiType, [ITuple<[SpRuntimeAccountAccountId20, u128, {
+      L1ReadStored: AugmentedEvent<ApiType, [ITuple<[PalletRolldownMessagesChain, SpRuntimeAccountAccountId20, u128, {
     readonly start: u128;
     readonly end: u128;
   } & Struct, H256]>]>;
