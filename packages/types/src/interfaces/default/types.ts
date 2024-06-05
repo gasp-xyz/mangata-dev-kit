@@ -13,6 +13,13 @@ export interface CancelResolution extends Struct {
   readonly timeStamp: U256;
 }
 
+/** @name Chain */
+export interface Chain extends Enum {
+  readonly isEthereum: boolean;
+  readonly isArbitrum: boolean;
+  readonly type: 'Ethereum' | 'Arbitrum';
+}
+
 /** @name Deposit */
 export interface Deposit extends Struct {
   readonly requestId: RequestId;
@@ -35,6 +42,7 @@ export interface Header extends Struct {
 
 /** @name L1Update */
 export interface L1Update extends Struct {
+  readonly chain: Chain;
   readonly pendingDeposits: Vec<Deposit>;
   readonly pendingCancelResolutions: Vec<CancelResolution>;
   readonly pendingWithdrawalResolutions: Vec<WithdrawalResolution>;
