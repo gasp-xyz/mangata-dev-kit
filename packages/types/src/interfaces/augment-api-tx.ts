@@ -10,7 +10,7 @@ import type { Data } from '@polkadot/types';
 import type { Bytes, Compact, Option, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { AnyNumber, IMethod, ITuple } from '@polkadot/types-codec/types';
 import type { Call, H256, Perbill, Permill } from '@polkadot/types/interfaces/runtime';
-import type { MangataTypesAssetsCustomMetadata, MangataTypesAssetsL1Asset, MangataTypesMultipurposeLiquidityActivateKind, MangataTypesMultipurposeLiquidityBondKind, OrmlTraitsAssetRegistryAssetMetadata, PalletIdentityBitFlags, PalletIdentityIdentityInfo, PalletIdentityJudgement, PalletIssuanceTgeInfo, PalletProofOfStakeThirdPartyActivationKind, PalletRolldownMessagesL1Update, PalletVestingMangataVestingInfo, ParachainStakingMetadataUpdateAction, ParachainStakingPairedOrLiquidityToken, RollupRuntimeOriginCaller, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, RollupRuntimeSessionKeys, SpConsensusGrandpaEquivocationProof, SpCoreVoid, SpRuntimeAccountAccountId20, SpRuntimeAccountEthereumSignature, SpWeightsWeightV2Weight, StagingXcmVersionedMultiLocation } from '@polkadot/types/lookup';
+import type { MangataTypesAssetsCustomMetadata, MangataTypesAssetsL1Asset, MangataTypesMultipurposeLiquidityActivateKind, MangataTypesMultipurposeLiquidityBondKind, OrmlTraitsAssetRegistryAssetMetadata, PalletIdentityBitFlags, PalletIdentityIdentityInfo, PalletIdentityJudgement, PalletIssuanceTgeInfo, PalletProofOfStakeThirdPartyActivationKind, PalletRolldownMessagesChain, PalletRolldownMessagesL1Update, PalletVestingMangataVestingInfo, ParachainStakingMetadataUpdateAction, ParachainStakingPairedOrLiquidityToken, RollupRuntimeOriginCaller, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, RollupRuntimeSessionKeys, SpConsensusGrandpaEquivocationProof, SpCoreVoid, SpRuntimeAccountAccountId20, SpRuntimeAccountEthereumSignature, SpWeightsWeightV2Weight, StagingXcmVersionedMultiLocation } from '@polkadot/types/lookup';
 
 export type __AugmentedSubmittable = AugmentedSubmittable<() => unknown>;
 export type __SubmittableExtrinsic<ApiType extends ApiTypes> = SubmittableExtrinsic<ApiType>;
@@ -26,7 +26,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::register_l1_asset`].
        **/
-      registerL1Asset: AugmentedSubmittable<(metadata: OrmlTraitsAssetRegistryAssetMetadata | { decimals?: any; name?: any; symbol?: any; existentialDeposit?: any; location?: any; additional?: any } | string | Uint8Array, assetId: Option<u32> | null | Uint8Array | u32 | AnyNumber, l1Asset: MangataTypesAssetsL1Asset | { Ethereum: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [OrmlTraitsAssetRegistryAssetMetadata, Option<u32>, MangataTypesAssetsL1Asset]>;
+      registerL1Asset: AugmentedSubmittable<(metadata: OrmlTraitsAssetRegistryAssetMetadata | { decimals?: any; name?: any; symbol?: any; existentialDeposit?: any; location?: any; additional?: any } | string | Uint8Array, assetId: Option<u32> | null | Uint8Array | u32 | AnyNumber, l1Asset: MangataTypesAssetsL1Asset | { Ethereum: any } | { Arbitrum: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [OrmlTraitsAssetRegistryAssetMetadata, Option<u32>, MangataTypesAssetsL1Asset]>;
       /**
        * See [`Pallet::update_asset`].
        **/
@@ -34,7 +34,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::update_l1_asset_data`].
        **/
-      updateL1AssetData: AugmentedSubmittable<(assetId: u32 | AnyNumber | Uint8Array, l1Asset: Option<MangataTypesAssetsL1Asset> | null | Uint8Array | MangataTypesAssetsL1Asset | { Ethereum: any } | string) => SubmittableExtrinsic<ApiType>, [u32, Option<MangataTypesAssetsL1Asset>]>;
+      updateL1AssetData: AugmentedSubmittable<(assetId: u32 | AnyNumber | Uint8Array, l1Asset: Option<MangataTypesAssetsL1Asset> | null | Uint8Array | MangataTypesAssetsL1Asset | { Ethereum: any } | { Arbitrum: any } | string) => SubmittableExtrinsic<ApiType>, [u32, Option<MangataTypesAssetsL1Asset>]>;
       /**
        * Generic tx
        **/
@@ -534,23 +534,23 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::cancel_requests_from_l1`].
        **/
-      cancelRequestsFromL1: AugmentedSubmittable<(requestsToCancel: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128]>;
+      cancelRequestsFromL1: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, requestsToCancel: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
       /**
        * See [`Pallet::force_cancel_requests_from_l1`].
        **/
-      forceCancelRequestsFromL1: AugmentedSubmittable<(requestsToCancel: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128]>;
+      forceCancelRequestsFromL1: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, requestsToCancel: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
       /**
        * See [`Pallet::force_update_l2_from_l1`].
        **/
-      forceUpdateL2FromL1: AugmentedSubmittable<(update: PalletRolldownMessagesL1Update | { pendingDeposits?: any; pendingCancelResolutions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
+      forceUpdateL2FromL1: AugmentedSubmittable<(update: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
       /**
        * See [`Pallet::update_l2_from_l1`].
        **/
-      updateL2FromL1: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { pendingDeposits?: any; pendingCancelResolutions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
+      updateL2FromL1: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
       /**
        * See [`Pallet::withdraw`].
        **/
-      withdraw: AugmentedSubmittable<(withdrawalRecipient: U8aFixed | string | Uint8Array, tokenAddress: U8aFixed | string | Uint8Array, amount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [U8aFixed, U8aFixed, u128]>;
+      withdraw: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, recipient: U8aFixed | string | Uint8Array, tokenAddress: U8aFixed | string | Uint8Array, amount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, U8aFixed, U8aFixed, u128]>;
       /**
        * Generic tx
        **/
@@ -560,23 +560,23 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::leave_active_sequencers`].
        **/
-      leaveActiveSequencers: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
+      leaveActiveSequencers: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain]>;
       /**
        * See [`Pallet::provide_sequencer_stake`].
        **/
-      provideSequencerStake: AugmentedSubmittable<(stakeAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128]>;
+      provideSequencerStake: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, stakeAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
       /**
        * See [`Pallet::rejoin_active_sequencers`].
        **/
-      rejoinActiveSequencers: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
+      rejoinActiveSequencers: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain]>;
       /**
        * See [`Pallet::set_sequencer_configuration`].
        **/
-      setSequencerConfiguration: AugmentedSubmittable<(minimalStakeAmount: u128 | AnyNumber | Uint8Array, slashFineAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128, u128]>;
+      setSequencerConfiguration: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, minimalStakeAmount: u128 | AnyNumber | Uint8Array, slashFineAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128, u128]>;
       /**
        * See [`Pallet::unstake`].
        **/
-      unstake: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
+      unstake: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain]>;
       /**
        * Generic tx
        **/
