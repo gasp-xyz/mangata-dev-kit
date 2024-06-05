@@ -1,20 +1,28 @@
 export default {
   types: {},
   rpc: {
-    pending_updates_hash: {
+    pending_l2_requests_hash: {
       description: "",
       params: [
         {
-          name: 'at',
-          type: 'Hash',
+          name: "chain",
+          type: "Chain",
+        },
+        {
+          name: "at",
+          type: "Hash",
           isOptional: true
         }
       ],
       type: "H256"
     },
-    pending_updates: {
+    pending_l2_requests: {
       description: "",
       params: [
+        {
+          name: "chain",
+          type: "Chain",
+        },
         {
           name: 'at',
           type: 'Hash',
@@ -23,9 +31,13 @@ export default {
       ],
       type: "Vec<u8>"
     },
-    verify_pending_requests: {
+    verify_sequencer_update: {
       description: "",
       params: [
+        {
+          name: "chain",
+          type: "Chain",
+        },
         {
           name: "hash",
           type: "H256"
@@ -42,7 +54,7 @@ export default {
       ],
       type: "bool"
     },
-    get_native_l1_update: {
+    get_native_sequencer_update: {
       description: "",
       params: [
         {
