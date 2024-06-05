@@ -20,7 +20,7 @@ let secondTokenId: string | undefined;
 beforeEach(async () => {
   const keyring = new Keyring({ type: "sr25519" });
   testUser = createUser(keyring);
-  sudoUser = createUser(keyring, "//Alice");
+  sudoUser = createUser(keyring, "//Alith");
 
   const nonce = await instance.query.getNonce(sudoUser.address);
 

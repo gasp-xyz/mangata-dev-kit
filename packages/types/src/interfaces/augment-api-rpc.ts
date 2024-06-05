@@ -5,7 +5,7 @@
 // this is required to allow for ambient/previous definitions
 import '@polkadot/rpc-core/types/jsonrpc';
 
-import type { Chain, L1Update, RpcAssetMetadata, TokenId } from '@mangata-finance/types/interfaces/default';
+import type { L1Update, RpcAssetMetadata, TokenId } from '@mangata-finance/types/interfaces/default';
 import type { AugmentedRpc } from '@polkadot/rpc-core/types';
 import type { Metadata, StorageKey } from '@polkadot/types';
 import type { Bytes, HashMap, Json, Null, Option, Text, U256, U64, Vec, bool, f64, u128, u32, u64 } from '@polkadot/types-codec';
@@ -450,19 +450,19 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
       /**
        * 
        **/
-      get_native_sequencer_update: AugmentedRpc<(hex_payload: Text | string, at?: Hash | string | Uint8Array) => Observable<Option<L1Update>>>;
+      get_native_l1_update: AugmentedRpc<(hex_payload: Text | string, at?: Hash | string | Uint8Array) => Observable<Option<L1Update>>>;
       /**
        * 
        **/
-      pending_l2_requests: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Bytes>>;
+      pending_updates: AugmentedRpc<(at?: Hash | string | Uint8Array) => Observable<Bytes>>;
       /**
        * 
        **/
-      pending_l2_requests_hash: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, at?: Hash | string | Uint8Array) => Observable<H256>>;
+      pending_updates_hash: AugmentedRpc<(at?: Hash | string | Uint8Array) => Observable<H256>>;
       /**
        * 
        **/
-      verify_sequencer_update: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, hash: H256 | string | Uint8Array, request_id: u128 | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<bool>>;
+      verify_pending_requests: AugmentedRpc<(hash: H256 | string | Uint8Array, request_id: u128 | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<bool>>;
     };
     rpc: {
       /**

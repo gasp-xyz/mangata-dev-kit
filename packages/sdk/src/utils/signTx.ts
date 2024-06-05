@@ -174,7 +174,8 @@ export const signTx = async (
         const signRes = await signTypedData_v4(
           api,
           tx,
-          txOptions?.metamaskProvider
+          txOptions?.metamaskProvider,
+          extractedAccount
         );
 
         if (!signRes) {
@@ -182,14 +183,13 @@ export const signTx = async (
           return;
         }
 
-        const { dotAddress, payload, signature } = signRes;
-        const created_signature = api.createType('MultiSignature', {
-          Eth: hexToU8a(signature),
-        });
+        const { payload, signature, address } = signRes;
 
+        const created_signature = api.createType('EthereumSignature', hexToU8a(signature));
+        
         metamaskTx.addSignature(
-          dotAddress,
-          created_signature.toHex(),
+          address,
+          created_signature,
           payload.toHex()
         );
 

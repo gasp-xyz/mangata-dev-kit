@@ -1,6 +1,6 @@
 {
   "name": "@mangata-finance/types",
-  "version": "2.2.3-feature-multiple-l1.16",
+  "version": "2.2.3-eth-rollup-develop.60",
   "description": "Polkadot.js type definitions for Mangata Network",
   "author": "Mangata Finance <solutions@mangata.finance>",
   "repository": {
@@ -16,7 +16,7 @@
   ],
   "license": "GPL-3.0",
   "peerDependencies": {
-    "@polkadot/api": "^10.12.2"
+    "@polkadot/api": "^11.1.1"
   },
   "type": "module",
   "module": "./src/index.js",
