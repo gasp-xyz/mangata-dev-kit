@@ -332,6 +332,7 @@ declare module '@polkadot/api-base/types/consts' {
     rolldown: {
       disputePeriodLength: u128 & AugmentedConst<ApiType>;
       requestsPerBlock: u128 & AugmentedConst<ApiType>;
+      rightsMultiplier: u128 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
