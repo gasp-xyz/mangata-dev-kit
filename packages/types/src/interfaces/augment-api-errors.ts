@@ -714,6 +714,7 @@ declare module '@polkadot/api-base/types/errors' {
       SequencerAwaitingCancelResolution: AugmentedError<ApiType>;
       SequencerLastUpdateStillInDisputePeriod: AugmentedError<ApiType>;
       TooManyRequests: AugmentedError<ApiType>;
+      UnsupportedAsset: AugmentedError<ApiType>;
       WrongRequestId: AugmentedError<ApiType>;
       /**
        * Generic error
@@ -730,6 +731,7 @@ declare module '@polkadot/api-base/types/errors' {
       SequencerAlreadyInActiveSet: AugmentedError<ApiType>;
       SequencerIsNotInActiveSet: AugmentedError<ApiType>;
       TestUnstakingError: AugmentedError<ApiType>;
+      UnknownChainId: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
