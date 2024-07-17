@@ -1,14 +1,15 @@
 import { ApiPromise } from '@polkadot/api';
 import { Registry } from '@polkadot/types-codec/types';
-import { u8aToHex } from '@polkadot/util';
+import { u8aToHex, hexToU8a } from '@polkadot/util';
 import { isNumber, objectSpread } from '@polkadot/util';
+import { blake2AsU8a, encodeAddress } from '@polkadot/util-crypto';
 import type { Header, Index } from '@polkadot/types/interfaces';
 import { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { SignatureOptions, IExtrinsicEra } from '@polkadot/types/types';
+import type { SDKProvider } from '@metamask/sdk';
 import { GenericExtrinsicPayloadV4 } from '@polkadot/types';
 import { Call } from '@polkadot/types/interfaces';
 import type { HexString } from '@polkadot/util/types';
-import { signTypedData, type Config } from '@wagmi/core';
 
 interface SigningResult {
   header: Header | null;
@@ -63,7 +64,8 @@ function makeSignOptions(api: ApiPromise, partialOptions: Partial<SignatureOptio
   );
 }
 
-export async function signTypedData_v4(api: ApiPromise, tx: SubmittableExtrinsic<"promise">, config: Config, address?: string): Promise<SignTypedData_v4> {
+export async function signTypedData_v4(api: ApiPromise, tx: SubmittableExtrinsic<"promise">, provider: SDKProvider, selectedAddress?: string): Promise<SignTypedData_v4> {
+  const address = selectedAddress || provider.selectedAddress;
   const options: Partial<SignatureOptions> = {};
  
   if (!address) {
@@ -78,9 +80,11 @@ export async function signTypedData_v4(api: ApiPromise, tx: SubmittableExtrinsic
   const result = await api.rpc.metamask.get_eip712_sign_data(tx.toHex().slice(2));
   const data = JSON.parse(result.toString());
   data.message.tx = u8aToHex(raw_payload).slice(2);
-  data.account = address;
-  
-  const signature = await signTypedData(config, data);
+
+  const signature = await provider.request<HexString>({
+    method: 'eth_signTypedData_v4',
+    params: [address, JSON.stringify(data)],
+  });
 
   return {
     address,

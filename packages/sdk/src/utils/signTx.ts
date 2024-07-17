@@ -165,7 +165,7 @@ export const signTx = async (
     try {
       const subscriptionState = { isSubscribed: false };
 
-      if (txOptions?.wagmiConfig) {
+      if (txOptions?.metamaskProvider) {
         const metamaskTx = api.createType(
           'Extrinsic',
           { method: tx.method },
@@ -174,12 +174,12 @@ export const signTx = async (
         const signRes = await signTypedData_v4(
           api,
           tx,
-          txOptions?.wagmiConfig,
+          txOptions?.metamaskProvider,
           extractedAccount
         );
 
         if (!signRes) {
-          reject('SignTypedData error');
+          reject('Metamask sign error');
           return;
         }
 
